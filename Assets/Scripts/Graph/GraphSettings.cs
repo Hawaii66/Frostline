@@ -27,6 +27,8 @@ public class GraphSettings : ScriptableObject
     [Header("Spawn Rate")]
     [Range(0f,1f)]
     public float EndNodeSpawnRate;
+    [Range(0f, 1f)]
+    public float JunctionChallengeRate;
 
     [Header("Size")]
     public float StartDistance;
@@ -43,10 +45,7 @@ public class GraphSettings : ScriptableObject
     }
     public int WithVariation(int val, int variation)
     {
-        float variationf = variation;
-
-        int var = Mathf.RoundToInt(-variationf + Random.value * (variationf * 2));
-        return val + var;
+        return Random.Range(val - variation, val + variation + 1);
     }
 
 }

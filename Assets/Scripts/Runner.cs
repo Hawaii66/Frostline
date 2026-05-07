@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using UnityEditor;
 using UnityEngine;
 
 public class Runner : MonoBehaviour
@@ -25,6 +26,10 @@ public class Runner : MonoBehaviour
                 Node node = nodes[i];
                 Gizmos.color = node.GetColor();
                 Gizmos.DrawSphere(node.polar.ToCartesian3(), 0.2f);
+                if(node is JunctionNode junctionNode)
+                {
+                    Handles.Label(node.polar.ToCartesian3() + Vector3.up, "Edges: " + junctionNode.ConnectedNodes());
+                }
             }
 
             Gizmos.color = Color.blue;

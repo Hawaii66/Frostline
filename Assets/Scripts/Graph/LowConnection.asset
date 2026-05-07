@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9fe45dd83638b74dbb4d0b6d1daeaea, type: 3}
-  m_Name: GraphSettings
+  m_Name: LowConnection
   m_EditorClassIdentifier: Assembly-CSharp::GraphSettings
   seed: 0
   MaxNodes: 500
   StartConnections: 5
   StartRadVariation: 0
-  JunctionCount: 7
+  JunctionCount: 3
   JunctionCountVariation: 1
-  JunctionRadVariation: 0.0648
-  NextNodeSurvivalChance: 0.815
-  JunctionConnectionChance: 0.947
-  EndNodeSpawnRate: 0.413
+  JunctionRadVariation: 0.316
+  NextNodeSurvivalChance: 0.933
+  JunctionConnectionChance: 0.625
+  JunctionChallengeRate: 0.419
+  EndNodeSpawnRate: 0.168
   StartDistance: 5
   StartDistanceVariation: 2
   NodeDistance: 10
   NodeDistanceVariation: 3
-  MinDistanceBetweenNodes: 2
+  MinDistanceBetweenNodes: 3
   JunctionConnectionSearchDistance: 30

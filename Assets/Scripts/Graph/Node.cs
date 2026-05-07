@@ -19,6 +19,16 @@ public abstract class Node {
             edges.Add(node);
         }
     }
+    public int ConnectedNodes()
+    {
+        HashSet<string> seen = new ();
+        for (int i = 0; i < edges.Count; ++i)
+        {
+            Node node = edges[i];
+            seen.Add(node.polar.ToCartesian().ToString());
+        }
+        return seen.Count;
+    }
 
     public abstract Color GetColor();
     public abstract bool AllowsJunctionConnections();
@@ -45,6 +55,15 @@ public class EndNode : Node
     }
 }
 
+public class ChallengeJunction : JunctionNode
+{
+    public ChallengeJunction(Polar polar, GraphSettings settings, bool allowMakeConnections) : base(polar, settings, allowMakeConnections) { }
+    public override Color GetColor()
+    {
+        return Color.green; 
+    }
+}
+
 
 public class JunctionNode : Node
 {
@@ -65,7 +84,7 @@ public class JunctionNode : Node
             return false;
         }
 
-        if(edges.Count < junctions)
+        if(ConnectedNodes() < junctions)
         {
             return true;
         }

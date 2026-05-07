@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class Graph
@@ -55,7 +56,7 @@ public class Graph
             Debug.Log("Max nodes reached");
         }
 
-        Debug.Log("Fixing Graph");
+        Debug.Log("Removing Empty Junctions");
 
         for(int i = 0; i< nodes.Count; i++)
         {
@@ -63,11 +64,31 @@ public class Graph
 
             if(node is JunctionNode junctionNode)
             {
-                if(junctionNode.edges.Count == 1)
+                if(junctionNode.ConnectedNodes() == 1)
                 {
-                    EndNode endNode = new EndNode(node.polar);
+                    EndNode endNode = new (node.polar);
                     ReplaceNode(junctionNode, endNode);
                 }
+            }
+        }
+
+        Debug.Log("Generating Junction Challenges");
+
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            Node node = nodes[i];
+
+            if (node is JunctionNode junctionNode)
+            {
+                bool isPassThrough = junctionNode.ConnectedNodes() == 2;
+                float challengeRate = settings.JunctionChallengeRate * (isPassThrough ? 1.5f : 1);
+                if(!(Random.value < challengeRate))
+                {
+                    continue;
+                }
+
+                ChallengeJunction challengeJunctionNode = new (node.polar, settings, true);
+                ReplaceNode(junctionNode, challengeJunctionNode);
             }
         }
 
@@ -168,7 +189,7 @@ public class Graph
         {
             return;
         }
-        Node[] closeNodes = GetCloseNodes(node.polar, settings.JunctionConnectionSearchDistance);
+        Node[] closeNodes = GetCloseNodes(node.polar, settings.JunctionConnectionSearchDistance, true);
         for(int i = 0; i < closeNodes.Length; i++)
         {
             Node other = closeNodes[i];
@@ -306,7 +327,7 @@ public class Graph
         return false;
     }
 
-    Node[] GetCloseNodes(Polar polar, float testDist)
+    Node[] GetCloseNodes(Polar polar, float testDist, bool excludeSelf = false)
     {
         List<Node> closeNodes = new List<Node>();
 
@@ -315,6 +336,10 @@ public class Graph
         {
             Vector2 pos = nodes[i].polar.ToCartesian();
             float dist = Vector2.Distance(pos, test);
+            if(excludeSelf && dist == 0)
+            {
+                continue;
+            }
             if(dist < testDist)
             {
                 closeNodes.Add(nodes[i]);
