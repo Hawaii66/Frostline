@@ -11,9 +11,7 @@ public class Runner : MonoBehaviour
     [Button("Run")]
     void Run()
     {
-        Debug.Log("Starting to run world generation");
-
-        graph = new Graph(settings);
+        graph = GraphGenerator.Generate(settings);
     }
 
     private void OnDrawGizmos()
