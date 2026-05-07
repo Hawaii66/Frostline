@@ -7,7 +7,8 @@ using UnityEngine;
 public class Runner : MonoBehaviour
 {
     Graph graph;
-    List<Vector2Int> trackPath;
+    TrackGenerator trackGenerator;
+    List<List<Vector2Int>> trackPaths;
 
     public GraphSettings settings;
 
@@ -22,7 +23,23 @@ public class Runner : MonoBehaviour
     {
         Vector2Int start = graph.edges[1].a.polar.ToCartesianInt();
         Vector2Int end = graph.edges[1].b.polar.ToCartesianInt();
-        trackPath = Track.Generate(start, end);
+
+        trackGenerator = new TrackGenerator();
+
+        trackPaths = new List<List<Vector2Int>>();
+        for(int i = 0; i < graph.edges.Count; i++)
+        {
+            Edge edge = graph.edges[i];
+            TrackResult trackResult = trackGenerator.Generate(edge.a.polar.ToCartesianInt(), edge.b.polar.ToCartesianInt());
+            if (trackResult.success)
+            {
+                    trackPaths.Add(trackResult.path);
+            }
+            else
+            {
+                Debug.Log("Path failed to generate");
+            }
+        }
     }
 
     private void OnDrawGizmos()
@@ -51,15 +68,18 @@ public class Runner : MonoBehaviour
             }
         }
 
-        if (trackPath.Count > 0)
+        if (trackPaths != null && trackPaths.Count > 0)
         {
             Gizmos.color = Color.darkGoldenRod;
-            for (int i = 0; i < trackPath.Count - 1; i++)
+            for (int i = 0; i < trackPaths.Count; i++)
             {
-                Vector3 start = new Vector3(trackPath[i].x, 0, trackPath[i].y);
-                Vector3 end = new Vector3(trackPath[i + 1].x, 0, trackPath[i + 1].y);
+                for (int j = 0; j < trackPaths[i].Count - 1; j++)
+                {
+                    Vector3 start = new Vector3(trackPaths[i][j].x, 0, trackPaths[i][j].y);
+                    Vector3 end = new Vector3(trackPaths[i][j + 1].x, 0, trackPaths[i][j + 1].y);
 
-                Gizmos.DrawLine(start, end);
+                    Gizmos.DrawLine(start, end);
+                }
             }
         }
     }

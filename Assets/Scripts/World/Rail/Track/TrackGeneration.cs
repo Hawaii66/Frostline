@@ -1,0 +1,116 @@
+﻿
+using System.Collections.Generic;
+using UnityEngine;
+
+class TrackGeneration
+{
+    List<Piece> pieces;
+
+    public TrackGeneration()
+    {
+        pieces = new();
+    }
+
+    public TrackGeneration WithPiece(Piece piece)
+    {
+        pieces.Add(piece);
+        return this;
+    }
+
+    public bool PlacedPieceFits(HashSet<Vector2Int> visited, PlacedPiece piece, Vector2Int start, Vector2Int end)
+    {
+        for (int i = 0; i < piece.path.Count; i++)
+        {
+            Vector2Int pos = piece.path[i];
+            if (pos.x < start.x || pos.y < start.y || pos.x > end.x || pos.y > end.y)
+            {
+                return false;
+            }
+            if (visited.Contains(pos))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public TrackResult Generate(Vector2Int start, Vector2Int end)
+    {
+        int sizeX = end.x - start.x;
+        int sizeY = end.y - start.y;
+        int size = sizeX < sizeY ? sizeX : sizeY;
+
+        List<Vector2Int> visited = new()
+        {
+            start
+        };
+        HashSet<Vector2Int> visitedSet = new() { start };
+
+        Vector2Int position = start;
+
+        int safe = 0;
+        bool minimumDistanceRequired = false;
+        while (safe++ < 10000)
+        {
+            if (position == end)
+            {
+                return new TrackResult
+                {
+                    path = visited,
+                    success = true
+                };
+            }
+
+            int diffX = end.x - position.x;
+            int diffY = end.y - position.y;
+
+            List<PlacedPiece> piecesToTest = new();
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                Piece piece = pieces[i];
+                PlacedPiece placedPiece = new();
+                bool canGenerate = placedPiece.Generate(position, piece, size, minimumDistanceRequired);
+                if (!canGenerate)
+                {
+                    continue;
+                }
+                if (PlacedPieceFits(visitedSet, placedPiece, start, end))
+                {
+                    int weight = piece.Weight(position, end, new TrackInfo
+                    {
+                        HasReachedRight = position.x == end.x,
+                        HasReachedUp = position.y == end.y,
+                        ShouldTendRight = diffX > diffY,
+                        ShouldTendUp = diffY > diffX,
+                    });
+                    for (int j = 0; j < weight; j++)
+                    {
+                        piecesToTest.Add(placedPiece);
+                    }
+                }
+            }
+
+            if (piecesToTest.Count == 0)
+            {
+                minimumDistanceRequired = true;
+                continue;
+            }
+            minimumDistanceRequired = false;
+
+            PlacedPiece chosenPlacedPiece = piecesToTest[Random.Range(0, piecesToTest.Count)];
+            for (int i = 0; i < chosenPlacedPiece.path.Count; i++)
+            {
+                Vector2Int move = chosenPlacedPiece.path[i];
+                position = move;
+                visited.Add(position);
+                visitedSet.Add(position);
+            }
+        }
+
+        return new TrackResult
+        {
+            success = false
+        };
+    }
+}

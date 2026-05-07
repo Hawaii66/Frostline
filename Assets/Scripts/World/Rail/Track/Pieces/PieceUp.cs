@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.World.Rail.Track.Pieces
+class PieceUp : Piece
 {
-    internal class PieceUp
+    public PieceUp()
     {
+        segments = new()
+        {
+            new Segment
+            {
+                direction = Vector2Int.up,
+                distancePercent = 0.05f,
+                distancePercentVariation = 0.02f
+            }
+        };
+    }
+
+    public override int Weight(Vector2Int current, Vector2Int end, TrackInfo info)
+    {
+        if (info.ShouldTendUp)
+        {
+            return 8;
+        }
+
+        return 1;
     }
 }
