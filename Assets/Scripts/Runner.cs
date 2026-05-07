@@ -1,10 +1,13 @@
 using NaughtyAttributes;
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class Runner : MonoBehaviour
 {
     Graph graph;
+    List<Vector2Int> trackPath;
 
     public GraphSettings settings;
 
@@ -17,9 +20,9 @@ public class Runner : MonoBehaviour
     [Button("Generate Rails")]
     void Run2()
     {
-        Vector2 start = graph.edges[0].a.polar.ToCartesian();
-        Vector2 end = graph.edges[0].b.polar.ToCartesian();
-        Debug.Log(graph.edges[0].a.polar.ToCartesian() + " " + graph.edges[0].b.polar.ToCartesian());
+        Vector2Int start = graph.edges[1].a.polar.ToCartesianInt();
+        Vector2Int end = graph.edges[1].b.polar.ToCartesianInt();
+        trackPath = Track.Generate(start, end);
     }
 
     private void OnDrawGizmos()
@@ -32,7 +35,7 @@ public class Runner : MonoBehaviour
                 Node node = nodes[i];
                 Gizmos.color = node.GetColor();
                 Gizmos.DrawSphere(node.polar.ToCartesian3(), 0.2f);
-                if(node is JunctionNode junctionNode)
+                if (node is JunctionNode junctionNode)
                 {
                     Handles.Label(node.polar.ToCartesian3() + Vector3.up, "Edges: " + junctionNode.ConnectedNodes());
                 }
@@ -40,11 +43,23 @@ public class Runner : MonoBehaviour
 
             Gizmos.color = Color.blue;
             Edge[] edges = graph.edges.ToArray();
-            for(int i = 0; i < edges.Length; i++)
+            for (int i = 0; i < edges.Length; i++)
             {
                 Vector3 a = edges[i].a.polar.ToCartesian3();
                 Vector3 b = edges[i].b.polar.ToCartesian3();
                 Gizmos.DrawLine(a, b);
+            }
+        }
+
+        if (trackPath.Count > 0)
+        {
+            Gizmos.color = Color.darkGoldenRod;
+            for (int i = 0; i < trackPath.Count - 1; i++)
+            {
+                Vector3 start = new Vector3(trackPath[i].x, 0, trackPath[i].y);
+                Vector3 end = new Vector3(trackPath[i + 1].x, 0, trackPath[i + 1].y);
+
+                Gizmos.DrawLine(start, end);
             }
         }
     }

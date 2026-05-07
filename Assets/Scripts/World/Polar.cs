@@ -21,6 +21,14 @@ public class Polar
 
         return new Vector2(x, y);
     }
+    public Vector2Int ToCartesianInt()
+    {
+        Vector2 pos = ToCartesian();
+        return new Vector2Int(
+            Mathf.RoundToInt(pos.x),
+            Mathf.RoundToInt(pos.y)
+            );
+    }
 
     public Vector3 ToCartesian3()
     {
