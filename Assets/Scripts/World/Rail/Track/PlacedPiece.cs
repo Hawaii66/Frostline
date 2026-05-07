@@ -29,6 +29,11 @@ class PlacedPiece
             }
         }
 
+        if(path.Count == 0)
+        {
+            return false;
+        }
+
         return true;
     }
 }

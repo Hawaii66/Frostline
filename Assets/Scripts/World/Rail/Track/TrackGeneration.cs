@@ -50,7 +50,7 @@ class TrackGeneration
         Vector2Int position = start;
 
         int safe = 0;
-        bool minimumDistanceRequired = false;
+        int minimumDistanceRequired = 0;
         while (safe++ < 10000)
         {
             if (position == end)
@@ -69,8 +69,13 @@ class TrackGeneration
             for (int i = 0; i < pieces.Count; i++)
             {
                 Piece piece = pieces[i];
+                if(minimumDistanceRequired != 0 && !piece.IsMinimumDistancePossible())
+                {
+                    continue;
+                }
+
                 PlacedPiece placedPiece = new();
-                bool canGenerate = placedPiece.Generate(position, piece, size, minimumDistanceRequired);
+                bool canGenerate = placedPiece.Generate(position, piece, size, minimumDistanceRequired != 0);
                 if (!canGenerate)
                 {
                     continue;
@@ -81,8 +86,8 @@ class TrackGeneration
                     {
                         HasReachedRight = position.x == end.x,
                         HasReachedUp = position.y == end.y,
-                        ShouldTendRight = diffX > diffY,
-                        ShouldTendUp = diffY > diffX,
+                        DiffX = diffX,
+                        DiffY = diffY
                     });
                     for (int j = 0; j < weight; j++)
                     {
@@ -93,10 +98,10 @@ class TrackGeneration
 
             if (piecesToTest.Count == 0)
             {
-                minimumDistanceRequired = true;
+                minimumDistanceRequired = 10;
                 continue;
             }
-            minimumDistanceRequired = false;
+            minimumDistanceRequired = -1;
 
             PlacedPiece chosenPlacedPiece = piecesToTest[Random.Range(0, piecesToTest.Count)];
             for (int i = 0; i < chosenPlacedPiece.path.Count; i++)

@@ -17,11 +17,30 @@ class PieceRight : Piece
 
     public override int Weight(Vector2Int current, Vector2Int end, TrackInfo info)
     {
-        if (info.ShouldTendRight)
+        float total = info.DiffX + info.DiffY;
+        float xShare = info.DiffX / total;
+        if (xShare > 0.98f)
+        {
+            return 48;
+        }
+        if (xShare > 0.95f)
+        {
+            return 24;
+        }
+        if (xShare > 0.85f)
+        {
+            return 12;
+        }
+        if(xShare > 0.65f)
         {
             return 8;
         }
 
         return 1;
+    }
+
+    public override bool IsMinimumDistancePossible()
+    {
+        return true;
     }
 }

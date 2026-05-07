@@ -17,11 +17,23 @@ class PieceDiagonal : Piece
 
     public override int Weight(Vector2Int current, Vector2Int end, TrackInfo info)
     {
-        if (!info.ShouldTendUp && !info.ShouldTendRight)
+        float balance = (float)Mathf.Min(info.DiffX, info.DiffY) /
+                    Mathf.Max(info.DiffX, info.DiffY);
+
+        if (balance > 0.95f)
         {
-            return 4;
+            return 8;
+        }
+        if (balance > 0.85f)
+        {
+            return 6;
         }
 
         return 2;
+    }
+
+    public override bool IsMinimumDistancePossible()
+    {
+        return true;
     }
 }

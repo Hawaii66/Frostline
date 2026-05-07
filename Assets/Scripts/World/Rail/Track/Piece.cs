@@ -3,8 +3,8 @@ using UnityEngine;
 
 public struct TrackInfo
 {
-    public bool ShouldTendUp;
-    public bool ShouldTendRight;
+    public int DiffX;
+    public int DiffY;
     public bool HasReachedUp;
     public bool HasReachedRight;
 }
@@ -18,4 +18,5 @@ public abstract class Piece
 {
     public List<Segment> segments;
     public abstract int Weight(Vector2Int current, Vector2Int end, TrackInfo info);
+    public virtual bool IsMinimumDistancePossible() { return false; }
 }
