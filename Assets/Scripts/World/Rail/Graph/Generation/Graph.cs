@@ -22,7 +22,7 @@ public class Graph
             return false;
         }
 
-        Edge edge = new Edge(node, parent);
+        Edge edge = new (parent, node);
         if (Edge.IsOverlapping(edges, edge))
         {
             return false;

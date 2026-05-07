@@ -8,10 +8,18 @@ public class Runner : MonoBehaviour
 
     public GraphSettings settings;
 
-    [Button("Run")]
+    [Button("Generate Graph")]
     void Run()
     {
         graph = GraphGenerator.Generate(settings);
+    }
+
+    [Button("Generate Rails")]
+    void Run2()
+    {
+        Vector2 start = graph.edges[0].a.polar.ToCartesian();
+        Vector2 end = graph.edges[0].b.polar.ToCartesian();
+        Debug.Log(graph.edges[0].a.polar.ToCartesian() + " " + graph.edges[0].b.polar.ToCartesian());
     }
 
     private void OnDrawGizmos()
