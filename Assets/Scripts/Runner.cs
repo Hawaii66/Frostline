@@ -7,7 +7,6 @@ using UnityEngine;
 public class Runner : MonoBehaviour
 {
     Graph graph;
-    TrackGenerator trackGenerator;
     List<List<Vector2Int>> trackPaths;
 
     public GraphSettings settings;
@@ -21,10 +20,7 @@ public class Runner : MonoBehaviour
     [Button("Generate Rails")]
     void Run2()
     {
-        Vector2Int start = graph.edges[1].a.polar.ToCartesianInt();
-        Vector2Int end = graph.edges[1].b.polar.ToCartesianInt();
-
-        trackGenerator = new TrackGenerator();
+        TrackGenerator trackGenerator = new TrackGenerator();
 
         trackPaths = new List<List<Vector2Int>>();
         for(int i = 0; i < graph.edges.Count; i++)
