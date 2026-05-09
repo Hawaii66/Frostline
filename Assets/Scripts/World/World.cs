@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using NaughtyAttributes;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 class World
@@ -27,28 +29,6 @@ class World
     }
 }
 
-class StructureBlueprint
-{
-    public Vector2Int position;
-    public Vector2Int[] occupiedOffsets;
-
-    public StructureBlueprint(Vector2Int pos, Vector2Int[] offsets)
-    {
-        position = pos;
-        occupiedOffsets = offsets;
-    }
-
-    public Tile[] ToTiles(Vector2Int worldPosition)
-    {
-        Tile[] tiles = new Tile[occupiedOffsets.Length];
-        for(int i = 0; i < occupiedOffsets.Length; i++)
-        {
-            tiles[i] = new Tile(occupiedOffsets[i] + worldPosition);
-        }
-
-        return tiles;
-    }
-}
 
 class Structure
 {

@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Runner : MonoBehaviour
     Graph graph;
     World world;
     List<List<Vector2Int>> trackPaths;
+    Dictionary<string, StructureBlueprint> structureBlueprints;
 
     public GraphSettings settings;
 
@@ -39,11 +41,26 @@ public class Runner : MonoBehaviour
         }
     }
 
+    [Button("Load structures")]
+    void RunStructureLoad()
+    {
+        structureBlueprints = new();
+
+        string[] guids = AssetDatabase.FindAssets($"t:{typeof(StructureBlueprint).Name}", new[] { "Assets/Frostline/Structures" });
+        StructureBlueprint[] filtered = guids.Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<StructureBlueprint>)
+            .ToArray();
+        
+        for(int i = 0;i < filtered.Length; i++)
+        {
+            structureBlueprints.Add(filtered[i].name, filtered[i]);
+        }
+    }
+
     [Button("Generate world")]
     void Run3()
     {
         world = new World(graph.SizeX, graph.SizeY);
-        StructureBlueprint structureBlueprint = new StructureBlueprint(Vector2Int.zero, new Vector2Int[]
+        StructureBlueprint structureBlueprint = StructureBlueprint.New(new Vector2Int[]
         {
             new Vector2Int(0,0),
             new Vector2Int(1,0),
@@ -56,7 +73,7 @@ public class Runner : MonoBehaviour
         Structure structure2 = new (structureBlueprint, Vector2Int.right);
         world.TryAddStructure(structure2);
 
-        StructureBlueprint structureBlueprint2 = new StructureBlueprint(Vector2Int.zero, new Vector2Int[]
+        StructureBlueprint structureBlueprint2 = StructureBlueprint.New(new Vector2Int[]
         {
             new Vector2Int(0,0),
             new Vector2Int(1,0),
@@ -65,6 +82,10 @@ public class Runner : MonoBehaviour
         });
         Structure structure3 = new Structure(structureBlueprint2, Vector2Int.right * 3 + Vector2Int.up * 2);
         world.TryAddStructure(structure3);
+
+        if(structureBlueprints.TryGetValue("Cube",out StructureBlueprint sb)){
+            world.TryAddStructure(new(sb, new Vector2Int(20, 20)));
+        }
     }
 
     private void OnDrawGizmos()
