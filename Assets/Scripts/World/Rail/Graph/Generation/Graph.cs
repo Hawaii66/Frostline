@@ -6,6 +6,9 @@ public class Graph
 {
     public List<Node> nodes;
     public List<Edge> edges;
+    public int SizeX;
+    public int SizeY;
+    public Vector2 NegativeOffset;
     GraphSettings settings;
 
     public Graph(GraphSettings settings)
@@ -13,6 +16,11 @@ public class Graph
         nodes = new List<Node>();
         edges = new List<Edge>();
         this.settings = settings;
+    }
+
+    public Vector2 ToWorldPosition(Polar polar)
+    {
+        return NegativeOffset + polar.ToCartesian();
     }
 
     bool TryAddNode(Node node, Node parent)

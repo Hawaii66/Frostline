@@ -7,6 +7,7 @@ using UnityEngine;
 public class Runner : MonoBehaviour
 {
     Graph graph;
+    World world;
     List<List<Vector2Int>> trackPaths;
 
     public GraphSettings settings;
@@ -20,7 +21,7 @@ public class Runner : MonoBehaviour
     [Button("Generate Rails")]
     void Run2()
     {
-        TrackGenerator trackGenerator = new TrackGenerator();
+        TrackGenerator trackGenerator = new ();
 
         trackPaths = new List<List<Vector2Int>>();
         for(int i = 0; i < graph.edges.Count; i++)
@@ -36,6 +37,34 @@ public class Runner : MonoBehaviour
                 Debug.Log("Path failed to generate");
             }
         }
+    }
+
+    [Button("Generate world")]
+    void Run3()
+    {
+        world = new World(graph.SizeX, graph.SizeY);
+        StructureBlueprint structureBlueprint = new StructureBlueprint(Vector2Int.zero, new Vector2Int[]
+        {
+            new Vector2Int(0,0),
+            new Vector2Int(1,0),
+            new Vector2Int(1,1),
+            new Vector2Int(0,1),
+        });
+        Structure structure = new (structureBlueprint, Vector2Int.zero);
+        world.TryAddStructure(structure);
+
+        Structure structure2 = new (structureBlueprint, Vector2Int.right);
+        world.TryAddStructure(structure2);
+
+        StructureBlueprint structureBlueprint2 = new StructureBlueprint(Vector2Int.zero, new Vector2Int[]
+        {
+            new Vector2Int(0,0),
+            new Vector2Int(1,0),
+            new Vector2Int(1,1),
+            new Vector2Int(0,1),
+        });
+        Structure structure3 = new Structure(structureBlueprint2, Vector2Int.right * 3 + Vector2Int.up * 2);
+        world.TryAddStructure(structure3);
     }
 
     private void OnDrawGizmos()
@@ -62,6 +91,12 @@ public class Runner : MonoBehaviour
                 Vector3 b = edges[i].b.polar.ToCartesian3();
                 Gizmos.DrawLine(a, b);
             }
+
+            Vector3 start = new (graph.NegativeOffset.x, 0, graph.NegativeOffset.y);
+            Vector3 end = new (graph.NegativeOffset.x + graph.SizeX, 1, graph.NegativeOffset.y + graph.SizeY);
+            Vector3 center = (start + end) / 2f;
+            Vector3 size = end - start;
+            Gizmos.DrawWireCube(center, size);
         }
 
         if (trackPaths != null && trackPaths.Count > 0)
@@ -75,6 +110,20 @@ public class Runner : MonoBehaviour
                     Vector3 end = new Vector3(trackPaths[i][j + 1].x, 0, trackPaths[i][j + 1].y);
 
                     Gizmos.DrawLine(start, end);
+                }
+            }
+        }
+
+        if(world != null)
+        {
+            Gizmos.color = Color.black;
+            for (int i = 0; i < world.structures.Count; i++)
+            {
+                Structure structure = world.structures[i];
+                for(int j = 0; j < structure.tiles.Length; j++)
+                {
+                    Vector2Int position = structure.tiles[j].position;
+                    Gizmos.DrawWireSphere(new Vector3(position.x, 0, position.y), 0.2f);
                 }
             }
         }

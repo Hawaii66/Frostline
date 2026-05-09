@@ -11,6 +11,8 @@ public class GraphSettings : ScriptableObject
     public int StartConnections;
     [Range(0f, 0.5f)]
     public float StartRadVariation;
+    [Range(20, 100)]
+    public int BufferFromRail;
 
     [Header("Junctions")]
     [Range(3, 10)]

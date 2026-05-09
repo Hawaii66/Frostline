@@ -8,6 +8,7 @@
             .AddStep(new GraphGenerationStepExpand())
             .AddStep(new GraphGenerationStepRemoveEmptyJunctions())
             .AddStep(new GraphGenerationStepAddChallengeJunctions())
+            .AddStep(new GraphGenerationStepCalculateSize())
             .Generate();
     }
 }

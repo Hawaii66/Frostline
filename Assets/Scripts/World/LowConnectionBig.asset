@@ -16,6 +16,7 @@ MonoBehaviour:
   MaxNodes: 500
   StartConnections: 5
   StartRadVariation: 0
+  BufferFromRail: 30
   JunctionCount: 3
   JunctionCountVariation: 1
   JunctionRadVariation: 0.316
