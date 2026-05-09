@@ -77,12 +77,17 @@ class Tile
     public bool IsOccupied => structure != null;
 }
 
-class TileGrid : Grid<Tile>
+class TileGrid : GridDictionary<Tile>
 {
     public TileGrid(int sizeX, int sizeY) : base(sizeX, sizeY, pos => new Tile(pos)) { }
     public bool IsOccupied(int x, int y)
     {
-        return cells[x, y].IsOccupied;
+        Vector2Int pos = new Vector2Int(x, y);
+        if (cells.TryGetValue(pos, out Tile tile))
+        {
+            return tile.IsOccupied;
+        }
+        return false;
     }
     public bool IsOccupied(Vector2Int position)
     {
@@ -151,5 +156,39 @@ class Grid<T>
     public void SetCell(Vector2Int position, T cell)
     {
         SetCell(position.x, position.y, cell);
+    }
+}
+
+class GridDictionary<T>
+{
+    public int SizeX;
+    public int SizeY;
+    public int Size => SizeX * SizeY;
+
+    public Dictionary<Vector2Int, T> cells;
+
+    public GridDictionary(int sizeX, int sizeY, CellFactory<T> createCell)
+    {
+        SizeX = sizeX;
+        SizeY = sizeY;
+
+        cells = new Dictionary<Vector2Int, T>();
+    }
+
+    public T GetCell(int x, int y)
+    {
+        return GetCell(new Vector2Int(x, y));
+    }
+    public T GetCell(Vector2Int position)
+    {
+        return cells[position];
+    }
+    public void SetCell(int x, int y, T cell)
+    {
+        SetCell(new Vector2Int(x, y), cell);
+    }
+    public void SetCell(Vector2Int position, T cell)
+    {
+        cells[position] = cell;
     }
 }
