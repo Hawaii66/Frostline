@@ -1,45 +1,45 @@
 ﻿
 using UnityEngine;
-
-class GraphGenerationStepCalculateSize : GraphGenerationStep
+namespace Frostline.World.Generation
 {
-    public void Execute(GraphGenerationContext context)
+    class GraphGenerationStepCalculateSize : IGraphGenerationStep
     {
-        int minX = int.MaxValue;
-        int minY = int.MaxValue;
-        int maxX = int.MinValue;
-        int maxY = int.MinValue;
-        for (int i = 0; i < context.graph.nodes.Count; i++)
+        public void Execute(GraphGenerationContext context)
         {
-            Vector2 position = context.graph.nodes[i].polar.ToCartesian();
-            if(position.x < minX)
+            int minX = int.MaxValue;
+            int minY = int.MaxValue;
+            int maxX = int.MinValue;
+            int maxY = int.MinValue;
+            for (int i = 0; i < context.Graph.Nodes.Count; i++)
             {
-                minX = Mathf.FloorToInt(position.x);
+                Vector2 position = context.Graph.Nodes[i].Polar.ToCartesian();
+                if (position.x < minX)
+                {
+                    minX = Mathf.FloorToInt(position.x);
+                }
+                if (position.y < minY)
+                {
+                    minY = Mathf.FloorToInt(position.y);
+                }
+                if (position.x > maxX)
+                {
+                    maxX = Mathf.CeilToInt(position.x);
+                }
+                if (position.y > maxY)
+                {
+                    maxY = Mathf.CeilToInt(position.y);
+                }
             }
-            if(position.y < minY) 
-            {
-                minY = Mathf.FloorToInt(position.y);
-            }
-            if (position.x > maxX)
-            {
-                maxX = Mathf.CeilToInt(position.x);
-            }
-            if (position.y > maxY)
-            {
-                maxY = Mathf.CeilToInt(position.y);
-            }
+
+            minX -= context.Settings.BufferFromRail;
+            minY -= context.Settings.BufferFromRail;
+            maxX += context.Settings.BufferFromRail;
+            maxY += context.Settings.BufferFromRail;
+
+            int sizeX = maxX - minX;
+            int sizeY = maxY - minY;
+            Vector2Int negativeOffset = new(minX, minY);
+            context.Graph.SetSize(sizeX, sizeY, negativeOffset);
         }
-
-        minX -= context.settings.BufferFromRail;
-        minY -= context.settings.BufferFromRail;
-        maxX += context.settings.BufferFromRail;
-        maxY += context.settings.BufferFromRail;
-
-        int sizeX = maxX - minX;
-        int sizeY = maxY - minY;
-        Vector2Int negativeOffset = new Vector2Int(minX, minY);
-        context.graph.SizeX = sizeX;
-        context.graph.SizeY = sizeY;
-        context.graph.NegativeOffset = negativeOffset;
     }
 }

@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
-
-class GraphGenerationStepAddChallengeJunctions : GraphGenerationStep
+namespace Frostline.World.Generation
 {
-    public void Execute(GraphGenerationContext context)
+    class GraphGenerationStepAddChallengeJunctions : IGraphGenerationStep
     {
-        for (int i = 0; i < context.graph.nodes.Count; i++)
+        public void Execute(GraphGenerationContext context)
         {
-            Node node = context.graph.nodes[i];
-
-            if (node is JunctionNode junctionNode)
+            for (int i = 0; i < context.Graph.Nodes.Count; i++)
             {
-                bool isPassThrough = junctionNode.ConnectedNodes() == 2;
-                float challengeRate = context.settings.JunctionChallengeRate * (isPassThrough ? 1.5f : 1);
-                if (!(Random.value < challengeRate))
-                {
-                    continue;
-                }
+                Node node = context.Graph.Nodes[i];
 
-                ChallengeJunction challengeJunctionNode = new(node.polar, context.settings, true);
-                context.graph.ReplaceNode(junctionNode, challengeJunctionNode);
+                if (node is JunctionNode junctionNode)
+                {
+                    bool isPassThrough = junctionNode.ConnectedNodes() == 2;
+                    float challengeRate = context.Settings.JunctionChallengeRate * (isPassThrough ? 1.5f : 1);
+                    if (!(Random.value < challengeRate))
+                    {
+                        continue;
+                    }
+
+                    ChallengeJunction challengeJunctionNode = new(node.Polar, context.Settings, true);
+                    context.Graph.ReplaceNode(junctionNode, challengeJunctionNode);
+                }
             }
         }
     }

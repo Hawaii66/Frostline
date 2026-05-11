@@ -1,35 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using Frostline.Core;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Node
+namespace Frostline.World.Generation
 {
-    public Polar polar;
-    public List<Node> edges;
-
-    public Node(Polar polar)
+    public abstract class Node
     {
-        this.polar = polar;
-        edges = new List<Node>();
-    }
+        private readonly Polar _polar;
+        private readonly List<Node> _edges;
+        public IReadOnlyList<Node> Edges => _edges;
+        public Polar Polar => _polar;
 
-    public void AddEdge(Node node)
-    {
-        if (!edges.Contains(node))
+        public Node(Polar polar)
         {
-            edges.Add(node);
+            _polar = polar;
+            _edges = new List<Node>();
         }
-    }
-    public int ConnectedNodes()
-    {
-        HashSet<string> seen = new();
-        for (int i = 0; i < edges.Count; ++i)
-        {
-            Node node = edges[i];
-            seen.Add(node.polar.ToCartesian().ToString());
-        }
-        return seen.Count;
-    }
 
-    public abstract Color GetColor();
-    public abstract bool AllowsJunctionConnections();
+        public void AddEdge(Node node)
+        {
+            if (!_edges.Contains(node))
+            {
+                _edges.Add(node);
+            }
+        }
+        public void RemoveEdge(Node node)
+        {
+            _edges.Remove(node);
+        }
+        public int ConnectedNodes()
+        {
+            HashSet<string> seen = new();
+            for (int i = 0; i < _edges.Count; ++i)
+            {
+                Node node = _edges[i];
+                seen.Add(node._polar.ToCartesian().ToString());
+            }
+            return seen.Count;
+        }
+
+        public abstract Color GetColor();
+        public abstract bool AllowsJunctionConnections();
+    }
 }

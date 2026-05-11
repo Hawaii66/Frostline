@@ -1,25 +1,28 @@
 ﻿
 using UnityEngine;
 
-class StructureBlueprint : ScriptableObject
+namespace Frostline.DEBUG
 {
-    public Vector2Int[] occupiedOffsets;
-
-    public static StructureBlueprint New(Vector2Int[] offsets)
+    class StructureBlueprint : ScriptableObject
     {
-        StructureBlueprint sb = ScriptableObject.CreateInstance<StructureBlueprint>();
-        sb.occupiedOffsets = offsets;
-        return sb;
-    }
+        public Vector2Int[] occupiedOffsets;
 
-    public Tile[] ToTiles(Vector2Int worldPosition)
-    {
-        Tile[] tiles = new Tile[occupiedOffsets.Length];
-        for (int i = 0; i < occupiedOffsets.Length; i++)
+        public static StructureBlueprint New(Vector2Int[] offsets)
         {
-            tiles[i] = new Tile(occupiedOffsets[i] + worldPosition);
+            StructureBlueprint sb = ScriptableObject.CreateInstance<StructureBlueprint>();
+            sb.occupiedOffsets = offsets;
+            return sb;
         }
 
-        return tiles;
+        public Tile[] ToTiles(Vector2Int worldPosition)
+        {
+            Tile[] tiles = new Tile[occupiedOffsets.Length];
+            for (int i = 0; i < occupiedOffsets.Length; i++)
+            {
+                tiles[i] = new Tile(occupiedOffsets[i] + worldPosition);
+            }
+
+            return tiles;
+        }
     }
 }

@@ -1,206 +1,230 @@
 ﻿
+using Frostline.Core;
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Graph
+namespace Frostline.World.Generation
 {
-    public List<Node> nodes;
-    public List<Edge> edges;
-    public int SizeX;
-    public int SizeY;
-    public Vector2 NegativeOffset;
-    GraphSettings settings;
-
-    public Graph(GraphSettings settings)
+    public class Graph
     {
-        nodes = new List<Node>();
-        edges = new List<Edge>();
-        this.settings = settings;
-    }
+        private readonly List<Node> _nodes;
+        public IReadOnlyList<Node> Nodes => _nodes;
+        private readonly List<Edge> _edges;
+        public IReadOnlyList<Edge> Edges => _edges;
+        public int SizeX { get; private set; }
+        public int SizeY { get; private set; }
+        public Vector2Int NegativeOffset { get; private set; }
+        private readonly GraphSettings _settings;
 
-    public Vector2 ToWorldPosition(Polar polar)
-    {
-        return NegativeOffset + polar.ToCartesian();
-    }
-
-    bool TryAddNode(Node node, Node parent)
-    {
-        if (IsTooClose(node.polar))
+        public Graph(GraphSettings settings)
         {
-            return false;
+            _nodes = new List<Node>();
+            _edges = new List<Edge>();
+            _settings = settings;
         }
 
-        Edge edge = new (parent, node);
-        if (Edge.IsOverlapping(edges, edge))
+        private bool TryAddNode(Node node, Node parent)
         {
-            return false;
-        }
-
-        nodes.Add(node);
-        edges.Add(edge);
-        parent.AddEdge(node);
-        node.AddEdge(parent);
-        return true;
-    }
-    public JunctionNode TryAddJunctionNode(Polar polar, Node parent, bool allowMakeConnections)
-    {
-        JunctionNode node = new (polar, settings, allowMakeConnections);
-        if (TryAddNode(node, parent))
-        {
-            return node;
-        }
-        return null;
-    }
-
-    public EndNode TryAddEndNode(Polar polar, Node parent)
-    {
-        EndNode node = new(polar);
-        if (TryAddNode(node, parent))
-        {
-            return node;
-        }
-
-        return null;
-    }
-    public void ReplaceNode(Node prev, Node next)
-    {
-        int index = nodes.IndexOf(prev);
-        nodes[index] = next;
-        for(int i = 0; i < edges.Count; i++)
-        {
-            Edge edge = edges[i];
-            if(edge.a == prev)
+            if (IsTooClose(node.Polar))
             {
-                edge.a = next;
-            }
-            if(edge.b == prev)
-            {
-                edge.b = next;
-            }
-        }
-        for(int i = 0; i < prev.edges.Count; i++)
-        {
-            Node other = prev.edges[i];
-            next.edges.Add(other);
-            other.edges.Remove(prev);
-            other.edges.Add(next);
-        }
-    }
-
-    public void ExpandFromJunction(JunctionNode node, List<Node> toProcess)
-    {
-        Polar[] polars = node.GetNext();
-
-        for (int i = 0; i < polars.Length; i++)
-        {
-            Polar polar = node.polar + polars[i];
-            if (IsTooClose(polar))
-            {
-                continue;
+                return false;
             }
 
-            if (Random.value < settings.EndNodeSpawnRate)
+            _nodes.Add(node);
+
+            if (parent != null)
             {
-                TryAddEndNode(polar, node);
-            }
-            else
-            {
-                JunctionNode newNode = TryAddJunctionNode(polar, node, true);
-                if (newNode != null)
+                Edge edge = new(parent, node);
+                if (Edge.IsOverlapping(_edges, edge))
                 {
-                    toProcess.Add(newNode);
+                    return false;
+                }
+                _edges.Add(edge);
+                parent.AddEdge(node);
+                node.AddEdge(parent);
+            }
+
+            return true;
+        }
+
+        public void SetSize(int x, int y, Vector2Int negativeOffset)
+        {
+            SizeX = x;
+            SizeY = y;
+            NegativeOffset = negativeOffset;
+        }
+
+        public JunctionNode TryAddJunctionNode(Polar polar, Node parent, bool allowMakeConnections)
+        {
+            JunctionNode node = new(polar, _settings, allowMakeConnections);
+            if (TryAddNode(node, parent))
+            {
+                return node;
+            }
+            return null;
+        }
+
+        public EndNode TryAddEndNode(Polar polar, Node parent)
+        {
+            EndNode node = new(polar);
+            if (TryAddNode(node, parent))
+            {
+                return node;
+            }
+
+            return null;
+        }
+        public StartNode TryAddStartNode(Polar polar)
+        {
+            StartNode node = new(polar);
+            if (TryAddNode(node, null))
+            {
+                return node;
+            }
+
+            return null;
+        }
+        public void ReplaceNode(Node prev, Node next)
+        {
+            int index = _nodes.IndexOf(prev);
+            _nodes[index] = next;
+            for (int i = 0; i < _edges.Count; i++)
+            {
+                Edge edge = _edges[i];
+                if (edge.A == prev)
+                {
+                    edge.SetA(next);
+                }
+                if (edge.B == prev)
+                {
+                    edge.SetB(next);
                 }
             }
+            for (int i = 0; i < prev.Edges.Count; i++)
+            {
+                Node other = prev.Edges[i];
+                next.AddEdge(other);
+                other.RemoveEdge(prev);
+                other.AddEdge(next);
+            }
         }
 
-        if (!node.AllowsJunctionConnections())
+        public void ExpandFromJunction(JunctionNode node, List<Node> toProcess)
         {
-            return;
+            Polar[] polars = node.GetNext();
+
+            for (int i = 0; i < polars.Length; i++)
+            {
+                Polar polar = node.Polar + polars[i];
+                if (IsTooClose(polar))
+                {
+                    continue;
+                }
+
+                if (Random.value < _settings.EndNodeSpawnRate)
+                {
+                    TryAddEndNode(polar, node);
+                }
+                else
+                {
+                    JunctionNode newNode = TryAddJunctionNode(polar, node, true);
+                    if (newNode != null)
+                    {
+                        toProcess.Add(newNode);
+                    }
+                }
+            }
+
+            if (!node.AllowsJunctionConnections())
+            {
+                return;
+            }
+            Node[] closeNodes = GetNodesWithinDistance(node.Polar, _settings.JunctionConnectionSearchDistance, true);
+            for (int i = 0; i < closeNodes.Length; i++)
+            {
+                Node other = closeNodes[i];
+                if (!other.AllowsJunctionConnections())
+                {
+                    continue;
+                }
+                if (Random.value > _settings.JunctionConnectionChance)
+                {
+                    continue;
+                }
+
+                Edge edge = new(node, other);
+                if (HasEdge(edge))
+                {
+                    continue;
+                }
+                if (Edge.IsOverlapping(_edges, edge))
+                {
+                    continue;
+                }
+
+                _edges.Add(edge);
+                node.AddEdge(other);
+                other.AddEdge(node);
+            }
         }
-        Node[] closeNodes = GetNodesWithinDistance(node.polar, settings.JunctionConnectionSearchDistance, true);
-        for(int i = 0; i < closeNodes.Length; i++)
+
+        private bool HasEdge(Edge edge)
         {
-            Node other = closeNodes[i];
-            if (!other.AllowsJunctionConnections())
+            for (int i = 0; i < _edges.Count; i++)
             {
-                continue;
-            }
-            if(Random.value > settings.JunctionConnectionChance)
-            {
-                continue;
+                Edge other = _edges[i];
+
+                if (other.A == edge.A && other.B == edge.B)
+                {
+                    return true;
+                }
+                if (other.A == edge.B && other.B == edge.A)
+                {
+                    return true;
+                }
             }
 
-            Edge edge = new (node, other);
-            if (HasEdge(edge))
-            {
-                continue;
-            }
-            if (Edge.IsOverlapping(edges, edge))
-            {
-                continue;
-            }
-
-            edges.Add(edge);
-            node.AddEdge(other);
-            other.AddEdge(node);
+            return false;
         }
-    }
 
-    bool HasEdge(Edge edge)
-    {
-        for(int i = 0;i < edges.Count; i++)
+        private bool IsTooClose(Polar polar)
         {
-            Edge other = edges[i];
+            Vector2 test = polar.ToCartesian();
+            for (int i = 0; i < _nodes.Count; i++)
+            {
+                Vector2 pos = _nodes[i].Polar.ToCartesian();
 
-            if(other.a == edge.a && other.b == edge.b)
-            {
-                return true;
+                float dist = Vector2.Distance(pos, test);
+                if (dist < _settings.MinDistanceBetweenNodes)
+                {
+                    return true;
+                }
             }
-            if(other.a == edge.b && other.b == edge.a)
-            {
-                return true;
-            }
+
+            return false;
         }
 
-        return false;
-    }
-
-    bool IsTooClose(Polar polar)
-    {
-        Vector2 test = polar.ToCartesian();
-        for(int i = 0; i < nodes.Count; i++)
+        private Node[] GetNodesWithinDistance(Polar polar, float testDist, bool excludeSelf = false)
         {
-            Vector2 pos = nodes[i].polar.ToCartesian();
+            List<Node> closeNodes = new();
 
-            float dist = Vector2.Distance(pos, test);
-            if(dist < settings.MinDistanceBetweenNodes)
+            Vector2 test = polar.ToCartesian();
+            for (int i = 0; i < _nodes.Count; i++)
             {
-                return true;
+                Vector2 pos = _nodes[i].Polar.ToCartesian();
+                float dist = Vector2.Distance(pos, test);
+                if (excludeSelf && dist == 0)
+                {
+                    continue;
+                }
+                if (dist < testDist)
+                {
+                    closeNodes.Add(_nodes[i]);
+                }
             }
+
+            return closeNodes.ToArray();
         }
-
-        return false;
-    }
-
-    Node[] GetNodesWithinDistance(Polar polar, float testDist, bool excludeSelf = false)
-    {
-        List<Node> closeNodes = new ();
-
-        Vector2 test = polar.ToCartesian();
-        for(int i = 0; i < nodes.Count; i++)
-        {
-            Vector2 pos = nodes[i].polar.ToCartesian();
-            float dist = Vector2.Distance(pos, test);
-            if(excludeSelf && dist == 0)
-            {
-                continue;
-            }
-            if(dist < testDist)
-            {
-                closeNodes.Add(nodes[i]);
-            }
-        }
-
-        return closeNodes.ToArray();
     }
 }

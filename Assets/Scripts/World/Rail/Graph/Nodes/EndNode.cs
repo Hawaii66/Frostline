@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿using Frostline.Core;
+using UnityEngine;
 
-public class EndNode : Node
+namespace Frostline.World.Generation
 {
-    public EndNode(Polar polar) : base(polar) { }
-    public override Color GetColor() { return Color.blanchedAlmond; }
-    public override bool AllowsJunctionConnections()
+    public class EndNode : Node
     {
-        return false;
+        public EndNode(Polar polar) : base(polar) { }
+        public override Color GetColor() { return Color.blanchedAlmond; }
+        public override bool AllowsJunctionConnections()
+        {
+            return false;
+        }
     }
 }

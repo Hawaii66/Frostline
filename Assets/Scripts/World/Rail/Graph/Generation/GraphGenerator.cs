@@ -1,14 +1,18 @@
-﻿class GraphGenerator
+﻿namespace Frostline.World.Generation
 {
-    public static Graph Generate(GraphSettings settings)
+
+    public class GraphGenerator
     {
-        return new GraphGeneration(settings)
-            .AddStep(new GraphGenerationStepWithSeed())
-            .AddStep(new GraphGenerationStepStart())
-            .AddStep(new GraphGenerationStepExpand())
-            .AddStep(new GraphGenerationStepRemoveEmptyJunctions())
-            .AddStep(new GraphGenerationStepAddChallengeJunctions())
-            .AddStep(new GraphGenerationStepCalculateSize())
-            .Generate();
+        public static Graph Generate(GraphSettings settings)
+        {
+            return new GraphGeneration(settings)
+                .AddStep(new GraphGenerationStepWithSeed())
+                .AddStep(new GraphGenerationStepStart())
+                .AddStep(new GraphGenerationStepExpand())
+                .AddStep(new GraphGenerationStepRemoveEmptyJunctions())
+                .AddStep(new GraphGenerationStepAddChallengeJunctions())
+                .AddStep(new GraphGenerationStepCalculateSize())
+                .Generate();
+        }
     }
 }

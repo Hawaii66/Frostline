@@ -1,19 +1,23 @@
 ﻿
-class GraphGenerationStepRemoveEmptyJunctions : GraphGenerationStep
+namespace Frostline.World.Generation
 {
-    public void Execute(GraphGenerationContext context)
+    class GraphGenerationStepRemoveEmptyJunctions : IGraphGenerationStep
     {
-        for (int i = 0; i < context.graph.nodes.Count; i++)
+        public void Execute(GraphGenerationContext context)
         {
-            Node node = context.graph.nodes[i];
-
-            if (node is JunctionNode junctionNode)
+            for (int i = 0; i < context.Graph.Nodes.Count; i++)
             {
-                if (junctionNode.ConnectedNodes() == 1)
+                Node node = context.Graph.Nodes[i];
+
+                if (node is JunctionNode junctionNode)
                 {
-                    EndNode endNode = new(node.polar);
-                    context.graph.ReplaceNode(junctionNode, endNode);
+                    if (junctionNode.ConnectedNodes() == 1)
+                    {
+                        EndNode endNode = new(node.Polar);
+                        context.Graph.ReplaceNode(junctionNode, endNode);
+                    }
                 }
             }
-        }    }
+        }
+    }
 }

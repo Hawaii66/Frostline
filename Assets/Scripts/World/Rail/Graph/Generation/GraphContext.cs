@@ -1,16 +1,19 @@
 ﻿
 using System.Collections.Generic;
 
-class GraphGenerationContext
+namespace Frostline.World.Generation
 {
-    public Graph graph;
-    public GraphSettings settings;
-    public List<Node> toProcess;
-
-    public GraphGenerationContext(Graph graph, GraphSettings settings)
+    public class GraphGenerationContext
     {
-        this.graph = graph;
-        this.settings = settings;
-        toProcess = new List<Node>();
+        public Graph Graph { get; }
+        public GraphSettings Settings { get; }
+        public List<Node> ToProcess { get; }
+
+        public GraphGenerationContext(Graph graph, GraphSettings settings)
+        {
+            Graph = graph;
+            Settings = settings;
+            ToProcess = new List<Node>();
+        }
     }
 }

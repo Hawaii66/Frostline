@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using Frostline.Core;
+using UnityEngine;
 
-public class ChallengeJunction : JunctionNode
+namespace Frostline.World.Generation
 {
-    public ChallengeJunction(Polar polar, GraphSettings settings, bool allowMakeConnections) : base(polar, settings, allowMakeConnections) { }
-    public override Color GetColor()
+    public class ChallengeJunction : JunctionNode
     {
-        return Color.green;
+        public ChallengeJunction(Polar polar, GraphSettings settings, bool allowMakeConnections) : base(polar, settings, allowMakeConnections) { }
+        public override Color GetColor()
+        {
+            return Color.green;
+        }
     }
 }

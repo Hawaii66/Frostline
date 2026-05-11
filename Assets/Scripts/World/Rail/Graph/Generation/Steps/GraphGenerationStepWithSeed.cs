@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-class GraphGenerationStepWithSeed : GraphGenerationStep
+namespace Frostline.World.Generation
 {
-    public void Execute(GraphGenerationContext context)
+    class GraphGenerationStepWithSeed : IGraphGenerationStep
     {
-        Random.InitState(context.settings.seed);
+        public void Execute(GraphGenerationContext context)
+        {
+            Random.InitState(context.Settings.Seed);
+        }
     }
 }

@@ -1,22 +1,25 @@
-﻿
-class GraphGenerationStepStart : GraphGenerationStep
+﻿using Frostline.Core;
+
+namespace Frostline.World.Generation
 {
-    public void Execute(GraphGenerationContext context)
+    class GraphGenerationStepStart : IGraphGenerationStep
     {
-        StartNode startNode = new(Polar.Zero);
-        context.graph.nodes.Add(startNode);
-
-        int startConnections = context.settings.StartConnections;
-        float radSplit = Polar.CircleRad / startConnections;
-        for (int i = 0; i < startConnections; i++)
+        public void Execute(GraphGenerationContext context)
         {
-            float rad = radSplit * i + radSplit * context.settings.WithVariation(0, context.settings.StartRadVariation);
-            float dist = context.settings.WithVariation(context.settings.StartDistance, context.settings.StartDistanceVariation);
+            StartNode startNode = context.Graph.TryAddStartNode(Polar.Zero);
 
-            JunctionNode node = context.graph.TryAddJunctionNode(new Polar(rad, dist), startNode, false);
-            if (node != null)
+            int startConnections = context.Settings.StartConnections;
+            float radSplit = Polar.CircleRad / startConnections;
+            for (int i = 0; i < startConnections; i++)
             {
-                context.toProcess.Add(node);
+                float rad = radSplit * i + radSplit * context.Settings.WithVariation(0, context.Settings.StartRadVariation);
+                float dist = context.Settings.WithVariation(context.Settings.Seed, context.Settings.StartDistanceVariation);
+
+                JunctionNode node = context.Graph.TryAddJunctionNode(new Polar(rad, dist), startNode, false);
+                if (node != null)
+                {
+                    context.ToProcess.Add(node);
+                }
             }
         }
     }

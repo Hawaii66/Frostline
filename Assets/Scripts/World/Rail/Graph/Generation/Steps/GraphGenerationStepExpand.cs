@@ -1,21 +1,23 @@
-﻿using System.Diagnostics;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GraphGenerationStepExpand : GraphGenerationStep
+namespace Frostline.World.Generation
 {
-    void GraphGenerationStep.Execute(GraphGenerationContext context)
+    public class GraphGenerationStepExpand : IGraphGenerationStep
     {
-        while (context.toProcess.Count > 0 && context.graph.nodes.Count <= context.settings.MaxNodes)
+        public void Execute(GraphGenerationContext context)
         {
-            int randomIndex = Random.Range(0, context.toProcess.Count);
-            Node node = context.toProcess[randomIndex];
-
-            if (node is JunctionNode junctionNode)
+            while (context.ToProcess.Count > 0 && context.Graph.Nodes.Count <= context.Settings.MaxNodes)
             {
-                context.graph.ExpandFromJunction(junctionNode, context.toProcess);
-            }
+                int randomIndex = Random.Range(0, context.ToProcess.Count);
+                Node node = context.ToProcess[randomIndex];
 
-            context.toProcess.RemoveAt(randomIndex);
+                if (node is JunctionNode junctionNode)
+                {
+                    context.Graph.ExpandFromJunction(junctionNode, context.ToProcess);
+                }
+
+                context.ToProcess.RemoveAt(randomIndex);
+            }
         }
     }
 }

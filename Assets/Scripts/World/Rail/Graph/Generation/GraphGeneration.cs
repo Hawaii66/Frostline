@@ -1,37 +1,38 @@
 ﻿using System.Collections.Generic;
 
-class GraphGeneration
+namespace Frostline.World.Generation
 {
-    Graph graph;
-    GraphGenerationContext context;
-    List<GraphGenerationStep> steps;
-
-    public GraphGeneration(GraphSettings settings)
+    public interface IGraphGenerationStep
     {
-        graph = new (settings);
-        context = new(graph, settings);
-        steps = new();
+        void Execute(GraphGenerationContext context);
     }
 
-    public GraphGeneration AddStep(GraphGenerationStep step)
+    public class GraphGeneration
     {
-        steps.Add(step);
-        return this;
-    }
+        private readonly GraphGenerationContext _context;
+        private readonly List<IGraphGenerationStep> _steps;
 
-    public Graph Generate()
-    {
-        for(int i = 0; i < steps.Count; i++)
+        public GraphGeneration(GraphSettings settings)
         {
-            steps[i].Execute(context);
+            Graph graph = new(settings);
+            _context = new(graph, settings);
+            _steps = new();
         }
 
-        return graph;
+        public GraphGeneration AddStep(IGraphGenerationStep step)
+        {
+            _steps.Add(step);
+            return this;
+        }
+
+        public Graph Generate()
+        {
+            for (int i = 0; i < _steps.Count; i++)
+            {
+                _steps[i].Execute(_context);
+            }
+
+            return _context.Graph;
+        }
     }
-}
-
-
-interface GraphGenerationStep
-{
-    void Execute(GraphGenerationContext context);
 }
