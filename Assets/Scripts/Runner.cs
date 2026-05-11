@@ -1,4 +1,6 @@
+using Frostline.World;
 using Frostline.World.Generation;
+using Frostline.World.Structures;
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace Frostline.DEBUG
     public class Runner : MonoBehaviour
     {
         Graph graph;
-        World world;
+        WorldContext world;
         List<List<Vector2Int>> trackPaths;
         Dictionary<string, StructureBlueprint> structureBlueprints;
 
@@ -62,13 +64,13 @@ namespace Frostline.DEBUG
         [Button("Generate world")]
         void Run3()
         {
-            world = new World(graph.SizeX, graph.SizeY);
+            world = new WorldContext();
             StructureBlueprint structureBlueprint = StructureBlueprint.New(new Vector2Int[]
             {
-            new Vector2Int(0,0),
-            new Vector2Int(1,0),
-            new Vector2Int(1,1),
-            new Vector2Int(0,1),
+            new (0,0),
+            new (1,0),
+            new (1,1),
+            new (0,1),
             });
             Structure structure = new(structureBlueprint, Vector2Int.zero);
             world.TryAddStructure(structure);
@@ -78,12 +80,12 @@ namespace Frostline.DEBUG
 
             StructureBlueprint structureBlueprint2 = StructureBlueprint.New(new Vector2Int[]
             {
-            new Vector2Int(0,0),
-            new Vector2Int(1,0),
-            new Vector2Int(1,1),
-            new Vector2Int(0,1),
+            new (0,0),
+            new (1,0),
+            new (1,1),
+            new (0,1),
             });
-            Structure structure3 = new Structure(structureBlueprint2, Vector2Int.right * 3 + Vector2Int.up * 2);
+            Structure structure3 = new(structureBlueprint2, Vector2Int.right * 3 + Vector2Int.up * 2);
             world.TryAddStructure(structure3);
 
             if (structureBlueprints.TryGetValue("Cube", out StructureBlueprint sb))
@@ -142,12 +144,12 @@ namespace Frostline.DEBUG
             if (world != null)
             {
                 Gizmos.color = Color.black;
-                for (int i = 0; i < world.structures.Count; i++)
+                for (int i = 0; i < world.Structures.Count; i++)
                 {
-                    Structure structure = world.structures[i];
-                    for (int j = 0; j < structure.tiles.Length; j++)
+                    Structure structure = world.Structures[i];
+                    for (int j = 0; j < structure.GetOccupiedPositions().Length; j++)
                     {
-                        Vector2Int position = structure.tiles[j].position;
+                        Vector2Int position = structure.GetOccupiedPositions()[j];
                         Gizmos.DrawWireSphere(new Vector3(position.x, 0, position.y), 0.2f);
                     }
                 }

@@ -511,7 +511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 833945523}
-  - component: {fileID: 833945522}
+  - component: {fileID: 833945524}
   m_Layer: 0
   m_Name: StructureGenerator
   m_TagString: Untagged
@@ -519,18 +519,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &833945522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833945521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64aa3056d6fc39340a66b71a77aab6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StructureBlueprintGenerator
 --- !u!4 &833945523
 Transform:
   m_ObjectHideFlags: 0
@@ -547,6 +535,18 @@ Transform:
   - {fileID: 86160606}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &833945524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833945521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f685bb4916bf1714090137ce7083d0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.Editor.StructureBlueprintGenerator
 --- !u!1 &1435506437
 GameObject:
   m_ObjectHideFlags: 0

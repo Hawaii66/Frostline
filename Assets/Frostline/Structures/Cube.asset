@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c70e0491942d3394db6458118cbe2d9e, type: 3}
   m_Name: Cube
-  m_EditorClassIdentifier: Assembly-CSharp::StructureBlueprint
-  occupiedOffsets:
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprint
+  OccupiedOffsets:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 1, y: 1}

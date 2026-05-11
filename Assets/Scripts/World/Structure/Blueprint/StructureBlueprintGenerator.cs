@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Frostline.DEBUG
+namespace Frostline.World.Structures.Editor
 {
-    class StructureBlueprintGenerator : MonoBehaviour
+    public class StructureBlueprintGenerator : MonoBehaviour
     {
         [Button("Generate Assets")]
         void Generate()
         {
             StructureBlueprintMetadata[] structures = transform.GetComponentsInChildren<StructureBlueprintMetadata>();
-
 
             for (int i = 0; i < structures.Length; i++)
             {
@@ -32,7 +31,7 @@ namespace Frostline.DEBUG
             }
 
             StructureBlueprint sb = ScriptableObject.CreateInstance<StructureBlueprint>();
-            sb.occupiedOffsets = positions.ToArray();
+            sb.OccupiedOffsets = positions.ToArray();
 
             AssetDatabase.CreateAsset(sb, "Assets/Frostline/Structures/" + parent.name + ".asset");
         }

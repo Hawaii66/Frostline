@@ -31,8 +31,6 @@ namespace Frostline.World.Generation
                 return false;
             }
 
-            _nodes.Add(node);
-
             if (parent != null)
             {
                 Edge edge = new(parent, node);
@@ -44,6 +42,7 @@ namespace Frostline.World.Generation
                 parent.AddEdge(node);
                 node.AddEdge(parent);
             }
+            _nodes.Add(node);
 
             return true;
         }

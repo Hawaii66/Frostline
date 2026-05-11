@@ -1,4 +1,5 @@
 ﻿using Frostline.Core;
+using UnityEngine;
 
 namespace Frostline.World.Generation
 {
@@ -13,7 +14,7 @@ namespace Frostline.World.Generation
             for (int i = 0; i < startConnections; i++)
             {
                 float rad = radSplit * i + radSplit * context.Settings.WithVariation(0, context.Settings.StartRadVariation);
-                float dist = context.Settings.WithVariation(context.Settings.Seed, context.Settings.StartDistanceVariation);
+                float dist = context.Settings.WithVariation(context.Settings.StartDistance, context.Settings.StartDistanceVariation);
 
                 JunctionNode node = context.Graph.TryAddJunctionNode(new Polar(rad, dist), startNode, false);
                 if (node != null)

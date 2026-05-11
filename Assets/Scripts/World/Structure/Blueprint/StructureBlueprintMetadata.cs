@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
-class StructureBlueprintMetadata : MonoBehaviour
+namespace Frostline.World.Structures
 {
+    public class StructureBlueprintMetadata : MonoBehaviour
+    {
+    }
 }
