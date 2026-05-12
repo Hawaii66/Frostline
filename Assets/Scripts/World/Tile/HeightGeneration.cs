@@ -37,6 +37,11 @@ namespace Frostline.World.Tiles
             return Mathf.RoundToInt(height);
         }
 
+        public static int TerraceHeightInt(float height)
+        {
+            return Mathf.RoundToInt(height);
+        }
+
         private float GetHeight(int x, int y)
         {
             float sampleOffset = 0.6591591f;

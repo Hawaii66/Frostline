@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Frostline.Renderer
 {
-    public class HeightRenderer : MonoBehaviour, IVisibilityListener, IRequireServices
+    public class HeightRendererManager : MonoBehaviour, IVisibilityListener, IRequireServices
     {
         [SerializeField] private FloorTile _floorTilePrefab;
         [SerializeField] private Transform _floorTilePoolHolder;
@@ -55,7 +55,7 @@ namespace Frostline.Renderer
                 }
 
                 FloorTile floorTile = _floorTilePool.GetFromPool();
-                floorTile.Configure(_tileManager.Tiles[pos.x, pos.y]);
+                floorTile.Configure(_tileManager.GetTile(pos));
                 _visibleFloorTiles.Add(pos, floorTile);
             }
         }

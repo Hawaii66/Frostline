@@ -7,6 +7,7 @@ namespace Frostline.World.Tiles
         public int X { get; private set; }
         public int Y { get; private set; }
         public float Height { get; private set; }
+        public int HeightInt => HeightGeneration.TerraceHeightInt(Height);
         public Color Color { get; private set; }
 
         public Tile(int x, int y, float height, Color color)

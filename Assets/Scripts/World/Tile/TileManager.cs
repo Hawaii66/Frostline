@@ -1,5 +1,6 @@
 ﻿using Frostline.Core;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Frostline.World.Tiles
 {
@@ -14,14 +15,14 @@ namespace Frostline.World.Tiles
         private int _sizeY;
         private TileSettings _tileSettings;
 
-        public Tile[,] Tiles { get; private set; }
+        private Tile[,] _tiles;
 
         public void GenerateTiles(int sizeX, int sizeY)
         {
             _sizeX = sizeX;
             _sizeY = sizeY;
             TileGeneration tileGeneration = new(_tileSettings, sizeX, sizeY);
-            Tiles = tileGeneration.GenerateTiles();
+            _tiles = tileGeneration.GenerateTiles();
         }
 
         public void ScaleHeights(IHeightScale scaler)
@@ -30,8 +31,8 @@ namespace Frostline.World.Tiles
             {
                 for (int y = 0; y < _sizeY; y++)
                 {
-                    float height = Tiles[x, y].Height;
-                    Tiles[x, y].SetHeight(height * (1 - scaler.Scale(x, y)));
+                    float height = _tiles[x, y].Height;
+                    _tiles[x, y].SetHeight(height * (1 - scaler.Scale(x, y)));
                 }
             });
         }
@@ -39,6 +40,15 @@ namespace Frostline.World.Tiles
         public void Initialize(IServiceRegistry serviceRegistry)
         {
             _tileSettings = serviceRegistry.GetService<WorldSettings>().TileSettings;
+        }
+
+        public Tile GetTile(int x, int y)
+        {
+            return _tiles[x, y];
+        }
+        public Tile GetTile(Vector2Int pos)
+        {
+            return GetTile(pos.x, pos.y);
         }
     }
 }

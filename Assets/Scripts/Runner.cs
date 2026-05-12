@@ -10,7 +10,7 @@ namespace Frostline.DEBUG
 {
     public class Runner : MonoBehaviour
     {
-        WorldContext world;
+        StructureManager world;
         Dictionary<string, StructureBlueprint> structureBlueprints;
 
         [Button("Load structures")]
@@ -31,7 +31,7 @@ namespace Frostline.DEBUG
         [Button("Generate world")]
         void Run3()
         {
-            world = new WorldContext();
+            world = new StructureManager();
             StructureBlueprint structureBlueprint = StructureBlueprint.New(new Vector2Int[]
             {
             new (0,0),

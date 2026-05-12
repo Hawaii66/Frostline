@@ -27,16 +27,13 @@ namespace Frostline.Core
             WorldGeneration worldGeneration = _serviceRegistry.GetService<WorldGeneration>();
             worldGeneration.GenerateWorld();
         }
-        private void Start()
-        {
-
-        }
 
         private void RegisterAll()
         {
             RegisterService(_worldSettings);
             RegisterServiceDependency(new WorldGeneration());
             RegisterServiceDependency(new StructureBlueprintManager());
+            RegisterServiceDependency(new StructureManager());
             RegisterServiceDependency(new TileManager());
             RegisterServiceDependency(new VisibilityManager());
         }
