@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using Frostline.World.Structures.Editor;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Frostline.World.Structures
@@ -7,6 +8,12 @@ namespace Frostline.World.Structures
     {
         [SerializeField] private Vector2Int[] _occupiedPositions;
         [SerializeField] private Vector2Int lowerLeftCorner;
+
+        [Button("Generate Blueprint")]
+        private void GenerateBlueprint()
+        {
+            StructureBlueprintGenerator.GenerateStructure(transform);
+        }
 
         public Vector2Int[] GetOccupiedTiles()
         {

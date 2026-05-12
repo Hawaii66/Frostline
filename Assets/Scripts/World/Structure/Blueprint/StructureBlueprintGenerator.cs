@@ -19,7 +19,7 @@ namespace Frostline.World.Structures.Editor
             }
         }
 
-        void GenerateStructure(Transform parent)
+        public static void GenerateStructure(Transform parent)
         {
             StructureBlueprintMetadata metadata = parent.GetComponent<StructureBlueprintMetadata>();
 
