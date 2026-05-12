@@ -31,8 +31,9 @@ namespace Frostline.World.Tiles
             {
                 for (int y = 0; y < _sizeY; y++)
                 {
-                    float height = _tiles[x, y].Height;
-                    _tiles[x, y].SetHeight(height * (1 - scaler.Scale(x, y)));
+                    int height = _tiles[x, y].Height;
+                    float scaledHeight = height * (1 - scaler.Scale(x, y));
+                    _tiles[x, y].SetHeight(HeightGeneration.TerraceHeight(scaledHeight));
                 }
             });
         }

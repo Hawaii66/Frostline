@@ -18,9 +18,9 @@ namespace Frostline.World.Tiles
             _sizeY = sizeY;
         }
 
-        public float[,] GenerateHeights()
+        public int[,] GenerateHeights()
         {
-            float[,] heights = new float[_sizeX, _sizeY];
+            int[,] heights = new int[_sizeX, _sizeY];
             Parallel.For(0, _sizeX, (int x) =>
             {
                 for (int y = 0; y < _sizeY; y++)
@@ -32,16 +32,10 @@ namespace Frostline.World.Tiles
             return heights;
         }
 
-        public static float TerraceHeight(float height)
+        public static int TerraceHeight(float height)
         {
             return Mathf.RoundToInt(height);
         }
-
-        public static int TerraceHeightInt(float height)
-        {
-            return Mathf.RoundToInt(height);
-        }
-
         private float GetHeight(int x, int y)
         {
             float sampleOffset = 0.6591591f;

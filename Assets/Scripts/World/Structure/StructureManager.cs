@@ -37,10 +37,10 @@ namespace Frostline.World.Structures
         private bool CanPlaceAtHeight(Structure structure)
         {
             Vector2Int[] occupiedPositions = structure.GetOccupiedPositions();
-            int height = _tileManager.GetTile(occupiedPositions[0]).HeightInt;
+            int height = _tileManager.GetTile(occupiedPositions[0]).Height;
             for (int i = 1; i < occupiedPositions.Length; i++)
             {
-                int height2 = _tileManager.GetTile(occupiedPositions[i]).HeightInt;
+                int height2 = _tileManager.GetTile(occupiedPositions[i]).Height;
                 if (height2 != height)
                 {
                     return false;

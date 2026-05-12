@@ -17,7 +17,7 @@
 
         public Tile[,] GenerateTiles()
         {
-            float[,] heights = _heightGeneration.GenerateHeights();
+            int[,] heights = _heightGeneration.GenerateHeights();
 
             Tile[,] tiles = new Tile[_sizeX, _sizeY];
             for (int x = 0; x < _sizeX; x++)
