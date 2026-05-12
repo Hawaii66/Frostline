@@ -1,15 +1,16 @@
 ﻿
+using Frostline.World.Tiles;
 using UnityEngine;
 
-namespace Frostline.World.Heights
+namespace Frostline.World.Tiles
 {
     public class HeightGeneration
     {
         private readonly int _sizeX;
         private readonly int _sizeY;
-        private readonly HeightSettings _settings;
+        private readonly TileSettings _settings;
 
-        public HeightGeneration(HeightSettings settings, int sizeX, int sizeY)
+        public HeightGeneration(TileSettings settings, int sizeX, int sizeY)
         {
             _settings = settings;
             _sizeX = sizeX;

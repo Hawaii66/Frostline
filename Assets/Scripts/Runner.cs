@@ -2,8 +2,8 @@ using Frostline.Core;
 using Frostline.Renderer;
 using Frostline.World;
 using Frostline.World.Generation;
-using Frostline.World.Heights;
 using Frostline.World.Structures;
+using Frostline.World.Tiles;
 using Frostline.World.Tracks;
 using NaughtyAttributes;
 using System.Collections.Generic;
@@ -22,13 +22,13 @@ namespace Frostline.DEBUG
 
         Graph graph;
         WorldContext world;
-        Height height;
+        TileManager tileManager;
         List<List<Vector2Int>> trackPaths;
         TrackNetwork trackNetwork;
         Dictionary<string, StructureBlueprint> structureBlueprints;
 
         public GraphSettings settings;
-        public HeightSettings heightSettings;
+        public TileSettings tileSettings;
 
         private void Awake()
         {
@@ -72,13 +72,14 @@ namespace Frostline.DEBUG
         [Button("Terrain Height")]
         void GenerateTerrainHeight()
         {
-            height = new(heightSettings, graph.SizeX, graph.SizeY);
+            tileManager = new(tileSettings);
+            tileManager.GenerateTiles(graph.SizeX, graph.SizeY);
         }
 
         [Button("Adjust terrain height to track")]
         void AdjustTerrainHeightToTrack()
         {
-            height.ScaleHeights(trackNetwork);
+            tileManager.ScaleHeights(trackNetwork);
         }
 
         [Button("Load structures")]
@@ -204,16 +205,16 @@ namespace Frostline.DEBUG
                 }
             }
 
-            if (height != null)
+            if (tileManager != null)
             {
                 for (int x = startTrackNetwork.x; x < endTrackNetwork.x; x++)
                 {
                     for (int y = startTrackNetwork.y; y < endTrackNetwork.y; y++)
                     {
-                        Gizmos.color = Util.FromGrayScaleRange(-4, 4, height.Heights[x, y]);
-
-                        Vector3 center = new(x, 0.5f, y);
-                        Vector3 size = new(1, 0.1f, 1);
+                        Tile tile = tileManager.Tiles[x, y];
+                        Gizmos.color = tile.Color;
+                        Vector3 center = new(x, 0, y);
+                        Vector3 size = new(1, 0.01f, 1);
                         Gizmos.DrawCube(center, size);
                     }
                 }

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057bb222105dfa74a9347d83e0ebd795, type: 3}
   m_Name: FlatTerrain
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Heights.HeightSettings
-  HeightScale: 0
+  TileColors:
+  - {r: 0.27617115, g: 0.764151, b: 0.2559185, a: 1}
+  - {r: 0.17940675, g: 0.6226415, b: 0.16153437, a: 1}
   Amplitude: 4
   Frequency: 0.08
   Octaves: 4

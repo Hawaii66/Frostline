@@ -1,4 +1,5 @@
 ﻿using Frostline.Renderer;
+using Frostline.World.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Frostline.Core
 {
     public class GameBootstrapper : MonoBehaviour
     {
+        [SerializeField] private TileSettings tileSettings;
+
         private IServiceRegistry _serviceRegistry;
         private HashSet<IRequireServices> _initializers;
 
@@ -21,6 +24,7 @@ namespace Frostline.Core
         }
         private void RegisterAll()
         {
+            RegisterService(new TileManager(tileSettings));
             RegisterService(new VisibilityManager(20));
             RegisterDependency(new LogVisibility());
         }
