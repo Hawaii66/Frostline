@@ -1,26 +1,25 @@
-﻿using NUnit.Framework.Interfaces;
-using System;
+﻿using Frostline.Core;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Frostline.Renderer
 {
-    public class HeightRenderer : MonoBehaviour, IHandleVisibilityChange
+    public class HeightRenderer : MonoBehaviour, IVisibilityListener, IRequireServices
     {
         [SerializeField] private FloorTile _floorTilePrefab;
         [SerializeField] private Transform _floorTilePoolHolder;
         private ObjectPool<FloorTile> _floorTilePool;
         private Dictionary<Vector2Int, FloorTile> _visibleFloorTiles;
+        private VisibilityManager _visibilityManager;
 
-        private void Start()
+        private void Awake()
         {
             _visibleFloorTiles = new();
             _floorTilePool = new(50, InstantiateFloorPrefab);
-            VisibilityManager.Instance.AddListener(this);
         }
         private void OnDestroy()
         {
-            VisibilityManager.Instance.RemoveListener(this);
+            _visibilityManager.RemoveListener(this);
         }
         private FloorTile InstantiateFloorPrefab()
         {
@@ -57,6 +56,12 @@ namespace Frostline.Renderer
                 floorTile.Configure(pos);
                 _visibleFloorTiles.Add(pos, floorTile);
             }
+        }
+
+        public void Initialize(IServiceRegistry serviceRegistry)
+        {
+            _visibilityManager = serviceRegistry.GetService<VisibilityManager>();
+            _visibilityManager.AddListener(this);
         }
     }
 }

@@ -4,28 +4,24 @@ using UnityEngine;
 
 namespace Frostline.Renderer
 {
-    public interface IVisibilityChanged
+    public interface IVisibilityViewer
     {
-        event Action<Vector2Int> OnVisibilityChanged;
         Vector2Int GetPosition();
     }
-    public interface IHandleVisibilityChange
+    public interface IVisibilityListener
     {
         void ChangeVisible(HashSet<Vector2Int> visiblePositions);
     }
 
     public class VisibilityManager
     {
-        public static VisibilityManager Instance;
-
-        private readonly HashSet<IVisibilityChanged> _rendererViewers;
+        private readonly HashSet<IVisibilityViewer> _rendererViewers;
         private event Action<HashSet<Vector2Int>> _changeVisible;
 
         private static Vector2Int[] _viewOffsets;
 
         public VisibilityManager(int viewRadius)
         {
-            Instance = this;
             _rendererViewers = new();
             _viewOffsets = CalculateViewOffsets(viewRadius);
         }
@@ -47,29 +43,27 @@ namespace Frostline.Renderer
             return offsets.ToArray();
         }
 
-        public void AddViewer(IVisibilityChanged viewer)
+        public void AddViewer(IVisibilityViewer viewer)
         {
-            viewer.OnVisibilityChanged += OnMove;
             _rendererViewers.Add(viewer);
         }
-        public void RemoveViewer(IVisibilityChanged viewer)
+        public void RemoveViewer(IVisibilityViewer viewer)
         {
-            viewer.OnVisibilityChanged -= OnMove;
             _rendererViewers.Remove(viewer);
         }
-        public void AddListener(IHandleVisibilityChange handler)
+        public void AddListener(IVisibilityListener handler)
         {
             _changeVisible += handler.ChangeVisible;
         }
-        public void RemoveListener(IHandleVisibilityChange handler)
+        public void RemoveListener(IVisibilityListener handler)
         {
             _changeVisible -= handler.ChangeVisible;
         }
 
-        private void OnMove(Vector2Int t)
+        public void OnNotifyListeners()
         {
             HashSet<Vector2Int> inRange = new();
-            foreach (IVisibilityChanged viewer in _rendererViewers)
+            foreach (IVisibilityViewer viewer in _rendererViewers)
             {
                 Vector2Int viewerPosition = viewer.GetPosition();
                 for (int i = 0; i < _viewOffsets.Length; i++)

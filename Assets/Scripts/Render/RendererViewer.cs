@@ -1,21 +1,25 @@
-﻿using System;
+﻿using Frostline.Core;
+using System;
 using UnityEngine;
 
 namespace Frostline.Renderer
 {
-    public class RendererViewer : MonoBehaviour, IVisibilityChanged
+    public class RendererViewer : MonoBehaviour, IVisibilityViewer, IRequireServices
     {
         private Vector2Int _previousPosition;
-        public event Action<Vector2Int> OnVisibilityChanged;
+        private VisibilityManager _visibilityManager;
 
-        private void Start()
+        private void Awake()
         {
             _previousPosition = GetPosition();
-            VisibilityManager.Instance.AddViewer(this);
+        }
+        private void Start()
+        {
+            _visibilityManager.OnNotifyListeners();
         }
         private void OnDestroy()
         {
-            VisibilityManager.Instance.RemoveViewer(this);
+            _visibilityManager.RemoveViewer(this);
         }
         private void Update()
         {
@@ -24,13 +28,19 @@ namespace Frostline.Renderer
             int diffY = position.y - _previousPosition.y;
             if (diffX * diffX + diffY * diffY > 5)
             {
-                OnVisibilityChanged.Invoke(GetPosition());
+                _visibilityManager.OnNotifyListeners();
                 _previousPosition = position;
             }
         }
         public Vector2Int GetPosition()
         {
             return new(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
+        }
+
+        public void Initialize(IServiceRegistry serviceRegistry)
+        {
+            _visibilityManager = serviceRegistry.GetService<VisibilityManager>();
+            _visibilityManager.AddViewer(this);
         }
     }
 }
