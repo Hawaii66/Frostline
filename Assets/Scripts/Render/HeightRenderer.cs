@@ -1,4 +1,5 @@
 ﻿using Frostline.Core;
+using Frostline.World.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Frostline.Renderer
         private ObjectPool<FloorTile> _floorTilePool;
         private Dictionary<Vector2Int, FloorTile> _visibleFloorTiles;
         private VisibilityManager _visibilityManager;
+        private TileManager _tileManager;
 
         private void Awake()
         {
@@ -53,7 +55,7 @@ namespace Frostline.Renderer
                 }
 
                 FloorTile floorTile = _floorTilePool.GetFromPool();
-                floorTile.Configure(pos);
+                floorTile.Configure(_tileManager.Tiles[pos.x, pos.y]);
                 _visibleFloorTiles.Add(pos, floorTile);
             }
         }
@@ -62,6 +64,7 @@ namespace Frostline.Renderer
         {
             _visibilityManager = serviceRegistry.GetService<VisibilityManager>();
             _visibilityManager.AddListener(this);
+            _tileManager = serviceRegistry.GetService<TileManager>();
         }
     }
 }

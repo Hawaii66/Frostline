@@ -1,5 +1,6 @@
 ﻿
 using Frostline.World.Tiles;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Frostline.World.Tiles
@@ -20,18 +21,23 @@ namespace Frostline.World.Tiles
         public float[,] GenerateHeights()
         {
             float[,] heights = new float[_sizeX, _sizeY];
-            for (int x = 0; x < _sizeX; x++)
+            Parallel.For(0, _sizeX, (int x) =>
             {
                 for (int y = 0; y < _sizeY; y++)
                 {
-                    heights[x, y] = GetHeight(x, y);
+                    heights[x, y] = TerraceHeight(GetHeight(x, y));
                 }
-            }
+            });
 
             return heights;
         }
 
-        public float GetHeight(int x, int y)
+        public static float TerraceHeight(float height)
+        {
+            return Mathf.RoundToInt(height);
+        }
+
+        private float GetHeight(int x, int y)
         {
             float sampleOffset = 0.6591591f;
             float xf = x + sampleOffset;
@@ -43,13 +49,13 @@ namespace Frostline.World.Tiles
             float freq = _settings.Frequency;
             for (int i = 0; i < _settings.Octaves; i++)
             {
-                height += Mathf.PerlinNoise(xf * freq, yf * freq) * amp;
+                height += (Mathf.PerlinNoise(xf * freq, yf * freq) * 2 - 1) * amp;
 
                 amp *= _settings.Persistence;
                 freq *= _settings.Lacunarity;
             }
 
-            return height * 2 - 1;
+            return height;
         }
     }
 }

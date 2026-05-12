@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 struct TrackResult
@@ -21,13 +22,13 @@ class TrackGenerator
             .WithPiece(new PieceWeird());
     }
 
-    public TrackResult Generate(Vector2Int start, Vector2Int end)
+    public TrackResult Generate(Vector2Int start, Vector2Int end, System.Random random)
     {
         int dirX = Dir(start.x, end.x);
         int dirY = Dir(start.y, end.y);
         Vector2Int localEnd = new(Mathf.Abs(end.x - start.x), Mathf.Abs(end.y - start.y));
 
-        TrackResult result = _track.Generate(Vector2Int.zero, localEnd);
+        TrackResult result = _track.Generate(Vector2Int.zero, localEnd, random);
         if (!result.success)
         {
             return result;

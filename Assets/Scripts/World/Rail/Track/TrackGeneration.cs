@@ -35,7 +35,7 @@ class TrackGeneration
         return true;
     }
 
-    public TrackResult Generate(Vector2Int start, Vector2Int end)
+    public TrackResult Generate(Vector2Int start, Vector2Int end, System.Random random)
     {
         int sizeX = end.x - start.x;
         int sizeY = end.y - start.y;
@@ -75,7 +75,7 @@ class TrackGeneration
                 }
 
                 PlacedPiece placedPiece = new();
-                bool canGenerate = placedPiece.Generate(position, piece, size, minimumDistanceRequired != 0);
+                bool canGenerate = placedPiece.Generate(position, piece, size, minimumDistanceRequired != 0, random);
                 if (!canGenerate)
                 {
                     continue;
@@ -103,7 +103,8 @@ class TrackGeneration
             }
             minimumDistanceRequired = -1;
 
-            PlacedPiece chosenPlacedPiece = piecesToTest[Random.Range(0, piecesToTest.Count)];
+            int next = random.Next(piecesToTest.Count);
+            PlacedPiece chosenPlacedPiece = piecesToTest[next];
             for (int i = 0; i < chosenPlacedPiece.path.Count; i++)
             {
                 Vector2Int move = chosenPlacedPiece.path[i];

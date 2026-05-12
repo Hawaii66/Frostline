@@ -1,22 +1,20 @@
-﻿namespace Frostline.World.Tiles
+﻿using Frostline.Core;
+using System.Threading.Tasks;
+
+namespace Frostline.World.Tiles
 {
     public interface IHeightScale
     {
         float Scale(int x, int y);
     }
 
-    public class TileManager
+    public class TileManager : IRequireServices
     {
         private int _sizeX;
         private int _sizeY;
-        private readonly TileSettings _tileSettings;
+        private TileSettings _tileSettings;
 
         public Tile[,] Tiles { get; private set; }
-
-        public TileManager(TileSettings settings)
-        {
-            _tileSettings = settings;
-        }
 
         public void GenerateTiles(int sizeX, int sizeY)
         {
@@ -28,14 +26,19 @@
 
         public void ScaleHeights(IHeightScale scaler)
         {
-            for (int x = 0; x < _sizeX; x++)
+            Parallel.For(0, _sizeX, (int x) =>
             {
                 for (int y = 0; y < _sizeY; y++)
                 {
                     float height = Tiles[x, y].Height;
                     Tiles[x, y].SetHeight(height * (1 - scaler.Scale(x, y)));
                 }
-            }
+            });
+        }
+
+        public void Initialize(IServiceRegistry serviceRegistry)
+        {
+            _tileSettings = serviceRegistry.GetService<WorldSettings>().TileSettings;
         }
     }
 }

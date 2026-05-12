@@ -19,7 +19,7 @@ namespace Frostline.World.Tiles
 
         public void SetHeight(float height)
         {
-            Height = height;
+            Height = HeightGeneration.TerraceHeight(height);
         }
     }
 }

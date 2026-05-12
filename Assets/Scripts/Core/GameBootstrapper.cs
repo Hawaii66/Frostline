@@ -1,4 +1,6 @@
 ﻿using Frostline.Renderer;
+using Frostline.World;
+using Frostline.World.Structures;
 using Frostline.World.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +9,7 @@ namespace Frostline.Core
 {
     public class GameBootstrapper : MonoBehaviour
     {
-        [SerializeField] private TileSettings tileSettings;
+        [SerializeField] private WorldSettings _worldSettings;
 
         private IServiceRegistry _serviceRegistry;
         private HashSet<IRequireServices> _initializers;
@@ -21,12 +23,22 @@ namespace Frostline.Core
             FindSceneDependencies();
 
             InitializeAllDependencies(_initializers);
+
+            WorldGeneration worldGeneration = _serviceRegistry.GetService<WorldGeneration>();
+            worldGeneration.GenerateWorld();
         }
+        private void Start()
+        {
+
+        }
+
         private void RegisterAll()
         {
-            RegisterService(new TileManager(tileSettings));
-            RegisterService(new VisibilityManager(20));
-            RegisterDependency(new LogVisibility());
+            RegisterService(_worldSettings);
+            RegisterServiceDependency(new WorldGeneration());
+            RegisterServiceDependency(new StructureBlueprintManager());
+            RegisterServiceDependency(new TileManager());
+            RegisterServiceDependency(new VisibilityManager());
         }
         private void RegisterService<T>(T t) where T : class
         {

@@ -15,8 +15,10 @@ MonoBehaviour:
   TileColors:
   - {r: 0.27617115, g: 0.764151, b: 0.2559185, a: 1}
   - {r: 0.17940675, g: 0.6226415, b: 0.16153437, a: 1}
+  - {r: 0.056734115, g: 0.6132076, b: 0.031817377, a: 1}
+  - {r: 0.19625203, g: 0.5566038, b: 0.18115878, a: 1}
   Amplitude: 4
-  Frequency: 0.08
+  Frequency: 0.01
   Octaves: 4
-  Persistence: 0.3
+  Persistence: 0.5
   Lacunarity: 2

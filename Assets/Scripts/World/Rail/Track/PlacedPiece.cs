@@ -6,14 +6,15 @@ class PlacedPiece
 {
     public List<Vector2Int> path;
     public PlacedPiece() { }
-    public bool Generate(Vector2Int start, Piece piece, int size, bool minimumDistanceRequired)
+    public bool Generate(Vector2Int start, Piece piece, int size, bool minimumDistanceRequired, System.Random random)
     {
         path = new();
         Vector2Int pos = start;
         for (int i = 0; i < piece.segments.Count; i++)
         {
             Segment segment = piece.segments[i];
-            float distance = segment.distancePercent + Random.Range(-segment.distancePercentVariation, segment.distancePercentVariation);
+            float t = (float)random.NextDouble();
+            float distance = segment.distancePercent + (t * 2 - 1) * segment.distancePercentVariation;
             Vector2Int goal = pos + segment.direction * (minimumDistanceRequired ? 1 : Mathf.RoundToInt(distance * size));
             int safe = 0;
             while (pos != goal)
@@ -29,7 +30,7 @@ class PlacedPiece
             }
         }
 
-        if(path.Count == 0)
+        if (path.Count == 0)
         {
             return false;
         }

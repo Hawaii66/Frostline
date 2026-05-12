@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Frostline.Core;
+using Frostline.World;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,17 +15,16 @@ namespace Frostline.Renderer
         void ChangeVisible(HashSet<Vector2Int> visiblePositions);
     }
 
-    public class VisibilityManager
+    public class VisibilityManager : IRequireServices
     {
         private readonly HashSet<IVisibilityViewer> _rendererViewers;
         private event Action<HashSet<Vector2Int>> _changeVisible;
 
         private static Vector2Int[] _viewOffsets;
 
-        public VisibilityManager(int viewRadius)
+        public VisibilityManager()
         {
             _rendererViewers = new();
-            _viewOffsets = CalculateViewOffsets(viewRadius);
         }
 
         private Vector2Int[] CalculateViewOffsets(int viewRadius)
@@ -73,6 +74,12 @@ namespace Frostline.Renderer
             }
 
             _changeVisible.Invoke(inRange);
+        }
+
+        public void Initialize(IServiceRegistry serviceRegistry)
+        {
+            int viewRadius = serviceRegistry.GetService<WorldSettings>().ViewRadius;
+            _viewOffsets = CalculateViewOffsets(viewRadius);
         }
     }
 }
