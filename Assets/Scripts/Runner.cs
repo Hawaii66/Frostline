@@ -1,3 +1,4 @@
+using Frostline.Core;
 using Frostline.World;
 using Frostline.World.Generation;
 using Frostline.World.Heights;
@@ -202,7 +203,7 @@ namespace Frostline.DEBUG
                 {
                     for (int y = startTrackNetwork.y; y < endTrackNetwork.y; y++)
                     {
-                        Gizmos.color = GrayScaleColor(height.Heights[x, y], -4, 4);
+                        Gizmos.color = Util.FromGrayScaleRange(-4, 4, height.Heights[x, y]);
 
                         Vector3 center = new(x, 0.5f, y);
                         Vector3 size = new(1, 0.1f, 1);
@@ -210,13 +211,6 @@ namespace Frostline.DEBUG
                     }
                 }
             }
-        }
-
-        private static Color GrayScaleColor(float dist, float min, float max)
-        {
-            float t = (dist - min) / (max - min);
-
-            return new Color(t, t, t);
         }
     }
 }

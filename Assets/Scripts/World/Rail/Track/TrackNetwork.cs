@@ -1,10 +1,8 @@
 ﻿
+using Frostline.Core;
 using Frostline.World.Heights;
-using JetBrains.Annotations;
-using Mono.Cecil;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Frostline.World.Tracks
 {
@@ -15,21 +13,6 @@ namespace Frostline.World.Tracks
         private readonly int _sizeY;
         public int[,] DistanceToTrack { get; private set; }
         public int MaxDistanceToTrack { get; private set; }
-
-        private readonly static Vector2Int[] _offsets10 = new Vector2Int[]
-        {
-            new(1,0),
-            new(0,1),
-            new(-1,0),
-            new(0,-1),
-        };
-        private readonly static Vector2Int[] _offsets14 = new Vector2Int[]
-        {
-            new(-1,-1),
-            new(1,-1),
-            new(-1,1),
-            new(1,1),
-        };
 
         public TrackNetwork(int sizeX, int sizeY)
         {
@@ -79,9 +62,9 @@ namespace Frostline.World.Tracks
 
                 int distance = DistanceToTrack[position.x, position.y];
 
-                for (int i = 0; i < _offsets10.Length; i++)
+                for (int i = 0; i < Util.CardinalOffsets.Length; i++)
                 {
-                    Vector2Int offstPosition = position + _offsets10[i];
+                    Vector2Int offstPosition = position + Util.CardinalOffsets[i];
                     if (!IsInWorld(offstPosition))
                     {
                         continue;
@@ -96,9 +79,9 @@ namespace Frostline.World.Tracks
                     toProcess.Enqueue(offstPosition);
                 }
 
-                for (int i = 0; i < _offsets14.Length; i++)
+                for (int i = 0; i < Util.DiagonalOffsets.Length; i++)
                 {
-                    Vector2Int offstPosition = position + _offsets14[i];
+                    Vector2Int offstPosition = position + Util.DiagonalOffsets[i];
                     if (!IsInWorld(offstPosition))
                     {
                         continue;
@@ -138,13 +121,7 @@ namespace Frostline.World.Tracks
                 return 0;
             }
 
-            return 1 - SmoothStep(0, blendDistance, distance);
-        }
-
-        private static float SmoothStep(float e0, float e1, float x)
-        {
-            float t = Mathf.Max(0, Mathf.Min(1, (x - e0) / (e1 - e0)));
-            return t * t * (3 - 2 * t);
+            return 1 - Util.SmoothStep(0, blendDistance, distance);
         }
     }
 }
