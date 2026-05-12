@@ -14,6 +14,8 @@ namespace Frostline.World.Generation
         public float StartRadVariation;
         [Range(20, 100)]
         public int BufferFromRail;
+        [Range(1, 20)]
+        public int WorldScale;
 
         [Header("Junctions")]
         [Range(3, 10)]

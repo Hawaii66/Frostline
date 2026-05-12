@@ -6,7 +6,7 @@ namespace Frostline.World.Generation
 {
     public abstract class Node
     {
-        private readonly Polar _polar;
+        private Polar _polar;
         private readonly List<Node> _edges;
         public IReadOnlyList<Node> Edges => _edges;
         public Polar Polar => _polar;
@@ -15,6 +15,15 @@ namespace Frostline.World.Generation
         {
             _polar = polar;
             _edges = new List<Node>();
+        }
+
+        public void SetPosition(Polar polar)
+        {
+            _polar = polar;
+        }
+        public void SetPosition(Vector2 position)
+        {
+            SetPosition(Polar.FromVector2(position));
         }
 
         public void AddEdge(Node node)

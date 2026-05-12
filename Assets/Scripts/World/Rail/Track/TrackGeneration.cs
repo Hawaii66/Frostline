@@ -4,16 +4,16 @@ using UnityEngine;
 
 class TrackGeneration
 {
-    List<Piece> pieces;
+    List<Piece> _pieces;
 
     public TrackGeneration()
     {
-        pieces = new();
+        _pieces = new();
     }
 
     public TrackGeneration WithPiece(Piece piece)
     {
-        pieces.Add(piece);
+        _pieces.Add(piece);
         return this;
     }
 
@@ -66,10 +66,10 @@ class TrackGeneration
             int diffY = end.y - position.y;
 
             List<PlacedPiece> piecesToTest = new();
-            for (int i = 0; i < pieces.Count; i++)
+            for (int i = 0; i < _pieces.Count; i++)
             {
-                Piece piece = pieces[i];
-                if(minimumDistanceRequired != 0 && !piece.IsMinimumDistancePossible())
+                Piece piece = _pieces[i];
+                if (minimumDistanceRequired != 0 && !piece.IsMinimumDistancePossible())
                 {
                     continue;
                 }

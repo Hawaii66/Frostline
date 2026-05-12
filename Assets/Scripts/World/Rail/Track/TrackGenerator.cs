@@ -9,10 +9,10 @@ struct TrackResult
 
 class TrackGenerator
 {
-    TrackGeneration track;
+    TrackGeneration _track;
     public TrackGenerator()
     {
-        track = new TrackGeneration()
+        _track = new TrackGeneration()
             .WithPiece(new PieceRight())
             .WithPiece(new PieceUp())
             .WithPiece(new PieceDiagonal())
@@ -25,15 +25,15 @@ class TrackGenerator
     {
         int dirX = Dir(start.x, end.x);
         int dirY = Dir(start.y, end.y);
-        Vector2Int localEnd = new Vector2Int(Mathf.Abs(end.x - start.x), Mathf.Abs(end.y - start.y));
+        Vector2Int localEnd = new(Mathf.Abs(end.x - start.x), Mathf.Abs(end.y - start.y));
 
-        TrackResult result = track.Generate(Vector2Int.zero, localEnd);
+        TrackResult result = _track.Generate(Vector2Int.zero, localEnd);
         if (!result.success)
         {
             return result;
         }
 
-        for(int i = 0; i < result.path.Count; i++)
+        for (int i = 0; i < result.path.Count; i++)
         {
             result.path[i] = new Vector2Int(
                 ToWorldCoord(start.x, result.path[i].x, dirX),

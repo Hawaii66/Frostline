@@ -12,6 +12,7 @@
                 .AddStep(new GraphGenerationStepRemoveEmptyJunctions())
                 .AddStep(new GraphGenerationStepAddChallengeJunctions())
                 .AddStep(new GraphGenerationStepCalculateSize())
+                .AddStep(new GraphGenerationStepTransformToWorldCoordinates())
                 .Generate();
         }
     }

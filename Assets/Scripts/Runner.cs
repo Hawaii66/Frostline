@@ -1,6 +1,7 @@
 using Frostline.World;
 using Frostline.World.Generation;
 using Frostline.World.Structures;
+using Frostline.World.Tracks;
 using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,13 @@ namespace Frostline.DEBUG
 {
     public class Runner : MonoBehaviour
     {
+        [SerializeField] private Vector2Int startTrackNetwork;
+        [SerializeField] private Vector2Int endTrackNetwork;
+
         Graph graph;
         WorldContext world;
         List<List<Vector2Int>> trackPaths;
+        TrackNetwork trackNetwork;
         Dictionary<string, StructureBlueprint> structureBlueprints;
 
         public GraphSettings settings;
@@ -44,6 +49,13 @@ namespace Frostline.DEBUG
                     Debug.Log("Path failed to generate");
                 }
             }
+        }
+
+        [Button("Generate Track Network")]
+        void GenerateTrackDistances()
+        {
+            trackNetwork = new(graph.SizeX, graph.SizeY);
+            trackNetwork.SetTrackPaths(trackPaths);
         }
 
         [Button("Load structures")]
@@ -151,6 +163,20 @@ namespace Frostline.DEBUG
                     {
                         Vector2Int position = structure.GetOccupiedPositions()[j];
                         Gizmos.DrawWireSphere(new Vector3(position.x, 0, position.y), 0.2f);
+                    }
+                }
+            }
+
+            if (trackNetwork != null)
+            {
+                Gizmos.color = Color.white;
+                for (int x = startTrackNetwork.x; x < endTrackNetwork.x; x++)
+                {
+                    for (int y = startTrackNetwork.y; y < endTrackNetwork.y; y++)
+                    {
+                        int distance = trackNetwork.DistanceToTrack[x, y];
+                        Vector3 pos = new(x, 0.2f, y);
+                        Handles.Label(pos, "Dist: " + distance);
                     }
                 }
             }
