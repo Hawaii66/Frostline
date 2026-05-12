@@ -21,19 +21,39 @@ namespace Frostline.World.Structures.Editor
 
         void GenerateStructure(Transform parent)
         {
-            List<Vector2Int> positions = new();
+            StructureBlueprintMetadata metadata = parent.GetComponent<StructureBlueprintMetadata>();
 
-            int childCount = parent.childCount;
-            for (int i = 0; i < childCount; i++)
+            Vector2Int[] occupiedOffsets = metadata.GetOccupiedTiles();
+            string name = parent.name;
+
+            if (name.Contains(" ") || name.Contains("("))
             {
-                Transform child = parent.GetChild(i);
-                positions.Add(new Vector2Int(Mathf.RoundToInt(child.position.x), Mathf.RoundToInt(child.position.z)));
+                Debug.LogWarning($"Name: {name} is not valid");
+                return;
             }
 
-            StructureBlueprint sb = ScriptableObject.CreateInstance<StructureBlueprint>();
-            sb.OccupiedOffsets = positions.ToArray();
+            GameObject prefab = Instantiate(parent.gameObject);
+            prefab.transform.position = Vector3.zero;
+            DestroyImmediate(prefab.GetComponent<StructureBlueprintMetadata>());
 
-            AssetDatabase.CreateAsset(sb, "Assets/Frostline/Structures/" + parent.name + ".asset");
+            string rootPath = "Assets/Frostline/Structures";
+            string folderPath = $"{rootPath}/{name}";
+            string prefabPath = $"{folderPath}/{name}.prefab";
+            string sbPath = $"{folderPath}/{name}.asset";
+
+            if (!AssetDatabase.IsValidFolder(folderPath))
+            {
+                AssetDatabase.CreateFolder(rootPath, name);
+            }
+            PrefabUtility.SaveAsPrefabAsset(prefab, prefabPath);
+            DestroyImmediate(prefab);
+
+            GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            StructureBlueprint sb = StructureBlueprint.New(prefabAsset, occupiedOffsets);
+            AssetDatabase.CreateAsset(sb, sbPath);
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
     }
 }

@@ -13,26 +13,11 @@ namespace Frostline.DEBUG
         StructureManager world;
         Dictionary<string, StructureBlueprint> structureBlueprints;
 
-        [Button("Load structures")]
-        void RunStructureLoad()
-        {
-            structureBlueprints = new();
-
-            string[] guids = AssetDatabase.FindAssets($"t:{typeof(StructureBlueprint).Name}", new[] { "Assets/Frostline/Structures" });
-            StructureBlueprint[] filtered = guids.Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<StructureBlueprint>)
-                .ToArray();
-
-            for (int i = 0; i < filtered.Length; i++)
-            {
-                structureBlueprints.Add(filtered[i].name, filtered[i]);
-            }
-        }
-
         [Button("Generate world")]
         void Run3()
         {
             world = new StructureManager();
-            StructureBlueprint structureBlueprint = StructureBlueprint.New(new Vector2Int[]
+            StructureBlueprint structureBlueprint = StructureBlueprint.New(null, new Vector2Int[]
             {
             new (0,0),
             new (1,0),
@@ -45,7 +30,7 @@ namespace Frostline.DEBUG
             Structure structure2 = new(structureBlueprint, Vector2Int.right);
             world.TryAddStructure(structure2);
 
-            StructureBlueprint structureBlueprint2 = StructureBlueprint.New(new Vector2Int[]
+            StructureBlueprint structureBlueprint2 = StructureBlueprint.New(null, new Vector2Int[]
             {
             new (0,0),
             new (1,0),

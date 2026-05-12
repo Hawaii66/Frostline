@@ -14,6 +14,9 @@ namespace Frostline.World.Tracks
         public int[,] DistanceToTrack { get; private set; }
         public int MaxDistanceToTrack { get; private set; }
 
+        private readonly static int CardinalDistance = 10;
+        private readonly static int DiagonalDistance = 14;
+
         public TrackNetwork(int sizeX, int sizeY)
         {
             _sizeX = sizeX;
@@ -74,8 +77,8 @@ namespace Frostline.World.Tracks
                         continue;
                     }
 
-                    DistanceToTrack[offstPosition.x, offstPosition.y] = distance + 10;
-                    MaxDistanceToTrack = Mathf.Max(MaxDistanceToTrack, distance + 10);
+                    DistanceToTrack[offstPosition.x, offstPosition.y] = distance + CardinalDistance;
+                    MaxDistanceToTrack = Mathf.Max(MaxDistanceToTrack, distance + CardinalDistance);
                     toProcess.Enqueue(offstPosition);
                 }
 
@@ -91,8 +94,8 @@ namespace Frostline.World.Tracks
                         continue;
                     }
 
-                    DistanceToTrack[offstPosition.x, offstPosition.y] = distance + 14;
-                    MaxDistanceToTrack = Mathf.Max(MaxDistanceToTrack, distance + 14);
+                    DistanceToTrack[offstPosition.x, offstPosition.y] = distance + DiagonalDistance;
+                    MaxDistanceToTrack = Mathf.Max(MaxDistanceToTrack, distance + DiagonalDistance);
                     toProcess.Enqueue(offstPosition);
                 }
             }
@@ -113,7 +116,7 @@ namespace Frostline.World.Tracks
 
         public float Scale(int x, int y)
         {
-            float blendDistance = MaxDistanceToTrack * 0.025f;
+            float blendDistance = Mathf.Max(MaxDistanceToTrack * 0.025f, CardinalDistance * 8);
             int distance = DistanceToTrack[x, y];
 
             if (distance > blendDistance)

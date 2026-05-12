@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70e0491942d3394db6458118cbe2d9e, type: 3}
   m_Name: Cube
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprint
+  prefab: {fileID: 2475764882071518847, guid: ddc6501f02f9e3d4d9d32820a1d088ea, type: 3}
   OccupiedOffsets:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
+  - {x: 0, y: 1}
   - {x: 1, y: 1}
