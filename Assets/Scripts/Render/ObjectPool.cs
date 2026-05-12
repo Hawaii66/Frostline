@@ -10,7 +10,7 @@ namespace Frostline.Renderer
         void OnEndUse();
     }
 
-    public class ObjectPool<T> where T : IPoolable
+    public class ObjectPool<T> where T : MonoBehaviour, IPoolable
     {
         private readonly HashSet<T> _objectsInUse;
         private readonly Stack<T> _availableObjects;
@@ -59,7 +59,9 @@ namespace Frostline.Renderer
 
         private void AddToAvailable()
         {
-            _availableObjects.Push(_generateObject());
+            T poolObj = _generateObject();
+            poolObj.OnEndUse();
+            _availableObjects.Push(poolObj);
         }
     }
 }

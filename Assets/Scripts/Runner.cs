@@ -1,4 +1,5 @@
 using Frostline.Core;
+using Frostline.Renderer;
 using Frostline.World;
 using Frostline.World.Generation;
 using Frostline.World.Heights;
@@ -17,6 +18,7 @@ namespace Frostline.DEBUG
     {
         [SerializeField] private Vector2Int startTrackNetwork;
         [SerializeField] private Vector2Int endTrackNetwork;
+        [SerializeField] private int viewRadius;
 
         Graph graph;
         WorldContext world;
@@ -27,6 +29,11 @@ namespace Frostline.DEBUG
 
         public GraphSettings settings;
         public HeightSettings heightSettings;
+
+        private void Awake()
+        {
+            new VisibilityManager(viewRadius);
+        }
 
         [Button("Generate Graph")]
         void Run()
