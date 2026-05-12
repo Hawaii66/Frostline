@@ -1,5 +1,6 @@
 using Frostline.World;
 using Frostline.World.Generation;
+using Frostline.World.Heights;
 using Frostline.World.Structures;
 using Frostline.World.Tracks;
 using NaughtyAttributes;
@@ -18,11 +19,13 @@ namespace Frostline.DEBUG
 
         Graph graph;
         WorldContext world;
+        Height height;
         List<List<Vector2Int>> trackPaths;
         TrackNetwork trackNetwork;
         Dictionary<string, StructureBlueprint> structureBlueprints;
 
         public GraphSettings settings;
+        public HeightSettings heightSettings;
 
         [Button("Generate Graph")]
         void Run()
@@ -56,6 +59,18 @@ namespace Frostline.DEBUG
         {
             trackNetwork = new(graph.SizeX, graph.SizeY);
             trackNetwork.SetTrackPaths(trackPaths);
+        }
+
+        [Button("Terrain Height")]
+        void GenerateTerrainHeight()
+        {
+            height = new(heightSettings, graph.SizeX, graph.SizeY);
+        }
+
+        [Button("Adjust terrain height to track")]
+        void AdjustTerrainHeightToTrack()
+        {
+            height.ScaleHeights(trackNetwork);
         }
 
         [Button("Load structures")]
@@ -180,6 +195,28 @@ namespace Frostline.DEBUG
                     }
                 }
             }
+
+            if (height != null)
+            {
+                for (int x = startTrackNetwork.x; x < endTrackNetwork.x; x++)
+                {
+                    for (int y = startTrackNetwork.y; y < endTrackNetwork.y; y++)
+                    {
+                        Gizmos.color = GrayScaleColor(height.Heights[x, y], -4, 4);
+
+                        Vector3 center = new(x, 0.5f, y);
+                        Vector3 size = new(1, 0.1f, 1);
+                        Gizmos.DrawCube(center, size);
+                    }
+                }
+            }
+        }
+
+        private static Color GrayScaleColor(float dist, float min, float max)
+        {
+            float t = (dist - min) / (max - min);
+
+            return new Color(t, t, t);
         }
     }
 }

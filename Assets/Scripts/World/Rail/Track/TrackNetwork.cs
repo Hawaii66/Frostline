@@ -1,4 +1,6 @@
 ﻿
+using Frostline.World.Heights;
+using JetBrains.Annotations;
 using Mono.Cecil;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace Frostline.World.Tracks
 {
-    public class TrackNetwork
+    public class TrackNetwork : IHeightScale
     {
         private List<List<Vector2Int>> _trackPaths;
         private readonly int _sizeX;
@@ -124,6 +126,25 @@ namespace Frostline.World.Tracks
                 return false;
             }
             return true;
+        }
+
+        public float Scale(int x, int y)
+        {
+            float blendDistance = MaxDistanceToTrack * 0.025f;
+            int distance = DistanceToTrack[x, y];
+
+            if (distance > blendDistance)
+            {
+                return 0;
+            }
+
+            return 1 - SmoothStep(0, blendDistance, distance);
+        }
+
+        private static float SmoothStep(float e0, float e1, float x)
+        {
+            float t = Mathf.Max(0, Mathf.Min(1, (x - e0) / (e1 - e0)));
+            return t * t * (3 - 2 * t);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Frostline.Core;
 using Frostline.World.Structures;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Frostline.World
 {
