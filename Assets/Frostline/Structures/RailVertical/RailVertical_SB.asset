@@ -10,26 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c70e0491942d3394db6458118cbe2d9e, type: 3}
-  m_Name: RailTurn
+  m_Name: RailVertical_SB
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprint
-  prefab: {fileID: 2669365131887082605, guid: e53498ffc699b3a4da0bd820dee95be7, type: 3}
+  prefab: {fileID: 1818066825973613087, guid: 4419f2d8432d93f4a94c92a59f44e5f9, type: 3}
   OccupiedOffsets:
-  - {x: 1, y: 0}
-  - {x: 1, y: 1}
-  - {x: 1, y: 2}
-  - {x: 2, y: 0}
-  - {x: 2, y: 1}
-  - {x: 2, y: 2}
-  - {x: 3, y: 1}
-  - {x: 2, y: 3}
-  - {x: 3, y: 2}
   - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 0, y: 2}
-  - {x: 2, y: 4}
-  - {x: 3, y: 3}
-  - {x: 3, y: 4}
-  - {x: 4, y: 2}
-  - {x: 4, y: 3}
-  - {x: 4, y: 4}
-  - {x: 1, y: 3}
+  - {x: 1, y: 0}
+  - {x: 2, y: 0}

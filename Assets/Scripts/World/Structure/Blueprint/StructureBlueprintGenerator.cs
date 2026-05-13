@@ -32,25 +32,34 @@ namespace Frostline.World.Structures.Editor
                 return;
             }
 
-            GameObject prefab = Instantiate(parent.gameObject);
-            prefab.transform.position = Vector3.zero;
-            DestroyImmediate(prefab.GetComponent<StructureBlueprintMetadata>());
-
             string rootPath = "Assets/Frostline/Structures";
             string folderPath = $"{rootPath}/{name}";
             string prefabPath = $"{folderPath}/{name}.prefab";
-            string sbPath = $"{folderPath}/{name}.asset";
+            string sbPath = $"{folderPath}/{name}_SB.asset";
+            string sbtPath = $"{folderPath}/{name}_SBT.asset";
 
             if (!AssetDatabase.IsValidFolder(folderPath))
             {
                 AssetDatabase.CreateFolder(rootPath, name);
             }
+
+            GameObject prefab = Instantiate(parent.gameObject);
+            prefab.transform.position = Vector3.zero;
+            DestroyImmediate(prefab.GetComponent<StructureBlueprintMetadata>());
+            DestroyImmediate(prefab.GetComponent<StructureBlueprintMetadataTrack>());
+
             PrefabUtility.SaveAsPrefabAsset(prefab, prefabPath);
             DestroyImmediate(prefab);
 
             GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
             StructureBlueprint sb = StructureBlueprint.New(prefabAsset, occupiedOffsets);
             AssetDatabase.CreateAsset(sb, sbPath);
+
+            if (parent.TryGetComponent(out StructureBlueprintMetadataTrack sbmt))
+            {
+                StructureBlueprintTrack sbt = StructureBlueprintTrack.New(sb, sbmt.OffsetToCenterTrackPoints(), sbmt.CenterOffset());
+                AssetDatabase.CreateAsset(sbt, sbtPath);
+            }
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

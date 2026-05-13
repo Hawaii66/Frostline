@@ -10,10 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c70e0491942d3394db6458118cbe2d9e, type: 3}
-  m_Name: RailVertical
+  m_Name: RailStraightToDiagonal_SB
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprint
-  prefab: {fileID: 3647086105601350491, guid: 4419f2d8432d93f4a94c92a59f44e5f9, type: 3}
+  prefab: {fileID: 8107093767695280013, guid: d3e8e07a1e88f524581611e989b93456, type: 3}
   OccupiedOffsets:
-  - {x: 0, y: 0}
   - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
   - {x: 2, y: 0}
+  - {x: 2, y: 1}
+  - {x: 2, y: 2}
+  - {x: 3, y: 1}
+  - {x: 2, y: 3}
+  - {x: 3, y: 2}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}

@@ -1472,6 +1472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 159513579}
   - component: {fileID: 159513580}
+  - component: {fileID: 159513581}
   m_Layer: 0
   m_Name: RailStraightToDiagonal
   m_TagString: Untagged
@@ -1536,6 +1537,23 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 2}
   lowerLeftCorner: {x: 0, y: 0}
+--- !u!114 &159513581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159513578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 2, y: 2}
+  - {x: 3, y: 3}
 --- !u!1 &162098498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,6 +2248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 244616077}
   - component: {fileID: 244616078}
+  - component: {fileID: 244616079}
   m_Layer: 0
   m_Name: RailDiagonal
   m_TagString: Untagged
@@ -2273,6 +2292,22 @@ MonoBehaviour:
   - {x: 1, y: 2}
   - {x: 2, y: 1}
   lowerLeftCorner: {x: 0, y: 0}
+--- !u!114 &244616079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244616076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 0, y: 0}
+  - {x: 1, y: 1}
+  - {x: 2, y: 2}
 --- !u!1 &249190890
 GameObject:
   m_ObjectHideFlags: 0
@@ -3871,6 +3906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 555214493}
   - component: {fileID: 555214492}
+  - component: {fileID: 555214494}
   m_Layer: 0
   m_Name: RailTurn
   m_TagString: Untagged
@@ -3928,6 +3964,25 @@ Transform:
   - {fileID: 89042957}
   m_Father: {fileID: 1099969049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &555214494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555214491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 2, y: 2}
+  - {x: 3, y: 3}
+  - {x: 3, y: 4}
+  - {x: 3, y: 5}
 --- !u!1 &560421239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4790,6 +4845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 661664359}
   - component: {fileID: 661664360}
+  - component: {fileID: 661664361}
   m_Layer: 0
   m_Name: RailHorizontal
   m_TagString: Untagged
@@ -4833,6 +4889,21 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 2}
   lowerLeftCorner: {x: 0, y: 0}
+--- !u!114 &661664361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661664358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
 --- !u!1 &689962862
 GameObject:
   m_ObjectHideFlags: 0
@@ -5736,6 +5807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 800858525}
   - component: {fileID: 800858526}
+  - component: {fileID: 800858527}
   m_Layer: 0
   m_Name: RailVertical
   m_TagString: Untagged
@@ -5779,6 +5851,21 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   lowerLeftCorner: {x: 0, y: 0}
+--- !u!114 &800858527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800858524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
 --- !u!1 &812615309
 GameObject:
   m_ObjectHideFlags: 0
@@ -6862,6 +6949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 884572313}
   - component: {fileID: 884572314}
+  - component: {fileID: 884572315}
   m_Layer: 0
   m_Name: RailDiagonalToStraight
   m_TagString: Untagged
@@ -6912,6 +7000,24 @@ MonoBehaviour:
   - {x: 2, y: 3}
   - {x: 3, y: 3}
   lowerLeftCorner: {x: 0, y: 0}
+--- !u!114 &884572315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884572312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 0, y: 0}
+  - {x: 1, y: 1}
+  - {x: 2, y: 2}
+  - {x: 2, y: 3}
+  - {x: 2, y: 4}
 --- !u!1 &885007282
 GameObject:
   m_ObjectHideFlags: 0

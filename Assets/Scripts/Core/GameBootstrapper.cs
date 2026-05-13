@@ -2,6 +2,7 @@
 using Frostline.World;
 using Frostline.World.Structures;
 using Frostline.World.Tiles;
+using Frostline.World.Tracks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +34,8 @@ namespace Frostline.Core
             RegisterService(_worldSettings);
             RegisterServiceDependency(new WorldGeneration());
             RegisterServiceDependency(new StructureBlueprintManager());
+            RegisterServiceDependency(new TrackSegmentManager());
+            RegisterServiceDependency(new TrackSegmentPlacer());
             RegisterServiceDependency(new StructureManager());
             RegisterServiceDependency(new TileManager());
             RegisterServiceDependency(new VisibilityManager());
