@@ -7,12 +7,14 @@ namespace Frostline.World.Structures
     {
         public GameObject prefab;
         public Vector2Int[] OccupiedOffsets;
+        public string Name;
 
-        public static StructureBlueprint New(GameObject prefab, Vector2Int[] offsets)
+        public static StructureBlueprint New(GameObject prefab, string name, Vector2Int[] offsets)
         {
             StructureBlueprint sb = CreateInstance<StructureBlueprint>();
             sb.OccupiedOffsets = offsets;
             sb.prefab = prefab;
+            sb.Name = name;
             return sb;
         }
 

@@ -12,10 +12,12 @@ namespace Frostline.World
     {
         private WorldSettings _worldSettings;
         private TileManager _tileManager;
+        private TrackSegmentManager _trackSegmentManager;
         public void Initialize(IServiceRegistry serviceRegistry)
         {
             _worldSettings = serviceRegistry.GetService<WorldSettings>();
             _tileManager = serviceRegistry.GetService<TileManager>();
+            _trackSegmentManager = serviceRegistry.GetService<TrackSegmentManager>();
         }
 
         public void GenerateWorld()
@@ -32,6 +34,7 @@ namespace Frostline.World
                 if (trackResult.success)
                 {
                     trackPaths.Add(trackResult.path);
+                    _trackSegmentManager.GenerateTrackSegments(edge, trackResult.path);
                 }
                 else
                 {
@@ -41,6 +44,7 @@ namespace Frostline.World
 
             TrackNetwork trackNetwork = new(graph.SizeX, graph.SizeY);
             trackNetwork.SetTrackPaths(trackPaths);
+            _trackSegmentManager.TrackPaths = trackPaths;
 
             _tileManager.GenerateTiles(graph.SizeX, graph.SizeY);
             _tileManager.ScaleHeights(trackNetwork);

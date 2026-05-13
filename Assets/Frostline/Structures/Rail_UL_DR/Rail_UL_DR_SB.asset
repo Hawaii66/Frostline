@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c70e0491942d3394db6458118cbe2d9e, type: 3}
+  m_Name: Rail_UL_DR_SB
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprint
+  prefab: {fileID: 8395171335164187161, guid: a925744384c09174caad9ee91ce96ab2, type: 3}
+  OccupiedOffsets:
+  - {x: 0, y: 2}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 1, y: 0}
+  - {x: 1, y: 2}
+  - {x: 2, y: 1}
+  Name: Rail_UL_DR

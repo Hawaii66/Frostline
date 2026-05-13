@@ -13,10 +13,31 @@ namespace Frostline.World.Structures.Editor
         {
             StructureBlueprintMetadata[] structures = transform.GetComponentsInChildren<StructureBlueprintMetadata>();
 
+            HashSet<string> names = new HashSet<string>();
             for (int i = 0; i < structures.Length; i++)
             {
+                if (names.Contains(structures[i].Name))
+                {
+                    Debug.LogWarning($"Name {structures[i].Name} is duplicate");
+                }
+                names.Add(structures[i].Name);
+
                 GenerateStructure(structures[i].transform);
             }
+        }
+
+        [Button("Add Structure")]
+        void AddStructure()
+        {
+            GameObject temp = new();
+            temp.transform.parent = transform;
+            temp.name = "Structure";
+            temp.AddComponent<StructureBlueprintMetadata>();
+            GameObject child = new();
+            child.transform.parent = temp.transform;
+            child.name = "Prefab";
+
+            Selection.SetActiveObjectWithContext(temp, null);
         }
 
         public static void GenerateStructure(Transform parent)
@@ -24,7 +45,8 @@ namespace Frostline.World.Structures.Editor
             StructureBlueprintMetadata metadata = parent.GetComponent<StructureBlueprintMetadata>();
 
             Vector2Int[] occupiedOffsets = metadata.GetOccupiedTiles();
-            string name = parent.name;
+            string name = metadata.Name;
+            parent.name = name;
 
             if (name.Contains(" ") || name.Contains("("))
             {
@@ -43,16 +65,14 @@ namespace Frostline.World.Structures.Editor
                 AssetDatabase.CreateFolder(rootPath, name);
             }
 
-            GameObject prefab = Instantiate(parent.gameObject);
+            GameObject prefab = Instantiate(parent.GetChild(0).gameObject);
             prefab.transform.position = Vector3.zero;
-            DestroyImmediate(prefab.GetComponent<StructureBlueprintMetadata>());
-            DestroyImmediate(prefab.GetComponent<StructureBlueprintMetadataTrack>());
 
             PrefabUtility.SaveAsPrefabAsset(prefab, prefabPath);
             DestroyImmediate(prefab);
 
             GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-            StructureBlueprint sb = StructureBlueprint.New(prefabAsset, occupiedOffsets);
+            StructureBlueprint sb = StructureBlueprint.New(prefabAsset, name, occupiedOffsets);
             AssetDatabase.CreateAsset(sb, sbPath);
 
             if (parent.TryGetComponent(out StructureBlueprintMetadataTrack sbmt))

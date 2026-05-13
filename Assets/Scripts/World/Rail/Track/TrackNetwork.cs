@@ -9,6 +9,7 @@ namespace Frostline.World.Tracks
     public class TrackNetwork : IHeightScale
     {
         private List<List<Vector2Int>> _trackPaths;
+        public List<List<Vector2Int>> TrackPaths => _trackPaths;
         private readonly int _sizeX;
         private readonly int _sizeY;
         public int[,] DistanceToTrack { get; private set; }

@@ -1,5 +1,8 @@
 ﻿using Frostline.World.Structures.Editor;
 using NaughtyAttributes;
+using NUnit.Framework;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor;
 using UnityEngine;
 
 namespace Frostline.World.Structures
@@ -8,6 +11,7 @@ namespace Frostline.World.Structures
     {
         [SerializeField] private Vector2Int[] _occupiedPositions;
         [SerializeField] private Vector2Int lowerLeftCorner;
+        public string Name;
 
         [Button("Generate Blueprint")]
         private void GenerateBlueprint()
@@ -37,6 +41,7 @@ namespace Frostline.World.Structures
 
             Gizmos.color = Color.rebeccaPurple;
             Gizmos.DrawWireSphere(ToWorldCoordinate(new Vector3(lowerLeftCorner.x, 0, lowerLeftCorner.y)), 0.1f);
+
         }
 
         [Button("Fix Alignment")]
@@ -52,6 +57,42 @@ namespace Frostline.World.Structures
         private Vector3 ToWorldCoordinate(Vector3 pos)
         {
             return pos + transform.position;
+        }
+
+        [Button("Rotate Occupied Positions")]
+        private void RotateOccupiedPositions()
+        {
+            for (int i = 0; i < _occupiedPositions.Length; i++)
+            {
+                _occupiedPositions[i] = new(_occupiedPositions[i].y, -_occupiedPositions[i].x);
+            }
+        }
+        [Button("Flip X")]
+        private void FlipX()
+        {
+            for (int i = 0; i < _occupiedPositions.Length; i++)
+            {
+                _occupiedPositions[i] = new(-_occupiedPositions[i].x, _occupiedPositions[i].y);
+            }
+        }
+        [Button("Flip Y")]
+        private void FlipY()
+        {
+            for (int i = 0; i < _occupiedPositions.Length; i++)
+            {
+                _occupiedPositions[i] = new(_occupiedPositions[i].x, -_occupiedPositions[i].y);
+            }
+        }
+
+        [SerializeField] private Vector2Int _moveOccupiedPositons;
+        [Button("Move")]
+        private void Move()
+        {
+            for (int i = 0; i < _occupiedPositions.Length; i++)
+            {
+                _occupiedPositions[i] += _moveOccupiedPositons;
+            }
+            _moveOccupiedPositons = new();
         }
     }
 }

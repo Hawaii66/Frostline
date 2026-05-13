@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace Frostline.World.Structures
 {
@@ -21,6 +22,15 @@ namespace Frostline.World.Structures
                 Vector3 end = new(TrackPoints[i + 1].x, 0, TrackPoints[i + 1].y);
                 Gizmos.DrawLine(start + transform.position, end + transform.position);
             }
+
+
+            //if (TrackPoints.Length >= 2)
+            //{
+            //  Vector2 toTest = Vector2.up;
+            //  Vector2 end = TrackPoints[TrackPoints.Length - 1] - TrackPoints[TrackPoints.Length - 2];
+            //  Vector2 start = TrackPoints[1] - TrackPoints[0];
+            //  Handles.Label(transform.position + Vector3.up, $"{Vector2.Dot(start.normalized, toTest.normalized)} {Vector2.Dot(end.normalized, toTest.normalized)}");
+            //}
         }
 
         public Vector2Int[] OffsetToCenterTrackPoints()

@@ -1,4 +1,5 @@
 ﻿using Frostline.Core;
+using Frostline.World.Generation;
 using Frostline.World.Structures;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,25 @@ namespace Frostline.World.Tracks
     public class TrackSegmentManager : IRequireServices
     {
         public StructureBlueprintTrack[] TrackSegments;
+        private Dictionary<Edge, string[]> _generatedTrackSegments;
+        public List<List<Vector2Int>> TrackPaths;
+
+        public TrackSegmentManager()
+        {
+            _generatedTrackSegments = new();
+        }
+
+        public bool HasTrack(Vector2Int start, Vector2Int end)
+        {
+            foreach (Edge edge in _generatedTrackSegments.Keys)
+            {
+                if (edge.A.Polar.ToCartesianInt() == start && edge.B.Polar.ToCartesianInt() == end)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public void Initialize(IServiceRegistry serviceRegistry)
         {
@@ -31,43 +51,25 @@ namespace Frostline.World.Tracks
 
             TrackSegments = t.ToArray();
         }
-    }
 
-    public class TrackSegmentPlacer : IRequireServices
-    {
-        private TrackSegmentManager _trackSegmentManager;
-
-        public void Initialize(IServiceRegistry serviceRegistry)
+        public void GenerateTrackSegments(Edge edge, List<Vector2Int> path)
         {
-            _trackSegmentManager = serviceRegistry.GetService<TrackSegmentManager>();
-
-            List<Vector2Int> testPath = new()
+            string[] segments = PathToSegments(path);
+            if (segments == null)
             {
-                new(0,5),
-                new(1,5),
-                new(2,5),
-                new(3,6),
-                new(4,7),
-                new(5,8),
-                new(6,9),
-            };
-
-            string[] result = GeneratePath(testPath);
-            Debug.Log("Path generation result");
-            if (result == null)
-            {
-                Debug.Log("Path not found");
+                Debug.Log($"Failed to generate path ${edge.A.Polar.ToCartesian()} {edge.B.Polar.ToCartesian()} {path.Count}");
+                return;
             }
             else
             {
-                for (int i = 0; i < result.Length; i++)
-                {
-                    Debug.Log(result[i]);
-                }
+                Debug.Log($"Success ${edge.A.Polar.ToCartesian()} {edge.B.Polar.ToCartesian()} {path.Count}");
+
             }
+
+            _generatedTrackSegments.Add(edge, segments);
         }
 
-        public string[] GeneratePath(List<Vector2Int> path)
+        private string[] PathToSegments(List<Vector2Int> path)
         {
             int n = path.Count;
             bool[] reachable = new bool[n];
@@ -88,9 +90,9 @@ namespace Frostline.World.Tracks
                     continue;
                 }
 
-                for (int j = 0; j < _trackSegmentManager.TrackSegments.Length; ++j)
+                for (int j = 0; j < TrackSegments.Length; ++j)
                 {
-                    StructureBlueprintTrack sbt = _trackSegmentManager.TrackSegments[j];
+                    StructureBlueprintTrack sbt = TrackSegments[j];
                     if (!Matches(path, i, sbt.TrackSegments))
                     {
                         continue;
@@ -106,7 +108,7 @@ namespace Frostline.World.Tracks
                     {
                         reachable[next] = true;
                         parentIndex[next] = i;
-                        parentSegment[next] = sbt.name;
+                        parentSegment[next] = sbt.StructureBlueprint.Name;
                     }
                 }
             }

@@ -35,7 +35,6 @@ namespace Frostline.Core
             RegisterServiceDependency(new WorldGeneration());
             RegisterServiceDependency(new StructureBlueprintManager());
             RegisterServiceDependency(new TrackSegmentManager());
-            RegisterServiceDependency(new TrackSegmentPlacer());
             RegisterServiceDependency(new StructureManager());
             RegisterServiceDependency(new TileManager());
             RegisterServiceDependency(new VisibilityManager());
