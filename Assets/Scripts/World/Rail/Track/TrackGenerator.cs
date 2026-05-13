@@ -18,8 +18,7 @@ class TrackGenerator
             .WithPiece(new PieceUp())
             .WithPiece(new PieceDiagonal())
             .WithPiece(new PieceUpU())
-            .WithPiece(new PieceRightU())
-            .WithPiece(new PieceWeird());
+            .WithPiece(new PieceRightU());
     }
 
     public TrackResult Generate(Vector2Int start, Vector2Int end, System.Random random)
