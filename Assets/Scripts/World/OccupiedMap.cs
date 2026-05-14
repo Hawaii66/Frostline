@@ -11,13 +11,15 @@ namespace Frostline.Core
         {
             _cells = new();
         }
-
         public bool CanPlace(T t)
         {
-            Vector2Int[] cellsToTest = t.GetOccupiedPositions();
-            for (int i = 0; i < cellsToTest.Length; i++)
+            return CanPlace(t.GetOccupiedPositions());
+        }
+        public bool CanPlace(Vector2Int[] offsets)
+        {
+            for (int i = 0; i < offsets.Length; i++)
             {
-                if (IsOccupied(cellsToTest[i]))
+                if (IsOccupied(offsets[i]))
                 {
                     return false;
                 }
@@ -31,10 +33,13 @@ namespace Frostline.Core
         }
         public void Add(T t)
         {
-            Vector2Int[] cellsToOccupy = t.GetOccupiedPositions();
-            for (int i = 0; i < cellsToOccupy.Length; i++)
+            Add(t, t.GetOccupiedPositions());
+        }
+        public void Add(T t, Vector2Int[] offsets)
+        {
+            for (int i = 0; i < offsets.Length; i++)
             {
-                _cells.Add(cellsToOccupy[i], t);
+                _cells.Add(offsets[i], t);
             }
         }
         public void Remove(T t)

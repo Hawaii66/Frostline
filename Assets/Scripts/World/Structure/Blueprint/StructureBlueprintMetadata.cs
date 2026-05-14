@@ -1,8 +1,7 @@
 ﻿using Frostline.World.Structures.Editor;
 using NaughtyAttributes;
 using NUnit.Framework;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Frostline.World.Structures
@@ -10,7 +9,9 @@ namespace Frostline.World.Structures
     public class StructureBlueprintMetadata : MonoBehaviour
     {
         [SerializeField] private Vector2Int[] _occupiedPositions;
-        [SerializeField] private Vector2Int lowerLeftCorner;
+        [SerializeField] private Vector2Int _lowerLeftCorner;
+        [SerializeField] private Vector2Int _boundLowerLeft;
+        [SerializeField] private Vector2Int _boundUpperRight;
         public string Name;
 
         [Button("Generate Blueprint")]
@@ -22,6 +23,18 @@ namespace Frostline.World.Structures
         public Vector2Int[] GetOccupiedTiles()
         {
             return _occupiedPositions;
+        }
+        public Vector2Int[] GetBounds()
+        {
+            List<Vector2Int> bounds = new();
+            for (int x = _boundLowerLeft.x; x < _boundUpperRight.x; x++)
+            {
+                for (int y = _boundLowerLeft.y; y < _boundUpperRight.y; y++)
+                {
+                    bounds.Add(new(x, y));
+                }
+            }
+            return bounds.ToArray();
         }
 
         private void OnDrawGizmos()
@@ -40,8 +53,12 @@ namespace Frostline.World.Structures
             }
 
             Gizmos.color = Color.rebeccaPurple;
-            Gizmos.DrawWireSphere(ToWorldCoordinate(new Vector3(lowerLeftCorner.x, 0, lowerLeftCorner.y)), 0.1f);
+            Gizmos.DrawWireSphere(ToWorldCoordinate(new Vector3(_lowerLeftCorner.x, 0, _lowerLeftCorner.y)), 0.1f);
 
+            Gizmos.color = Color.coral;
+            Vector3 boundCenter = new((_boundLowerLeft.x + _boundUpperRight.x) / 2, 0, (_boundLowerLeft.y + _boundUpperRight.y) / 2);
+            Vector3 boundSize = new(_boundUpperRight.x - _boundLowerLeft.x, 0.2f, _boundUpperRight.y - _boundLowerLeft.y);
+            Gizmos.DrawWireCube(ToWorldCoordinate(boundCenter), boundSize);
         }
 
         [Button("Fix Alignment")]

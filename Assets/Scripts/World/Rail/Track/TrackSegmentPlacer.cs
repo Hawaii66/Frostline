@@ -11,6 +11,7 @@ namespace Frostline.World.Tracks
     public class TrackSegmentManager : IRequireServices
     {
         public StructureBlueprintTrack[] TrackSegments;
+        public Dictionary<string, StructureBlueprintTrack> TrackSegmentDict;
         private Dictionary<Edge, string[]> _generatedTrackSegments;
         public List<List<Vector2Int>> TrackPaths;
 
@@ -39,6 +40,7 @@ namespace Frostline.World.Tracks
         private void LoadTrackSegments()
         {
             List<StructureBlueprintTrack> t = new();
+            TrackSegmentDict = new();
 
             string[] guids = AssetDatabase.FindAssets($"t:{typeof(StructureBlueprintTrack).Name}", new[] { "Assets/Frostline/Structures" });
             StructureBlueprintTrack[] filtered = guids.Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<StructureBlueprintTrack>)
@@ -47,6 +49,7 @@ namespace Frostline.World.Tracks
             for (int i = 0; i < filtered.Length; i++)
             {
                 t.Add(filtered[i]);
+                TrackSegmentDict.Add(filtered[i].StructureBlueprint.Name, filtered[i]);
             }
 
             TrackSegments = t.ToArray();

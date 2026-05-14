@@ -1197,7 +1197,9 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_U_DR
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &16695280
@@ -1863,7 +1865,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: 
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!4 &39296443
@@ -4009,7 +4013,9 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 4}
   - {x: 3, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_R_U
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &125524607
@@ -5258,7 +5264,9 @@ MonoBehaviour:
   - {x: 3, y: 0}
   - {x: 3, y: 2}
   - {x: 3, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_D_UL
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &159513578
@@ -5320,7 +5328,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_L_UR
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!114 &159513581
@@ -5688,7 +5698,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   - {x: 3, y: 0}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_UL_D
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &168209570
@@ -7501,7 +7513,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_DL_UR
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!114 &244616079
@@ -8240,6 +8254,80 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260849230}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &262674872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 262674873}
+  - component: {fileID: 262674874}
+  - component: {fileID: 262674875}
+  m_Layer: 0
+  m_Name: TestT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &262674873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262674872}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1082692468}
+  m_Father: {fileID: 1099969049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &262674874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262674872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643d75075dcff1344ad38042edd3abf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadata
+  _occupiedPositions:
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 2, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: -2, y: -2}
+  _boundUpperRight: {x: 5, y: 5}
+  Name: TestT
+  _moveOccupiedPositons: {x: 0, y: 0}
+--- !u!114 &262674875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262674872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 1, y: 0}
+  - {x: 1, y: -1}
+  - {x: 1, y: -2}
+  - {x: 1, y: -3}
 --- !u!1 &263389378
 GameObject:
   m_ObjectHideFlags: 0
@@ -8498,7 +8586,9 @@ MonoBehaviour:
   - {x: 2, y: 3}
   - {x: 1, y: 3}
   - {x: 0, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_DR_U
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &271434562
@@ -9051,7 +9141,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_L
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &283674615
@@ -10255,7 +10347,9 @@ MonoBehaviour:
   - {x: 4, y: 1}
   - {x: 4, y: 0}
   - {x: 1, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_L_D
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &320140856
@@ -11389,7 +11483,9 @@ MonoBehaviour:
   - {x: 2, y: 0}
   - {x: 1, y: 0}
   - {x: 0, y: 0}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_UR_D
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &366011443
@@ -11468,7 +11564,9 @@ MonoBehaviour:
   - {x: 3, y: 0}
   - {x: 3, y: 1}
   - {x: 3, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_R_UL
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &373352277
@@ -17176,7 +17274,9 @@ MonoBehaviour:
   - {x: 4, y: 3}
   - {x: 4, y: 4}
   - {x: 1, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_L_U
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!4 &555214493
@@ -17598,7 +17698,9 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 2}
   - {x: 0, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_DR_L
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &575816908
@@ -18436,7 +18538,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: 
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!4 &595844508
@@ -18906,7 +19010,9 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_L_DR
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &615439736
@@ -19849,7 +19955,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_R
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!114 &661664361
@@ -22294,7 +22402,9 @@ MonoBehaviour:
   - {x: 0, y: 2}
   - {x: 0, y: 1}
   - {x: 0, y: 0}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_UR_L
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &769320045
@@ -25329,7 +25439,9 @@ MonoBehaviour:
   - {x: 1, y: 3}
   - {x: 2, y: 3}
   - {x: 3, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_DL_U
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!114 &884572315
@@ -26500,7 +26612,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 2}
   - {x: 0, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_D_UR
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &935253479
@@ -26989,7 +27103,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: 
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!4 &941113219
@@ -27507,7 +27623,9 @@ MonoBehaviour:
   - {x: 4, y: 3}
   - {x: 4, y: 4}
   - {x: 1, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: 
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!4 &955611351
@@ -30883,7 +31001,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: 
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!4 &1052532468
@@ -31835,6 +31955,37 @@ Transform:
   - {fileID: 1866308723}
   m_Father: {fileID: 1048299972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1082692467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082692468}
+  m_Layer: 0
+  m_Name: Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1082692468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082692467}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 262674873}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1089144411
 GameObject:
   m_ObjectHideFlags: 0
@@ -32318,6 +32469,7 @@ Transform:
   - {fileID: 1712673578}
   - {fileID: 1676247076}
   - {fileID: 2031245274}
+  - {fileID: 262674873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1099969050
@@ -32678,7 +32830,9 @@ MonoBehaviour:
   - {x: 3, y: 3}
   - {x: 3, y: 1}
   - {x: 3, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_U_DL
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1103799474
@@ -33339,7 +33493,9 @@ MonoBehaviour:
   - {x: 3, y: 0}
   - {x: 4, y: 0}
   - {x: 3, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_U_R
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1117877060
@@ -35409,7 +35565,9 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 4}
   - {x: 3, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_D_L
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1183494688
@@ -36542,7 +36700,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 2, y: 0}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_U
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!114 &1203041161
@@ -42466,7 +42626,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: 
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!4 &1407626699
@@ -44954,7 +45116,9 @@ MonoBehaviour:
   - {x: 3, y: 2}
   - {x: 3, y: 1}
   - {x: 3, y: 0}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_UL_R
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1508314414
@@ -48600,7 +48764,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_UR_DL
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1614910573
@@ -49697,7 +49863,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_DR_TL
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1637284985
@@ -52494,7 +52662,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 0, y: 1}
   - {x: 1, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Cube
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1716505339
@@ -55386,7 +55556,9 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 0}
   - {x: 3, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_R_D
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1811909259
@@ -55638,7 +55810,9 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_UL_DR
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1817268495
@@ -56516,7 +56690,9 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 2, y: 0}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_D
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1842837893
@@ -58921,7 +59097,9 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 0}
   - {x: 3, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_U_L
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1948974535
@@ -59722,7 +59900,9 @@ MonoBehaviour:
   - {x: 3, y: 1}
   - {x: 3, y: 2}
   - {x: 3, y: 3}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_DL_R
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &1975545151
@@ -61691,7 +61871,9 @@ MonoBehaviour:
   - {x: 3, y: 3}
   - {x: 3, y: 1}
   - {x: 3, y: 2}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_R_DL
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &2031245273
@@ -61789,7 +61971,9 @@ MonoBehaviour:
   - {x: 6, y: 4}
   - {x: 6, y: 5}
   - {x: 6, y: 6}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: -3, y: -3}
+  _boundUpperRight: {x: 10, y: 10}
   Name: Center
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &2031931185
@@ -63890,7 +64074,9 @@ MonoBehaviour:
   - {x: 3, y: 4}
   - {x: 4, y: 4}
   - {x: 3, y: 1}
-  lowerLeftCorner: {x: 0, y: 0}
+  _lowerLeftCorner: {x: 0, y: 0}
+  _boundLowerLeft: {x: 0, y: 0}
+  _boundUpperRight: {x: 0, y: 0}
   Name: Rail_D_R
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!1 &2095323331

@@ -45,6 +45,7 @@ namespace Frostline.World.Structures.Editor
             StructureBlueprintMetadata metadata = parent.GetComponent<StructureBlueprintMetadata>();
 
             Vector2Int[] occupiedOffsets = metadata.GetOccupiedTiles();
+            Vector2Int[] bounds = metadata.GetBounds();
             string name = metadata.Name;
             parent.name = name;
 
@@ -72,7 +73,7 @@ namespace Frostline.World.Structures.Editor
             DestroyImmediate(prefab);
 
             GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-            StructureBlueprint sb = StructureBlueprint.New(prefabAsset, name, occupiedOffsets);
+            StructureBlueprint sb = StructureBlueprint.New(prefabAsset, name, occupiedOffsets, bounds);
             AssetDatabase.CreateAsset(sb, sbPath);
 
             if (parent.TryGetComponent(out StructureBlueprintMetadataTrack sbmt))

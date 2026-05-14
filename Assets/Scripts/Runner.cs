@@ -27,7 +27,7 @@ namespace Frostline.DEBUG
             new (1,0),
             new (1,1),
             new (0,1),
-            });
+            }, new Vector2Int[0]);
             Structure structure = new(structureBlueprint, Vector2Int.zero);
             world.TryAddStructure(structure);
 
@@ -40,7 +40,7 @@ namespace Frostline.DEBUG
             new (1,0),
             new (1,1),
             new (0,1),
-            });
+            }, new Vector2Int[0]);
             Structure structure3 = new(structureBlueprint2, Vector2Int.right * 3 + Vector2Int.up * 2);
             world.TryAddStructure(structure3);
 
