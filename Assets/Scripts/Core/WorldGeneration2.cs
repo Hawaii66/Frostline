@@ -4,13 +4,12 @@ using Frostline.World.Structures;
 using Frostline.World.Tiles;
 using Frostline.World.Tracks;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Frostline.Test
 {
 
-    public class TrackPath
+    public class TrackPathResult
     {
         public List<Vector2Int> Path;
         public List<string> Segments;
@@ -22,7 +21,7 @@ namespace Frostline.Test
     {
         public Tile[,] Tiles;
         public List<Structure> Structures;
-        public List<TrackPath> TrackPaths;
+        public List<TrackPathResult> TrackPaths;
         public List<Vector2Int> TrackNodes;
         public List<(Vector2Int, Vector2Int)> TrackEdges;
         public int[,] JunctionPredictor;
@@ -43,11 +42,14 @@ namespace Frostline.Test
             List<Structure> structures = new();
             List<Vector2Int> trackNodes = new();
             List<(Vector2Int, Vector2Int)> trackEdges = new();
+            List<Vector2Int[]> trackPointsList = new();
+            List<BoundFiller> fillers = new();
 
             _occupiedMap = new();
             _structureBlueprintManager.TryGetStructureBlueprint("TestT_SB", out StructureBlueprint cubeBlueprint);
             _structureBlueprintManager.TryGetStructureBlueprint("Center_SB", out StructureBlueprint centerBlueprint);
             _trackSegmentManager.TrackSegmentDict.TryGetValue("TestT", out StructureBlueprintTrack trackT);
+            _trackSegmentManager.TrackSegmentDict.TryGetValue("Center", out StructureBlueprintTrack centerT);
 
             Vector2Int center = size / 2;
             Structure centerStructure = new(centerBlueprint, center);
@@ -58,11 +60,12 @@ namespace Frostline.Test
             }
             _occupiedMap.Add(centerStructure, centerStructure.GetBounds());
             structures.Add(centerStructure);
+            ExpandStructureBounds(centerStructure.GetBounds(), size, _occupiedMap, fillers);
+            ExpandTrackPath(center, centerT.TrackPaths, Rotation.Up, trackPointsList, trackNodes, trackEdges);
 
             int[,] junctionPredictor = new int[size.x, size.y];
-            List<Vector2Int[]> trackPointsList = new();
 
-            int structureCount = 10;
+            int structureCount = 20;
             for (int i = 0; i < structureCount; i++)
             {
                 int maxAttempts = 20;
@@ -106,20 +109,9 @@ namespace Frostline.Test
                     {
                         _occupiedMap.Add(cubeStructure, cubeStructure.GetBounds());
                         structures.Add(cubeStructure);
+                        ExpandStructureBounds(cubeStructure.GetBounds(), size, _occupiedMap, fillers);
 
-                        Vector2Int[] trackPoints = new Vector2Int[trackT.TrackSegments.Length];
-                        trackPointsList.Add(trackPoints);
-
-                        for (int k = 0; k < trackPoints.Length; k++)
-                        {
-                            trackPoints[k] = RotationManager.Rotate(trackT.TrackSegments[k] + trackT.CenterOffset, rot) + gridPos;
-                            trackNodes.Add(trackPoints[k]);
-                        }
-                        for (int k = 0; k < trackPoints.Length - 1; k++)
-                        {
-                            trackEdges.Add((trackPoints[k], trackPoints[k + 1]));
-                        }
-
+                        ExpandTrackPath(gridPos, trackT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
                         break;
                     }
                 }
@@ -127,7 +119,9 @@ namespace Frostline.Test
 
             foreach (Vector2Int[] trackPoints in trackPointsList)
             {
-                Vector2Int diffTrackPoints = trackPoints[trackPoints.Length - 1] - trackPoints[trackPoints.Length - 2];
+                Vector2Int diffTrackPointsLarge = trackPoints[trackPoints.Length - 1] - trackPoints[trackPoints.Length - 2];
+                Vector2Int diffTrackPoints = new(Sign(diffTrackPointsLarge.x), Sign(diffTrackPointsLarge.y));
+
                 Vector2Int pos = trackPoints[trackPoints.Length - 1];
                 junctionPredictor[pos.x, pos.y] = -1;
                 pos += diffTrackPoints;
@@ -135,13 +129,19 @@ namespace Frostline.Test
                 while (true)
                 {
                     if (pos.x < 0 || pos.x > size.x - 1 || pos.y < 0 || pos.y > size.y - 1) { break; }
-                    if (_occupiedMap.IsOccupied(pos)) { break; }
+                    //if (_occupiedMap.IsOccupied(pos)) { break; }
 
                     junctionPredictor[pos.x, pos.y] += 1;
-                    //if (junctionPredictor[pos.x, pos.y] > 1) { break; }
+                    if (junctionPredictor[pos.x, pos.y] > 1) { break; }
                     pos += diffTrackPoints;
                 }
             }
+
+            foreach (BoundFiller filler in fillers)
+            {
+                _occupiedMap.Remove(filler);
+            }
+            fillers.Clear();
 
             JunctionNodes(junctionPredictor, trackNodes);
 
@@ -158,6 +158,111 @@ namespace Frostline.Test
             }
 
             return new WorldGenerationResult { OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
+        }
+
+        private static int Sign(int x)
+        {
+            if (x < 0)
+            {
+                return -1;
+            }
+            if (x > 0)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        private void ExpandTrackPath(Vector2Int gridPos, TrackPath[] trackPaths, Rotation rot, List<Vector2Int[]> trackPointsList, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges)
+        {
+            for (int l = 0; l < trackPaths.Length; l++)
+            {
+                Vector2Int[] path = trackPaths[l].Path;
+                Vector2Int centerOffset = trackPaths[l].CenterOffset;
+                Vector2Int[] trackPoints = new Vector2Int[path.Length];
+                trackPointsList.Add(trackPoints);
+
+                for (int k = 0; k < trackPoints.Length; k++)
+                {
+                    trackPoints[k] = RotationManager.Rotate(path[k] + centerOffset, rot) + gridPos;
+                    trackNodes.Add(trackPoints[k]);
+                }
+                for (int k = 0; k < trackPoints.Length - 1; k++)
+                {
+                    trackEdges.Add((trackPoints[k], trackPoints[k + 1]));
+                }
+            }
+        }
+
+        public class BoundFiller : IPlaceable
+        {
+            Vector2Int[] _pos;
+            public BoundFiller(Vector2Int pos)
+            {
+                _pos = new Vector2Int[1] { pos };
+            }
+            public Vector2Int[] GetOccupiedPositions()
+            {
+                return _pos;
+            }
+        }
+
+        private void ExpandStructureBounds(Vector2Int[] bounds, Vector2Int size, OccupiedMap<IPlaceable> occupiedMap, List<BoundFiller> fillers)
+        {
+            List<Vector2Int> visited = new();
+            for (int i = 0; i < bounds.Length; i++)
+            {
+                for (int j = 0; j < Util.CardinalOffsets.Length; j++)
+                {
+                    Vector2Int offset = Util.CardinalOffsets[j];
+
+                    Vector2Int newPos = bounds[i];
+                    while (true)
+                    {
+                        newPos += offset;
+                        if (newPos.x < 0 || newPos.y < 0 || newPos.x > size.x - 1 || newPos.y > size.y - 1)
+                        {
+                            break;
+                        }
+                        if (visited.Contains(newPos))
+                        {
+                            break;
+                        }
+                        visited.Add(newPos);
+
+                        if (!occupiedMap.IsOccupied(newPos))
+                        {
+                            BoundFiller filler = new(newPos);
+                            occupiedMap.Add(filler);
+                            fillers.Add(filler);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddPathsToLostStructures(int[,] junctionPredictor)
+        {
+            for (int x = 0; x < junctionPredictor.GetLength(0); x++)
+            {
+                for (int y = 0; y < junctionPredictor.GetLength(1); y++)
+                {
+                    if (junctionPredictor[x, y] == 1)
+                    {
+                    }
+                }
+            }
+        }
+
+        private void ShouldExpandEmptyLine(int[,] junctionPredictor, Vector2Int start)
+        {
+            Queue<Vector2Int> queue = new();
+            queue.Enqueue(start);
+
+            while (queue.Count > 0)
+            {
+                Vector2Int path = queue.Dequeue();
+            }
         }
 
         private void JunctionNodes(int[,] junctionPredictor, List<Vector2Int> trackNodes)

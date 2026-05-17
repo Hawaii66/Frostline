@@ -10,17 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca9e2290e5b406a4a904330a083ec12e, type: 3}
-  m_Name: TestT_SBT
+  m_Name: Center_SBT
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintTrack
-  StructureBlueprint: {fileID: 11400000, guid: 5db7f83351ea0b444a64242460f7d78a, type: 2}
+  StructureBlueprint: {fileID: 11400000, guid: 6b54969d0af481644b468b7712c56d14, type: 2}
   TrackPaths:
   - Path:
     - {x: 0, y: 0}
-    - {x: 0, y: -1}
-    - {x: 0, y: -2}
-    - {x: 0, y: -3}
-    - {x: 0, y: -4}
-    - {x: 0, y: -5}
-    - {x: 0, y: -6}
-    - {x: 0, y: -7}
-    CenterOffset: {x: 1, y: 0}
+    - {x: 0, y: -13}
+    CenterOffset: {x: 3, y: 0}
+  - Path:
+    - {x: 0, y: 0}
+    - {x: 0, y: 13}
+    CenterOffset: {x: 3, y: 6}
+  - Path:
+    - {x: 0, y: 0}
+    - {x: -13, y: 0}
+    CenterOffset: {x: 0, y: 0}
+  - Path:
+    - {x: 0, y: 0}
+    - {x: -13, y: 0}
+    CenterOffset: {x: 0, y: 6}
+  - Path:
+    - {x: 0, y: 0}
+    - {x: 13, y: 0}
+    CenterOffset: {x: 6, y: 4}

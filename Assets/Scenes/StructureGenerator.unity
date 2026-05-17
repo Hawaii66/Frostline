@@ -61890,6 +61890,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2031245274}
   - component: {fileID: 2031245275}
+  - component: {fileID: 2031245279}
+  - component: {fileID: 2031245278}
+  - component: {fileID: 2031245277}
+  - component: {fileID: 2031245276}
+  - component: {fileID: 2031245280}
   m_Layer: 0
   m_Name: Center
   m_TagString: Untagged
@@ -61980,6 +61985,81 @@ MonoBehaviour:
   _boundSize: {x: 16, y: 16}
   Name: Center
   _moveOccupiedPositons: {x: 0, y: 0}
+--- !u!114 &2031245276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031245273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 0, y: 6}
+  - {x: -13, y: 6}
+--- !u!114 &2031245277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031245273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 0, y: 0}
+  - {x: -13, y: 0}
+--- !u!114 &2031245278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031245273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 3, y: 6}
+  - {x: 3, y: 19}
+--- !u!114 &2031245279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031245273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 3, y: 0}
+  - {x: 3, y: -13}
+--- !u!114 &2031245280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031245273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdff9cba94b6c64da33e90fd72b197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
+  TrackPoints:
+  - {x: 6, y: 4}
+  - {x: 19, y: 4}
 --- !u!1 &2031931185
 GameObject:
   m_ObjectHideFlags: 0

@@ -96,7 +96,7 @@ namespace Frostline.World.Tracks
                 for (int j = 0; j < TrackSegments.Length; ++j)
                 {
                     StructureBlueprintTrack sbt = TrackSegments[j];
-                    if (!Matches(path, i, sbt.TrackSegments))
+                    /*if (!Matches(path, i, sbt.TrackSegments))
                     {
                         continue;
                     }
@@ -112,7 +112,7 @@ namespace Frostline.World.Tracks
                         reachable[next] = true;
                         parentIndex[next] = i;
                         parentSegment[next] = sbt.StructureBlueprint.Name;
-                    }
+                    }*/
                 }
             }
 

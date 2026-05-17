@@ -92,7 +92,10 @@ namespace Frostline.Test
                 {
                     if (_result.OccupiedMap.IsOccupied(new(x, y)))
                     {
-                        Gizmos.DrawWireSphere(new(x, 0, y), 0.1f);
+                        if (Random.value < 0.05f)
+                        {
+                            Gizmos.DrawWireSphere(new(x, 0, y), 0.1f);
+                        }
                     }
                 }
             }

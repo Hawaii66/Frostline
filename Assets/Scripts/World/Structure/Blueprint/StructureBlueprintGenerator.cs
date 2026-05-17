@@ -76,9 +76,22 @@ namespace Frostline.World.Structures.Editor
             StructureBlueprint sb = StructureBlueprint.New(prefabAsset, name, occupiedOffsets, bounds);
             AssetDatabase.CreateAsset(sb, sbPath);
 
-            if (parent.TryGetComponent(out StructureBlueprintMetadataTrack sbmt))
+            StructureBlueprintMetadataTrack[] sbmts = parent.GetComponents<StructureBlueprintMetadataTrack>();
+            if (sbmts.Length > 0)
             {
-                StructureBlueprintTrack sbt = StructureBlueprintTrack.New(sb, sbmt.OffsetToCenterTrackPoints(), sbmt.CenterOffset());
+                List<TrackPath> trackPaths = new();
+                for (int i = 0; i < sbmts.Length; i++)
+                {
+                    Vector2Int[] path = sbmts[i].OffsetToCenterTrackPoints();
+                    Vector2Int offset = sbmts[i].CenterOffset();
+                    TrackPath trackPath = new()
+                    {
+                        CenterOffset = offset,
+                        Path = path,
+                    };
+                    trackPaths.Add(trackPath);
+                }
+                StructureBlueprintTrack sbt = StructureBlueprintTrack.New(sb, trackPaths.ToArray());
                 AssetDatabase.CreateAsset(sbt, sbtPath);
             }
 
