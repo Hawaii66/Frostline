@@ -158,85 +158,82 @@ namespace Frostline.Test
                 {
                     if (junctionPredictor[x, y] == 2)
                     {
-                        trackNodes.Add(new(x, y));
-                        AddJunctionAndEdges(new(x, y), size, tJunctionBlueprint, junctionT, structures, _occupiedMap, debugTexts, junctionPredictor, trackNodes, trackEdges, trackPointsList);
-                    }
-                }
-            }
-
-            for (int x = 0; x < junctionPredictor.GetLength(0); x++)
-            {
-                for (int y = 0; y < junctionPredictor.GetLength(1); y++)
-                {
-                    if (junctionPredictor[x, y] > 1 && trackNodes.Contains(new(x, y)))
-                    {
-                        int index = trackNodes.IndexOf(new(x, y));
-                        MoveJunctionNode(index, trackNodes, _occupiedMap, size);
+                        Rotation rot = JunctionRotation(new(x, y), junctionPredictor);
+                        Vector2Int movedPosition = MoveJunction(new(x, y), rot, tJunctionBlueprint, _occupiedMap, size);
+                        AddJunctionAndEdges(new(x, y), movedPosition, size, tJunctionBlueprint, junctionT, structures, _occupiedMap, debugTexts, junctionPredictor, trackNodes, trackEdges, trackPointsList);
                     }
                 }
             }
 
             return new WorldGenerationResult { DebugTexts = debugTexts, OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
         }
-
-        private void AddJunctionAndEdges(Vector2Int junctionPos, Vector2Int size, StructureBlueprint tJB, StructureBlueprintTrack junctionT, List<Structure> structures, OccupiedMap<IPlaceable> occupiedMap, List<DebugText> debugTexts, int[,] junctionPredictor, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges, List<Vector2Int[]> trackPointsList)
+        private Rotation JunctionRotation(Vector2Int node, int[,] junctionPredictor)
         {
             for (int i = 0; i < Util.CardinalOffsets.Length; i++)
             {
                 Vector2Int offset = Util.CardinalOffsets[i];
-                Vector2Int pos = offset + junctionPos;
+                Vector2Int pos = offset + node;
                 if (junctionPredictor[pos.x, pos.y] == 0)
                 {
                     Rotation rot = RotationManager.FlipRotation(RotationManager.CardinalOffsetToDirection(offset));
+                    return rot;
+                }
+            }
+
+            return Rotation.Up;
+        }
+
+        private void AddJunctionAndEdges(Vector2Int originalPosition, Vector2Int junctionPos, Vector2Int size, StructureBlueprint tJB, StructureBlueprintTrack junctionT, List<Structure> structures, OccupiedMap<IPlaceable> occupiedMap, List<DebugText> debugTexts, int[,] junctionPredictor, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges, List<Vector2Int[]> trackPointsList)
+        {
+            Rotation rot = JunctionRotation(originalPosition, junctionPredictor);
+
+            debugTexts.Add(new DebugText()
+            {
+                Position = originalPosition,
+                Text = $"Empty {rot}"
+            });
+
+            Structure tJS = new(tJB, junctionPos, rot);
+            if (occupiedMap.CanPlace(tJS))
+            {
+                occupiedMap.Add(tJS);
+                structures.Add(tJS);
+                ExpandTrackPath(junctionPos, junctionT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
+                /*
+                for (int j = 0; j < junctionT.TrackPaths.Length; j++)
+                {
+                    TrackPath trackPath = junctionT.TrackPaths[j];
+                    Vector2Int centerOffset = trackPath.CenterOffset;
+                    Vector2Int start = RotationManager.Rotate(trackPath.Path[^1] + centerOffset, rot);
+                    Vector2Int seccondLast = RotationManager.Rotate(trackPath.Path[^2] + centerOffset, rot);
+                    Vector2Int searchPos = start + junctionPos;
+                    Vector2Int moveOffset = start - seccondLast;
+                    moveOffset = new(Sign(moveOffset.x), Sign(moveOffset.y));
+                    while (true)
+                    {
+                        if (searchPos.x < 0 || searchPos.y < 0 || searchPos.x > size.x - 1 || searchPos.y > size.y - 1)
+                        {
+                            break;
+                        }
+                        if (junctionPredictor[searchPos.x, searchPos.y] == 2)
+                        {
+                            break;
+                        }
+                        if (junctionPredictor[searchPos.x, searchPos.y] == 0)
+                        {
+                            break;
+                        }
+                        searchPos += moveOffset;
+                    }
+
                     debugTexts.Add(new DebugText()
                     {
-                        Position = pos,
-                        Text = $"Empty {rot}"
+                        Text = $"{start} {moveOffset}",
+                        Position = junctionPos + moveOffset,
                     });
-
-                    Structure tJS = new(tJB, junctionPos, rot);
-                    if (occupiedMap.CanPlace(tJS))
-                    {
-                        occupiedMap.Add(tJS);
-                        structures.Add(tJS);
-                        ExpandTrackPath(junctionPos, junctionT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
-                        /*
-                        for (int j = 0; j < junctionT.TrackPaths.Length; j++)
-                        {
-                            TrackPath trackPath = junctionT.TrackPaths[j];
-                            Vector2Int centerOffset = trackPath.CenterOffset;
-                            Vector2Int start = RotationManager.Rotate(trackPath.Path[^1] + centerOffset, rot);
-                            Vector2Int seccondLast = RotationManager.Rotate(trackPath.Path[^2] + centerOffset, rot);
-                            Vector2Int searchPos = start + junctionPos;
-                            Vector2Int moveOffset = start - seccondLast;
-                            moveOffset = new(Sign(moveOffset.x), Sign(moveOffset.y));
-                            while (true)
-                            {
-                                if (searchPos.x < 0 || searchPos.y < 0 || searchPos.x > size.x - 1 || searchPos.y > size.y - 1)
-                                {
-                                    break;
-                                }
-                                if (junctionPredictor[searchPos.x, searchPos.y] == 2)
-                                {
-                                    break;
-                                }
-                                if (junctionPredictor[searchPos.x, searchPos.y] == 0)
-                                {
-                                    break;
-                                }
-                                searchPos += moveOffset;
-                            }
-
-                            debugTexts.Add(new DebugText()
-                            {
-                                Text = $"{start} {moveOffset}",
-                                Position = junctionPos + moveOffset,
-                            });
-                            trackEdges.Add((start + junctionPos, searchPos));
-                        }
-                        */
-                    }
+                    trackEdges.Add((start + junctionPos, searchPos));
                 }
+                */
             }
         }
         struct JunctionInfo
@@ -350,6 +347,50 @@ namespace Frostline.Test
             {
                 return _occupiedPositions;
             }
+        }
+
+        private Vector2Int MoveJunction(Vector2Int node, Rotation rot, StructureBlueprint jbt, OccupiedMap<IPlaceable> occupiedMap, Vector2Int size)
+        {
+            int i = 10;
+            while (i-- > 0)
+            {
+                int randX = Random.Range(-10, +11);
+                int randY = Random.Range(-10, +11);
+                if (rot == Rotation.Right && randX < 0)
+                {
+                    continue;
+                }
+                if (rot == Rotation.Left && randX > 0)
+                {
+                    continue;
+                }
+                if (rot == Rotation.Up && randY < 0)
+                {
+                    continue;
+                }
+                if (rot == Rotation.Down && randY > 0)
+                {
+                    continue;
+                }
+
+                int x = node.x + randX;
+                int y = node.y + randY;
+
+                if (x < 0 || y < 0 || x > size.x - 1 || y > size.y - 1)
+                {
+                    continue;
+                }
+
+                Structure structure = new(jbt, new(x, y));
+                if (!occupiedMap.CanPlace(structure))
+                {
+                    continue;
+                }
+
+                return new(x, y);
+            }
+
+            return node;
         }
 
         private void MoveJunctionNode(int nodeIndex, List<Vector2Int> trackNodes, OccupiedMap<IPlaceable> occupiedMap, Vector2Int size)
