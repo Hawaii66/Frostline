@@ -17,16 +17,16 @@ MonoBehaviour:
   - Path:
     - {x: 0, y: 0}
     - {x: 8, y: 0}
-    CenterOffset: {x: -1, y: 1}
+    CenterOffset: {x: -4, y: 0}
   - Path:
     - {x: 0, y: 0}
     - {x: 2, y: 0}
     - {x: 4, y: 2}
     - {x: 4, y: 4}
-    CenterOffset: {x: -1, y: 1}
+    CenterOffset: {x: -4, y: 0}
   - Path:
     - {x: 0, y: 0}
     - {x: -2, y: 0}
     - {x: -4, y: 2}
     - {x: -4, y: 4}
-    CenterOffset: {x: 7, y: 1}
+    CenterOffset: {x: 4, y: 0}

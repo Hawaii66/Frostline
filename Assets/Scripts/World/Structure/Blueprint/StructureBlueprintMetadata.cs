@@ -9,7 +9,6 @@ namespace Frostline.World.Structures
     public class StructureBlueprintMetadata : MonoBehaviour
     {
         [SerializeField] private Vector2Int[] _occupiedPositions;
-        [SerializeField] private Vector2Int _lowerLeftCorner;
         [SerializeField] private Vector2Int _boundCenterOffset;
         [SerializeField] private Vector2Int _boundSize;
         public string Name;
@@ -53,7 +52,7 @@ namespace Frostline.World.Structures
             }
 
             Gizmos.color = Color.rebeccaPurple;
-            Gizmos.DrawWireSphere(ToWorldCoordinate(new Vector3(_lowerLeftCorner.x, 0, _lowerLeftCorner.y)), 0.1f);
+            Gizmos.DrawWireSphere(ToWorldCoordinate(new Vector3(0, 0, 0)), 0.1f);
 
             Gizmos.color = Color.coral;
             Vector3 boundCenterOffset = new(_boundCenterOffset.x, 0, _boundCenterOffset.y);

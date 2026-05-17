@@ -146,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 2305003}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268465, y: 0.0000009825446, z: 0.923879, w: 0.0000025156414}
-  m_LocalPosition: {x: 2.5060043, y: 0, z: 2.337}
+  m_LocalPosition: {x: -0.56399536, y: 0, z: 1.3969994}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1287,7 +1287,6 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_U_DR
@@ -1955,7 +1954,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: 
@@ -2378,7 +2376,7 @@ Transform:
   m_GameObject: {fileID: 67540829}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 3.1019974, y: 0, z: 3.3970013}
+  m_LocalPosition: {x: 0.03199768, y: 0, z: 2.4570007}
   m_LocalScale: {x: 0.100000024, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3415,7 +3413,7 @@ Transform:
   m_GameObject: {fileID: 88861539}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268209, y: -0, z: 0.92388016, w: 0}
-  m_LocalPosition: {x: 4.242996, y: 0, z: 1.816}
+  m_LocalPosition: {x: 1.1729965, y: 0, z: 0.87599945}
   m_LocalScale: {x: 0.10000003, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3505,7 +3503,7 @@ Transform:
   m_GameObject: {fileID: 89543661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.57357526, z: -0, w: 0.81915283}
-  m_LocalPosition: {x: 3.0919952, y: 0, z: 3.0629978}
+  m_LocalPosition: {x: 0.021995544, y: 0, z: 2.1229973}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4373,7 +4371,6 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 4}
   - {x: 3, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_R_U
@@ -5215,7 +5212,7 @@ Transform:
   m_GameObject: {fileID: 139532699}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710784, y: 0.0000020651923, z: 0.70710576, w: 0.0000020651983}
-  m_LocalPosition: {x: 3.0440063, y: 0, z: 3.6919994}
+  m_LocalPosition: {x: -0.025993347, y: 0, z: 2.751999}
   m_LocalScale: {x: 0.100000024, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5714,7 +5711,6 @@ MonoBehaviour:
   - {x: 3, y: 0}
   - {x: 3, y: 2}
   - {x: 3, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_D_UL
@@ -5746,7 +5742,7 @@ Transform:
   m_GameObject: {fileID: 155612024}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268209, y: -0, z: 0.92388016, w: 0}
-  m_LocalPosition: {x: 3.986, y: 0, z: 1.2840004}
+  m_LocalPosition: {x: 0.91600037, y: 0, z: 0.34399986}
   m_LocalScale: {x: 2.3000014, y: 0.100000024, z: 0.20000005}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5836,7 +5832,7 @@ Transform:
   m_GameObject: {fileID: 156718632}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268465, y: 0.0000009825446, z: 0.923879, w: 0.0000025156414}
-  m_LocalPosition: {x: 1.6550064, y: 0, z: 1.487997}
+  m_LocalPosition: {x: -1.4149933, y: 0, z: 0.5479965}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5926,7 +5922,7 @@ Transform:
   m_GameObject: {fileID: 157603147}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.7600021, y: 0, z: 1}
+  m_LocalPosition: {x: -0.30999756, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6048,7 +6044,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_L_UR
@@ -6418,7 +6413,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   - {x: 3, y: 0}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_UL_D
@@ -6720,7 +6714,7 @@ Transform:
   m_GameObject: {fileID: 186155937}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268465, y: 0.0000009825446, z: 0.923879, w: 0.0000025156414}
-  m_LocalPosition: {x: 2.755005, y: 0, z: 2.6109982}
+  m_LocalPosition: {x: -0.3149948, y: 0, z: 1.6709976}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7307,7 +7301,7 @@ Transform:
   m_GameObject: {fileID: 209564935}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 2.5769958, y: 0, z: 3.0259972}
+  m_LocalPosition: {x: -0.49300385, y: 0, z: 2.0859966}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8207,7 +8201,7 @@ Transform:
   m_GameObject: {fileID: 231727673}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000014305114, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 6.0879974, y: 0, z: 0.48000336}
+  m_LocalPosition: {x: 3.0179977, y: 0, z: -0.45999718}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8477,7 +8471,7 @@ Transform:
   m_GameObject: {fileID: 238540053}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268209, y: -0, z: 0.92388016, w: 0}
-  m_LocalPosition: {x: 3.633995, y: 0, z: 2.3690014}
+  m_LocalPosition: {x: 0.56399536, y: 0, z: 1.4290009}
   m_LocalScale: {x: 0.10000003, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8567,7 +8561,7 @@ Transform:
   m_GameObject: {fileID: 242000850}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000010931802, y: 0.38268465, z: 0.0000026052037, w: -0.923879}
-  m_LocalPosition: {x: 1.6370087, y: 0, z: 1.4680004}
+  m_LocalPosition: {x: -1.432991, y: 0, z: 0.5279999}
   m_LocalScale: {x: 0.100000024, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8683,7 +8677,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_DL_UR
@@ -8731,7 +8724,7 @@ Transform:
   m_GameObject: {fileID: 246035726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2300034, y: 0, z: 1}
+  m_LocalPosition: {x: -1.8399963, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9566,7 +9559,6 @@ MonoBehaviour:
   - {x: 1, y: 1}
   - {x: 1, y: 2}
   - {x: 2, y: 0}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 1, y: 1}
   _boundSize: {x: 8, y: 8}
   Name: TestT
@@ -9850,7 +9842,6 @@ MonoBehaviour:
   - {x: 2, y: 3}
   - {x: 1, y: 3}
   - {x: 0, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_DR_U
@@ -9882,7 +9873,7 @@ Transform:
   m_GameObject: {fileID: 271189541}
   serializedVersion: 2
   m_LocalRotation: {x: -4.0927257e-12, y: 0.0000014305114, z: 0.0000028554487, w: -1}
-  m_LocalPosition: {x: 0.03200531, y: 0, z: 1.4299946}
+  m_LocalPosition: {x: -3.0379944, y: 0, z: 0.48999405}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10495,7 +10486,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_L
@@ -11701,7 +11691,6 @@ MonoBehaviour:
   - {x: 4, y: 1}
   - {x: 4, y: 0}
   - {x: 1, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_L_D
@@ -11913,7 +11902,7 @@ Transform:
   m_GameObject: {fileID: 323154592}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 3.5769958, y: 0, z: 3.3339996}
+  m_LocalPosition: {x: 0.50699615, y: 0, z: 2.393999}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12543,7 +12532,7 @@ Transform:
   m_GameObject: {fileID: 336642352}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000010931802, y: 0.38268465, z: 0.0000026052037, w: -0.923879}
-  m_LocalPosition: {x: 2.4860077, y: 0, z: 2.3190002}
+  m_LocalPosition: {x: -0.583992, y: 0, z: 1.3789997}
   m_LocalScale: {x: 0.100000024, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12633,7 +12622,7 @@ Transform:
   m_GameObject: {fileID: 344638716}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.98, y: 0, z: 1.5}
+  m_LocalPosition: {x: -2.0899997, y: 0, z: 0.55999947}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12786,7 +12775,7 @@ Transform:
   m_GameObject: {fileID: 347865088}
   serializedVersion: 2
   m_LocalRotation: {x: -4.0927257e-12, y: 0.0000014305114, z: 0.0000028554487, w: -1}
-  m_LocalPosition: {x: 0.62700653, y: 0, z: 0.95599747}
+  m_LocalPosition: {x: -2.4429932, y: 0, z: 0.015996933}
   m_LocalScale: {x: 0.10000003, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13197,7 +13186,6 @@ MonoBehaviour:
   - {x: 2, y: 0}
   - {x: 1, y: 0}
   - {x: 0, y: 0}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_UR_D
@@ -13278,7 +13266,6 @@ MonoBehaviour:
   - {x: 3, y: 0}
   - {x: 3, y: 1}
   - {x: 3, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_R_UL
@@ -15233,7 +15220,7 @@ Transform:
   m_GameObject: {fileID: 453916859}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000014305114, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 5.493004, y: 0, z: 1.0060043}
+  m_LocalPosition: {x: 2.4230042, y: 0, z: 0.0660038}
   m_LocalScale: {x: 0.10000003, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15413,7 +15400,7 @@ Transform:
   m_GameObject: {fileID: 455970449}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000010931802, y: 0.38268465, z: 0.0000026052037, w: -0.923879}
-  m_LocalPosition: {x: 1.8770065, y: 0, z: 1.7659988}
+  m_LocalPosition: {x: -1.1929932, y: 0, z: 0.8259983}
   m_LocalScale: {x: 0.100000024, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15503,7 +15490,7 @@ Transform:
   m_GameObject: {fileID: 457670281}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268209, y: -0, z: 0.92388016, w: 0}
-  m_LocalPosition: {x: 4.482994, y: 0, z: 1.5180016}
+  m_LocalPosition: {x: 1.4129944, y: 0, z: 0.578001}
   m_LocalScale: {x: 0.10000003, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16313,7 +16300,7 @@ Transform:
   m_GameObject: {fileID: 475676942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.73000336, y: 0, z: 1}
+  m_LocalPosition: {x: -2.3399963, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17928,7 +17915,7 @@ Transform:
   m_GameObject: {fileID: 507216497}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.9800024, y: 0, z: 1.5}
+  m_LocalPosition: {x: 0.9100027, y: 0, z: 0.55999947}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18828,7 +18815,7 @@ Transform:
   m_GameObject: {fileID: 537151802}
   serializedVersion: 2
   m_LocalRotation: {x: -0.42261967, y: 0.000001193279, z: 0.90630716, w: 0.0000026104724}
-  m_LocalPosition: {x: 2.9290085, y: 0, z: 2.8409996}
+  m_LocalPosition: {x: -0.14099121, y: 0, z: 1.9009991}
   m_LocalScale: {x: 0.09999998, y: 0.04999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19325,7 +19312,7 @@ Transform:
   m_GameObject: {fileID: 547293540}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.94, y: 0, z: 1.5}
+  m_LocalPosition: {x: 1.8700004, y: 0, z: 0.55999947}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19618,7 +19605,6 @@ MonoBehaviour:
   - {x: 4, y: 3}
   - {x: 4, y: 4}
   - {x: 1, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_L_U
@@ -19955,7 +19941,7 @@ Transform:
   m_GameObject: {fileID: 564690357}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710784, y: 0.0000020651923, z: 0.70710576, w: 0.0000020651983}
-  m_LocalPosition: {x: 3.543007, y: 0, z: 2.9760017}
+  m_LocalPosition: {x: 0.4730072, y: 0, z: 2.0360012}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20132,7 +20118,6 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 2}
   - {x: 0, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_DR_L
@@ -20687,7 +20672,7 @@ Transform:
   m_GameObject: {fileID: 588854815}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17364685, y: -0, z: 0.984808, w: 0}
-  m_LocalPosition: {x: 5.159004, y: 0, z: 0.9959984}
+  m_LocalPosition: {x: 2.0890045, y: 0, z: 0.05599785}
   m_LocalScale: {x: 0.100000024, y: 0.050000023, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21062,7 +21047,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: 
@@ -21649,7 +21633,6 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_L_DR
@@ -21681,7 +21664,7 @@ Transform:
   m_GameObject: {fileID: 615285627}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000004846848, y: 0.17364977, z: 0.0000028554496, w: -0.9848075}
-  m_LocalPosition: {x: 0.96100616, y: 0, z: 0.94599533}
+  m_LocalPosition: {x: -2.1089935, y: 0, z: 0.0059947968}
   m_LocalScale: {x: 0.10000001, y: 0.050000023, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22684,7 +22667,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_R
@@ -23604,7 +23586,7 @@ Transform:
   m_GameObject: {fileID: 692932324}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710784, y: 0.0000020651923, z: 0.70710576, w: 0.0000020651983}
-  m_LocalPosition: {x: 3.5440063, y: 0, z: 3.9420013}
+  m_LocalPosition: {x: 0.47400665, y: 0, z: 3.0020008}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23694,7 +23676,7 @@ Transform:
   m_GameObject: {fileID: 693147584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.9400024, y: 0, z: 0.5}
+  m_LocalPosition: {x: 1.8700027, y: 0, z: -0.44000053}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23784,7 +23766,7 @@ Transform:
   m_GameObject: {fileID: 693494765}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000014305114, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 5.1220016, y: 0, z: 0.4810028}
+  m_LocalPosition: {x: 2.052002, y: 0, z: -0.45899773}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24360,7 +24342,7 @@ Transform:
   m_GameObject: {fileID: 717201188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.290001, y: 0, z: 1}
+  m_LocalPosition: {x: -0.7799988, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24900,7 +24882,7 @@ Transform:
   m_GameObject: {fileID: 724300866}
   serializedVersion: 2
   m_LocalRotation: {x: -4.0927257e-12, y: 0.0000014305114, z: 0.0000028554487, w: -1}
-  m_LocalPosition: {x: 0.9980087, y: 0, z: 0.43099594}
+  m_LocalPosition: {x: -2.071991, y: 0, z: -0.5090046}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25080,7 +25062,7 @@ Transform:
   m_GameObject: {fileID: 747315387}
   serializedVersion: 2
   m_LocalRotation: {x: -4.0927257e-12, y: 0.0000014305114, z: 0.0000028554487, w: -1}
-  m_LocalPosition: {x: -0.21799469, y: 0, z: 0.9299946}
+  m_LocalPosition: {x: -3.2879944, y: 0, z: -0.010005951}
   m_LocalScale: {x: 0.10000003, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25671,7 +25653,6 @@ MonoBehaviour:
   - {x: 0, y: 2}
   - {x: 0, y: 1}
   - {x: 0, y: 0}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_UR_L
@@ -26432,7 +26413,7 @@ Transform:
   m_GameObject: {fileID: 791228569}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268209, z: -0, w: 0.92388016}
-  m_LocalPosition: {x: 4.3150024, y: 0, z: 2.5039997}
+  m_LocalPosition: {x: 1.2450027, y: 0, z: 1.5639992}
   m_LocalScale: {x: 2, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28495,7 +28476,7 @@ Transform:
   m_GameObject: {fileID: 863567177}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.9800034, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0.91000366, y: 0, z: -0.44000053}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28888,7 +28869,6 @@ MonoBehaviour:
   - {x: 1, y: 3}
   - {x: 2, y: 3}
   - {x: 3, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_DL_U
@@ -30061,7 +30041,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 2}
   - {x: 0, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_D_UR
@@ -30552,7 +30531,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: 
@@ -30870,7 +30848,7 @@ Transform:
   m_GameObject: {fileID: 948538411}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000014305114, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 5.838005, y: 0, z: 0.98000336}
+  m_LocalPosition: {x: 2.7680054, y: 0, z: 0.040002823}
   m_LocalScale: {x: 0.10000003, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31140,7 +31118,7 @@ Transform:
   m_GameObject: {fileID: 952989208}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268465, y: 0.0000009825446, z: 0.923879, w: 0.0000025156414}
-  m_LocalPosition: {x: 2.7399979, y: 0, z: 1.8400002}
+  m_LocalPosition: {x: -0.33, y: 0, z: 0.9}
   m_LocalScale: {x: 2.3000002, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31252,7 +31230,6 @@ MonoBehaviour:
   - {x: 4, y: 3}
   - {x: 4, y: 4}
   - {x: 1, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: 
@@ -32518,7 +32495,7 @@ Transform:
   m_GameObject: {fileID: 985632002}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 3.5759964, y: 0, z: 3.9919987}
+  m_LocalPosition: {x: 0.5059967, y: 0, z: 3.0519981}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34408,7 +34385,7 @@ Transform:
   m_GameObject: {fileID: 1031578021}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.1900005, y: 0, z: 1}
+  m_LocalPosition: {x: 2.1200008, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34810,7 +34787,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: 
@@ -35218,7 +35194,7 @@ Transform:
   m_GameObject: {fileID: 1058969139}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5735775, y: 0.0000016647969, z: 0.8191513, w: 0.0000024023725}
-  m_LocalPosition: {x: 3.0280075, y: 0, z: 3.0129986}
+  m_LocalPosition: {x: -0.041992188, y: 0, z: 2.072998}
   m_LocalScale: {x: 0.09999999, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35308,7 +35284,7 @@ Transform:
   m_GameObject: {fileID: 1063833152}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.0100012, y: 0, z: 1.5}
+  m_LocalPosition: {x: -0.059998512, y: 0, z: 0.55999947}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35398,7 +35374,7 @@ Transform:
   m_GameObject: {fileID: 1065602457}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710784, y: 0.0000020651923, z: 0.70710576, w: 0.0000020651983}
-  m_LocalPosition: {x: 2.5439987, y: 0, z: 3.9419975}
+  m_LocalPosition: {x: -0.526001, y: 0, z: 3.001997}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36092,7 +36068,7 @@ Transform:
   m_GameObject: {fileID: 1084485260}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 3.0759964, y: 0, z: 4.241995}
+  m_LocalPosition: {x: 0.005996704, y: 0, z: 3.3019943}
   m_LocalScale: {x: 0.100000024, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36182,7 +36158,7 @@ Transform:
   m_GameObject: {fileID: 1085448390}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000010931802, y: 0.38268465, z: 0.0000026052037, w: -0.923879}
-  m_LocalPosition: {x: 2.1340027, y: 0, z: 1.2339973}
+  m_LocalPosition: {x: -0.935997, y: 0, z: 0.2939968}
   m_LocalScale: {x: 2.3000011, y: 0.100000024, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37090,7 +37066,6 @@ MonoBehaviour:
   - {x: 3, y: 3}
   - {x: 3, y: 1}
   - {x: 3, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_U_DL
@@ -37335,7 +37310,7 @@ Transform:
   m_GameObject: {fileID: 1108856130}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268209, z: -0, w: 0.92388016}
-  m_LocalPosition: {x: 4.195999, y: 0, z: 1.8370018}
+  m_LocalPosition: {x: 1.1259995, y: 0, z: 0.89700127}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37605,7 +37580,7 @@ Transform:
   m_GameObject: {fileID: 1110699859}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268465, y: 0.0000009825446, z: 0.923879, w: 0.0000025156414}
-  m_LocalPosition: {x: 1.9240036, y: 0, z: 1.7869968}
+  m_LocalPosition: {x: -1.1459961, y: 0, z: 0.8469963}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37933,7 +37908,6 @@ MonoBehaviour:
   - {x: 3, y: 0}
   - {x: 4, y: 0}
   - {x: 3, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_U_R
@@ -38145,7 +38119,7 @@ Transform:
   m_GameObject: {fileID: 1120251362}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.04, y: 0, z: 1.5}
+  m_LocalPosition: {x: -1.0299997, y: 0, z: 0.55999947}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39205,7 +39179,7 @@ Transform:
   m_GameObject: {fileID: 1159938750}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7900009, y: 0, z: 1}
+  m_LocalPosition: {x: -1.2799988, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40185,7 +40159,6 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 0, y: 4}
   - {x: 3, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_D_L
@@ -40239,43 +40212,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadata
   _occupiedPositions:
+  - {x: -3, y: -1}
+  - {x: -3, y: 0}
+  - {x: -3, y: 1}
+  - {x: -2, y: -1}
+  - {x: -2, y: 0}
+  - {x: -2, y: 1}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: -1, y: 1}
+  - {x: 0, y: -1}
   - {x: 0, y: 0}
   - {x: 0, y: 1}
-  - {x: 0, y: 2}
+  - {x: 1, y: -1}
   - {x: 1, y: 0}
   - {x: 1, y: 1}
-  - {x: 1, y: 2}
+  - {x: 2, y: -1}
   - {x: 2, y: 0}
   - {x: 2, y: 1}
-  - {x: 2, y: 2}
+  - {x: 3, y: -1}
   - {x: 3, y: 0}
   - {x: 3, y: 1}
+  - {x: -3, y: 2}
+  - {x: -2, y: 2}
+  - {x: -1, y: 2}
+  - {x: 0, y: 2}
+  - {x: 1, y: 2}
+  - {x: 2, y: 2}
   - {x: 3, y: 2}
-  - {x: 4, y: 0}
-  - {x: 4, y: 1}
-  - {x: 4, y: 2}
-  - {x: 5, y: 0}
-  - {x: 5, y: 1}
-  - {x: 5, y: 2}
-  - {x: 6, y: 0}
-  - {x: 6, y: 1}
-  - {x: 6, y: 2}
+  - {x: -2, y: 3}
+  - {x: -1, y: 3}
   - {x: 0, y: 3}
   - {x: 1, y: 3}
   - {x: 2, y: 3}
-  - {x: 3, y: 3}
-  - {x: 4, y: 3}
-  - {x: 5, y: 3}
-  - {x: 6, y: 3}
-  - {x: 0, y: 4}
-  - {x: 1, y: 4}
-  - {x: 2, y: 4}
-  - {x: 3, y: 4}
-  - {x: 4, y: 4}
-  - {x: 5, y: 4}
-  - {x: 6, y: 4}
-  _lowerLeftCorner: {x: 0, y: 0}
-  _boundCenterOffset: {x: 3, y: 2}
+  _boundCenterOffset: {x: 0, y: 1}
   _boundSize: {x: 4, y: 3}
   Name: TJunction
   _moveOccupiedPositons: {x: 0, y: 0}
@@ -40292,10 +40262,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
   TrackPoints:
-  - {x: 7, y: 1}
-  - {x: 5, y: 1}
-  - {x: 3, y: 3}
-  - {x: 3, y: 5}
+  - {x: 4, y: 0}
+  - {x: 2, y: 0}
+  - {x: 0, y: 2}
+  - {x: 0, y: 4}
 --- !u!114 &1182747907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40309,10 +40279,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
   TrackPoints:
-  - {x: -1, y: 1}
-  - {x: 1, y: 1}
-  - {x: 3, y: 3}
-  - {x: 3, y: 5}
+  - {x: -4, y: 0}
+  - {x: -2, y: 0}
+  - {x: 0, y: 2}
+  - {x: 0, y: 4}
 --- !u!114 &1182747908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40326,8 +40296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.Structures.StructureBlueprintMetadataTrack
   TrackPoints:
-  - {x: -1, y: 1}
-  - {x: 7, y: 1}
+  - {x: -4, y: 0}
+  - {x: 4, y: 0}
 --- !u!1 &1183494688
 GameObject:
   m_ObjectHideFlags: 0
@@ -40625,7 +40595,7 @@ Transform:
   m_GameObject: {fileID: 1186426107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.26, y: 0, z: 1}
+  m_LocalPosition: {x: 0.1900003, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40805,7 +40775,7 @@ Transform:
   m_GameObject: {fileID: 1190082359}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 3.0759964, y: 0, z: 3.7419949}
+  m_LocalPosition: {x: 0.005996704, y: 0, z: 2.8019943}
   m_LocalScale: {x: 0.100000024, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41638,7 +41608,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 2, y: 0}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_U
@@ -46385,7 +46354,7 @@ Transform:
   m_GameObject: {fileID: 1364713901}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000001069472, y: 0.3420215, z: 0.0000028291086, w: -0.93969214}
-  m_LocalPosition: {x: 1.1330109, y: 0, z: 1.0450001}
+  m_LocalPosition: {x: -1.9369888, y: 0, z: 0.10499954}
   m_LocalScale: {x: 0.10000004, y: 0.050000016, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47645,7 +47614,7 @@ Transform:
   m_GameObject: {fileID: 1404203304}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268209, z: -0, w: 0.92388016}
-  m_LocalPosition: {x: 3.911995, y: 0, z: 2.1470013}
+  m_LocalPosition: {x: 0.84199524, y: 0, z: 1.2070007}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47744,7 +47713,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: 
@@ -48152,7 +48120,7 @@ Transform:
   m_GameObject: {fileID: 1416050588}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000010931802, y: 0.38268465, z: 0.0000026052037, w: -0.923879}
-  m_LocalPosition: {x: 2.1870117, y: 0, z: 2.0499973}
+  m_LocalPosition: {x: -0.882988, y: 0, z: 1.1099968}
   m_LocalScale: {x: 0.100000024, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48923,7 +48891,7 @@ Transform:
   m_GameObject: {fileID: 1450426291}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.040001, y: 0, z: 0.5}
+  m_LocalPosition: {x: -1.0299988, y: 0, z: -0.44000053}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49553,7 +49521,7 @@ Transform:
   m_GameObject: {fileID: 1468338192}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000014305114, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 6.0879974, y: 0, z: 1.4800053}
+  m_LocalPosition: {x: 3.0179977, y: 0, z: 0.54000473}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50504,7 +50472,6 @@ MonoBehaviour:
   - {x: 3, y: 2}
   - {x: 3, y: 1}
   - {x: 3, y: 0}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_UL_R
@@ -50716,7 +50683,7 @@ Transform:
   m_GameObject: {fileID: 1516116549}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.42261705, z: -0, w: 0.9063084}
-  m_LocalPosition: {x: 3.191002, y: 0, z: 2.890997}
+  m_LocalPosition: {x: 0.1210022, y: 0, z: 1.9509964}
   m_LocalScale: {x: 0.099999994, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50896,7 +50863,7 @@ Transform:
   m_GameObject: {fileID: 1518339541}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000014305114, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 5.4300003, y: 0, z: 1.4810028}
+  m_LocalPosition: {x: 2.3600006, y: 0, z: 0.5410023}
   m_LocalScale: {x: 0.40000004, y: 0.1, z: 0.20000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52457,7 +52424,7 @@ Transform:
   m_GameObject: {fileID: 1563891147}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710784, y: 0.0000020651923, z: 0.70710576, w: 0.0000020651983}
-  m_LocalPosition: {x: 2.5429993, y: 0, z: 3.2840023}
+  m_LocalPosition: {x: -0.5270004, y: 0, z: 2.3440018}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54020,7 +53987,7 @@ Transform:
   m_GameObject: {fileID: 1601982585}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.98000336, y: 0, z: 0.5}
+  m_LocalPosition: {x: -2.0899963, y: 0, z: -0.44000053}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54380,7 +54347,7 @@ Transform:
   m_GameObject: {fileID: 1607436060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268209, z: -0, w: 0.92388016}
-  m_LocalPosition: {x: 3.3649979, y: 0, z: 2.6609955}
+  m_LocalPosition: {x: 0.29499817, y: 0, z: 1.720995}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54602,7 +54569,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_UR_DL
@@ -55701,7 +55667,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_DR_TL
@@ -56281,7 +56246,7 @@ Transform:
   m_GameObject: {fileID: 1653944838}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.689999, y: 0, z: 1}
+  m_LocalPosition: {x: 1.6199994, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57091,7 +57056,7 @@ Transform:
   m_GameObject: {fileID: 1666891348}
   serializedVersion: 2
   m_LocalRotation: {x: -4.0927257e-12, y: 0.0000014305114, z: 0.0000028554487, w: -1}
-  m_LocalPosition: {x: 0.69000244, y: 0, z: 1.4309978}
+  m_LocalPosition: {x: -2.3799973, y: 0, z: 0.4909973}
   m_LocalScale: {x: 0.40000004, y: 0.1, z: 0.20000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57514,7 +57479,7 @@ Transform:
   m_GameObject: {fileID: 1677531568}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710784, y: 0.0000020651923, z: 0.70710576, w: 0.0000020651983}
-  m_LocalPosition: {x: 3.0180054, y: 0, z: 3.347002}
+  m_LocalPosition: {x: -0.051994324, y: 0, z: 2.4070015}
   m_LocalScale: {x: 0.100000024, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58297,7 +58262,7 @@ Transform:
   m_GameObject: {fileID: 1693761114}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268209, y: -0, z: 0.92388016, w: 0}
-  m_LocalPosition: {x: 3.9329987, y: 0, z: 2.0999985}
+  m_LocalPosition: {x: 0.86299896, y: 0, z: 1.1599979}
   m_LocalScale: {x: 0.10000003, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58860,7 +58825,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 0, y: 1}
   - {x: 1, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Cube
@@ -59197,7 +59161,7 @@ Transform:
   m_GameObject: {fileID: 1728333138}
   serializedVersion: 2
   m_LocalRotation: {x: -4.0927257e-12, y: 0.0000014305114, z: 0.0000028554487, w: -1}
-  m_LocalPosition: {x: 0.03201294, y: 0, z: 0.42999268}
+  m_LocalPosition: {x: -3.0379868, y: 0, z: -0.51000786}
   m_LocalScale: {x: 1, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60313,7 +60277,7 @@ Transform:
   m_GameObject: {fileID: 1763885452}
   serializedVersion: 2
   m_LocalRotation: {x: 0.34201878, y: -0, z: 0.93969315, w: 0}
-  m_LocalPosition: {x: 4.9869995, y: 0, z: 1.095005}
+  m_LocalPosition: {x: 1.9169998, y: 0, z: 0.1550045}
   m_LocalScale: {x: 0.10000003, y: 0.050000016, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61066,7 +61030,7 @@ Transform:
   m_GameObject: {fileID: 1789914349}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268209, y: -0, z: 0.92388016, w: 0}
-  m_LocalPosition: {x: 4.5999985, y: 0, z: 2.2189999}
+  m_LocalPosition: {x: 1.5299988, y: 0, z: 1.2789993}
   m_LocalScale: {x: 2, y: 0.100000024, z: 0.20000005}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61966,7 +61930,7 @@ Transform:
   m_GameObject: {fileID: 1802257747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.2300014, y: 0, z: 1}
+  m_LocalPosition: {x: 1.1600018, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62114,7 +62078,6 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 0}
   - {x: 3, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_R_D
@@ -62368,7 +62331,6 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 1, y: 2}
   - {x: 2, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_UL_DR
@@ -63248,7 +63210,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 2, y: 0}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_D
@@ -63820,7 +63781,7 @@ Transform:
   m_GameObject: {fileID: 1851977299}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268465, y: 0.0000009825446, z: 0.923879, w: 0.0000025156414}
-  m_LocalPosition: {x: 1.8050079, y: 0, z: 2.4539986}
+  m_LocalPosition: {x: -1.2649918, y: 0, z: 1.513998}
   m_LocalScale: {x: 2, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64270,7 +64231,7 @@ Transform:
   m_GameObject: {fileID: 1875075015}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268209, z: -0, w: 0.92388016}
-  m_LocalPosition: {x: 3.6139984, y: 0, z: 2.387001}
+  m_LocalPosition: {x: 0.5439987, y: 0, z: 1.4470005}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64693,7 +64654,7 @@ Transform:
   m_GameObject: {fileID: 1902533630}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268209, y: -0, z: 0.92388016, w: 0}
-  m_LocalPosition: {x: 4.756996, y: 0, z: 1.269001}
+  m_LocalPosition: {x: 1.6869965, y: 0, z: 0.32900047}
   m_LocalScale: {x: 0.10000003, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64963,7 +64924,7 @@ Transform:
   m_GameObject: {fileID: 1909582414}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000010931802, y: 0.38268465, z: 0.0000026052037, w: -0.923879}
-  m_LocalPosition: {x: 1.5200043, y: 0, z: 2.1689968}
+  m_LocalPosition: {x: -1.5499954, y: 0, z: 1.2289963}
   m_LocalScale: {x: 2, y: 0.100000024, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66015,7 +65976,6 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 0}
   - {x: 3, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_U_L
@@ -66818,7 +66778,6 @@ MonoBehaviour:
   - {x: 3, y: 1}
   - {x: 3, y: 2}
   - {x: 3, y: 3}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_DL_R
@@ -67120,7 +67079,7 @@ Transform:
   m_GameObject: {fileID: 1978218454}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268209, z: -0, w: 0.92388016}
-  m_LocalPosition: {x: 4.465004, y: 0, z: 1.5379982}
+  m_LocalPosition: {x: 1.3950043, y: 0, z: 0.59799767}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67750,7 +67709,7 @@ Transform:
   m_GameObject: {fileID: 1990991514}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268465, y: 0.0000009825446, z: 0.923879, w: 0.0000025156414}
-  m_LocalPosition: {x: 2.2080078, y: 0, z: 2.0970001}
+  m_LocalPosition: {x: -0.8619919, y: 0, z: 1.1569996}
   m_LocalScale: {x: 0.10000001, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -68740,7 +68699,7 @@ Transform:
   m_GameObject: {fileID: 2025252187}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.73, y: 0, z: 1}
+  m_LocalPosition: {x: 0.6600003, y: 0, z: 0.059999466}
   m_LocalScale: {x: 0.1, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69059,7 +69018,6 @@ MonoBehaviour:
   - {x: 3, y: 3}
   - {x: 3, y: 1}
   - {x: 3, y: 2}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_R_DL
@@ -69164,7 +69122,6 @@ MonoBehaviour:
   - {x: 6, y: 4}
   - {x: 6, y: 5}
   - {x: 6, y: 6}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 3, y: 3}
   _boundSize: {x: 16, y: 16}
   Name: Center
@@ -69361,7 +69318,7 @@ Transform:
   m_GameObject: {fileID: 2033577512}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268209, z: -0, w: 0.92388016}
-  m_LocalPosition: {x: 3.38, y: 0, z: 1.8900003}
+  m_LocalPosition: {x: 0.31000042, y: 0, z: 0.9499998}
   m_LocalScale: {x: 2.3000002, y: 0.1, z: 0.20000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69811,7 +69768,7 @@ Transform:
   m_GameObject: {fileID: 2048513406}
   serializedVersion: 2
   m_LocalRotation: {x: -4.0927257e-12, y: 0.0000014305114, z: 0.0000028554487, w: -1}
-  m_LocalPosition: {x: 0.2820053, y: 0, z: 0.9299946}
+  m_LocalPosition: {x: -2.7879944, y: 0, z: -0.010005951}
   m_LocalScale: {x: 0.10000003, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69901,7 +69858,7 @@ Transform:
   m_GameObject: {fileID: 2049183894}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000010931802, y: 0.38268465, z: 0.0000026052037, w: -0.923879}
-  m_LocalPosition: {x: 1.3630066, y: 0, z: 1.218998}
+  m_LocalPosition: {x: -1.7069931, y: 0, z: 0.27899742}
   m_LocalScale: {x: 0.100000024, y: 0.050000012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69991,7 +69948,7 @@ Transform:
   m_GameObject: {fileID: 2051315795}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 2.5759964, y: 0, z: 3.9919968}
+  m_LocalPosition: {x: -0.4940033, y: 0, z: 3.0519962}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70564,7 +70521,7 @@ Transform:
   m_GameObject: {fileID: 2061894370}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000014305114, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 6.338005, y: 0, z: 0.9800072}
+  m_LocalPosition: {x: 3.2680054, y: 0, z: 0.040006638}
   m_LocalScale: {x: 0.10000003, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71284,7 +71241,7 @@ Transform:
   m_GameObject: {fileID: 2083284279}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710784, y: 0.0000020651923, z: 0.70710576, w: 0.0000020651983}
-  m_LocalPosition: {x: 3.0440063, y: 0, z: 4.1919994}
+  m_LocalPosition: {x: -0.025993347, y: 0, z: 3.251999}
   m_LocalScale: {x: 0.100000024, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71882,7 +71839,6 @@ MonoBehaviour:
   - {x: 3, y: 4}
   - {x: 4, y: 4}
   - {x: 3, y: 1}
-  _lowerLeftCorner: {x: 0, y: 0}
   _boundCenterOffset: {x: 0, y: 0}
   _boundSize: {x: 0, y: 0}
   Name: Rail_D_R
@@ -72037,7 +71993,7 @@ Transform:
   m_GameObject: {fileID: 2097341339}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.0100021, y: 0, z: 0.5}
+  m_LocalPosition: {x: -0.05999756, y: 0, z: -0.44000053}
   m_LocalScale: {x: 1, y: 0.1, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []

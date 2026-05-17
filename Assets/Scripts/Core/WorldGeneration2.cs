@@ -26,6 +26,12 @@ namespace Frostline.Test
         public List<(Vector2Int, Vector2Int)> TrackEdges;
         public int[,] JunctionPredictor;
         public OccupiedMap<IPlaceable> OccupiedMap;
+        public List<DebugText> DebugTexts;
+    }
+    public class DebugText
+    {
+        public string Text;
+        public Vector2Int Position;
     }
 
     public class WorldGeneration2 : IRequireServices
@@ -44,12 +50,15 @@ namespace Frostline.Test
             List<(Vector2Int, Vector2Int)> trackEdges = new();
             List<Vector2Int[]> trackPointsList = new();
             List<BoundFiller> fillers = new();
+            List<DebugText> debugTexts = new();
 
             _occupiedMap = new();
             _structureBlueprintManager.TryGetStructureBlueprint("TestT_SB", out StructureBlueprint cubeBlueprint);
             _structureBlueprintManager.TryGetStructureBlueprint("Center_SB", out StructureBlueprint centerBlueprint);
+            _structureBlueprintManager.TryGetStructureBlueprint("TJunction_SB", out StructureBlueprint tJunctionBlueprint);
             _trackSegmentManager.TrackSegmentDict.TryGetValue("TestT", out StructureBlueprintTrack trackT);
             _trackSegmentManager.TrackSegmentDict.TryGetValue("Center", out StructureBlueprintTrack centerT);
+            _trackSegmentManager.TrackSegmentDict.TryGetValue("TJunction", out StructureBlueprintTrack junctionT);
 
             Vector2Int center = size / 2;
             Structure centerStructure = new(centerBlueprint, center);
@@ -143,7 +152,17 @@ namespace Frostline.Test
             }
             fillers.Clear();
 
-            JunctionNodes(junctionPredictor, trackNodes);
+            for (int x = 0; x < junctionPredictor.GetLength(0); x++)
+            {
+                for (int y = 0; y < junctionPredictor.GetLength(1); y++)
+                {
+                    if (junctionPredictor[x, y] == 2)
+                    {
+                        trackNodes.Add(new(x, y));
+                        AddJunctionAndEdges(new(x, y), size, tJunctionBlueprint, junctionT, structures, _occupiedMap, debugTexts, junctionPredictor, trackNodes, trackEdges, trackPointsList);
+                    }
+                }
+            }
 
             for (int x = 0; x < junctionPredictor.GetLength(0); x++)
             {
@@ -157,7 +176,73 @@ namespace Frostline.Test
                 }
             }
 
-            return new WorldGenerationResult { OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
+            return new WorldGenerationResult { DebugTexts = debugTexts, OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
+        }
+
+        private void AddJunctionAndEdges(Vector2Int junctionPos, Vector2Int size, StructureBlueprint tJB, StructureBlueprintTrack junctionT, List<Structure> structures, OccupiedMap<IPlaceable> occupiedMap, List<DebugText> debugTexts, int[,] junctionPredictor, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges, List<Vector2Int[]> trackPointsList)
+        {
+            for (int i = 0; i < Util.CardinalOffsets.Length; i++)
+            {
+                Vector2Int offset = Util.CardinalOffsets[i];
+                Vector2Int pos = offset + junctionPos;
+                if (junctionPredictor[pos.x, pos.y] == 0)
+                {
+                    Rotation rot = RotationManager.FlipRotation(RotationManager.CardinalOffsetToDirection(offset));
+                    debugTexts.Add(new DebugText()
+                    {
+                        Position = pos,
+                        Text = $"Empty {rot}"
+                    });
+
+                    Structure tJS = new(tJB, junctionPos, rot);
+                    if (occupiedMap.CanPlace(tJS))
+                    {
+                        occupiedMap.Add(tJS);
+                        structures.Add(tJS);
+                        ExpandTrackPath(junctionPos, junctionT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
+                        /*
+                        for (int j = 0; j < junctionT.TrackPaths.Length; j++)
+                        {
+                            TrackPath trackPath = junctionT.TrackPaths[j];
+                            Vector2Int centerOffset = trackPath.CenterOffset;
+                            Vector2Int start = RotationManager.Rotate(trackPath.Path[^1] + centerOffset, rot);
+                            Vector2Int seccondLast = RotationManager.Rotate(trackPath.Path[^2] + centerOffset, rot);
+                            Vector2Int searchPos = start + junctionPos;
+                            Vector2Int moveOffset = start - seccondLast;
+                            moveOffset = new(Sign(moveOffset.x), Sign(moveOffset.y));
+                            while (true)
+                            {
+                                if (searchPos.x < 0 || searchPos.y < 0 || searchPos.x > size.x - 1 || searchPos.y > size.y - 1)
+                                {
+                                    break;
+                                }
+                                if (junctionPredictor[searchPos.x, searchPos.y] == 2)
+                                {
+                                    break;
+                                }
+                                if (junctionPredictor[searchPos.x, searchPos.y] == 0)
+                                {
+                                    break;
+                                }
+                                searchPos += moveOffset;
+                            }
+
+                            debugTexts.Add(new DebugText()
+                            {
+                                Text = $"{start} {moveOffset}",
+                                Position = junctionPos + moveOffset,
+                            });
+                            trackEdges.Add((start + junctionPos, searchPos));
+                        }
+                        */
+                    }
+                }
+            }
+        }
+        struct JunctionInfo
+        {
+            public Vector2Int Position;
+            public List<Vector2Int> Edges;
         }
 
         private static int Sign(int x)
@@ -249,31 +334,6 @@ namespace Frostline.Test
                 {
                     if (junctionPredictor[x, y] == 1)
                     {
-                    }
-                }
-            }
-        }
-
-        private void ShouldExpandEmptyLine(int[,] junctionPredictor, Vector2Int start)
-        {
-            Queue<Vector2Int> queue = new();
-            queue.Enqueue(start);
-
-            while (queue.Count > 0)
-            {
-                Vector2Int path = queue.Dequeue();
-            }
-        }
-
-        private void JunctionNodes(int[,] junctionPredictor, List<Vector2Int> trackNodes)
-        {
-            for (int x = 0; x < junctionPredictor.GetLength(0); x++)
-            {
-                for (int y = 0; y < junctionPredictor.GetLength(1); y++)
-                {
-                    if (junctionPredictor[x, y] == 2)
-                    {
-                        trackNodes.Add(new(x, y));
                     }
                 }
             }

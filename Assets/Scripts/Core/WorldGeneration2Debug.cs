@@ -58,6 +58,13 @@ namespace Frostline.Test
                 Gizmos.DrawWireSphere(pos, 0.2f);
             }
 
+            Gizmos.color = Color.darkSlateBlue;
+            foreach (DebugText debugText in _result.DebugTexts)
+            {
+                Vector3 pos = new(debugText.Position.x, 0, debugText.Position.y);
+                Handles.Label(pos, debugText.Text);
+            }
+
             Gizmos.color = Color.blanchedAlmond;
             for (int i = 0; i < _result.TrackEdges.Count; i++)
             {

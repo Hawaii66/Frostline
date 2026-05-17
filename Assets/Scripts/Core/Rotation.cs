@@ -32,5 +32,46 @@ namespace Frostline.Core
             }
             return rotated;
         }
+
+        public static Rotation CardinalOffsetToDirection(Vector2Int offset)
+        {
+            if (offset.x == 1)
+            {
+                return Rotation.Right;
+            }
+            if (offset.x == -1)
+            {
+                return Rotation.Left;
+            }
+            if (offset.y == 1)
+            {
+                return Rotation.Up;
+            }
+            if (offset.y == -1)
+            {
+                return Rotation.Down;
+            }
+            return Rotation.Up;
+        }
+        public static Rotation FlipRotation(Rotation rot)
+        {
+            if (rot == Rotation.Right)
+            {
+                return Rotation.Left;
+            }
+            if (rot == Rotation.Left)
+            {
+                return Rotation.Right;
+            }
+            if (rot == Rotation.Up)
+            {
+                return Rotation.Down;
+            }
+            if (rot == Rotation.Down)
+            {
+                return Rotation.Up;
+            }
+            return Rotation.Up;
+        }
     }
 }
