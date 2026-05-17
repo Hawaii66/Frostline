@@ -2,7 +2,7 @@
 
 namespace Frostline.Core
 {
-    interface IPlaceable
+    public interface IPlaceable
     {
         public Vector2Int[] GetOccupiedPositions();
     }

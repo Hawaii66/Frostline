@@ -26,6 +26,7 @@ namespace Frostline.Test
         public List<Vector2Int> TrackNodes;
         public List<(Vector2Int, Vector2Int)> TrackEdges;
         public int[,] JunctionPredictor;
+        public OccupiedMap<IPlaceable> OccupiedMap;
     }
 
     public class WorldGeneration2 : IRequireServices
@@ -33,7 +34,7 @@ namespace Frostline.Test
         private TrackSegmentManager _trackSegmentManager;
         private StructureBlueprintManager _structureBlueprintManager;
         private WorldSettings _worldSettings;
-        private OccupiedMap<Structure> _occupiedMap;
+        private OccupiedMap<IPlaceable> _occupiedMap;
 
         public WorldGenerationResult Generate(Vector2Int size)
         {
@@ -144,7 +145,19 @@ namespace Frostline.Test
 
             JunctionNodes(junctionPredictor, trackNodes);
 
-            return new WorldGenerationResult { JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
+            for (int x = 0; x < junctionPredictor.GetLength(0); x++)
+            {
+                for (int y = 0; y < junctionPredictor.GetLength(1); y++)
+                {
+                    if (junctionPredictor[x, y] > 1 && trackNodes.Contains(new(x, y)))
+                    {
+                        int index = trackNodes.IndexOf(new(x, y));
+                        MoveJunctionNode(index, trackNodes, _occupiedMap, size);
+                    }
+                }
+            }
+
+            return new WorldGenerationResult { OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
         }
 
         private void JunctionNodes(int[,] junctionPredictor, List<Vector2Int> trackNodes)
@@ -157,66 +170,75 @@ namespace Frostline.Test
                     {
                         trackNodes.Add(new(x, y));
                     }
-                    //if (junctionPredictor[x, y] == 1)
-                    //{
-                    //    JunctionNodesExpand(junctionPredictor, trackNodes, new(x, y));
-                    //}
                 }
             }
         }
 
-        private void JunctionNodesExpand(int[,] junctionPredictor, List<Vector2Int> trackNodes, Vector2Int start)
+        class Junction : IPlaceable
         {
-            Queue<Vector2Int> toScan = new();
-            HashSet<Vector2Int> seen = new();
-            toScan.Enqueue(start);
-
-            Vector2Int[] offsets = new Vector2Int[]
+            private readonly Vector2Int[] _occupiedPositions;
+            public Junction(Vector2Int[] occupiedPositions)
             {
-                new(1,0),
-                new(0,1),
-                new(-1,0),
-                new(0,-1),
-            };
-
-            Vector2Int finalPosition = Vector2Int.zero;
-            while (toScan.Count > 0)
+                _occupiedPositions = occupiedPositions;
+            }
+            public Vector2Int[] GetOccupiedPositions()
             {
-                Vector2Int pos = toScan.Dequeue();
-                if (seen.Contains(pos)) { continue; }
-                seen.Add(pos);
-                if (junctionPredictor[pos.x, pos.y] > 1)
-                {
-                    return;
-                }
-                if (junctionPredictor[pos.x, pos.y] == -1)
+                return _occupiedPositions;
+            }
+        }
+
+        private void MoveJunctionNode(int nodeIndex, List<Vector2Int> trackNodes, OccupiedMap<IPlaceable> occupiedMap, Vector2Int size)
+        {
+            Vector2Int node = new(trackNodes[nodeIndex].x, trackNodes[nodeIndex].y);
+            int i = 10;
+            while (i-- > 0)
+            {
+                bool failed = false;
+                int randX = Random.Range(-10, +11);
+                int randY = Random.Range(-10, +11);
+                int x = node.x + randX;
+                int y = node.y + randY;
+
+                if (x < 0 || y < 0 || x > size.x - 1 || y > size.y - 1)
                 {
                     continue;
                 }
-                finalPosition = pos;
-                for (int i = 0; i < offsets.Length; i++)
+
+                List<Vector2Int> occupiedPositions = new();
+                for (int dx = -10; dx <= 10; dx++)
                 {
-                    Vector2Int next = pos + offsets[i];
-                    if (next.x < 0 || next.y < 0 || next.x > junctionPredictor.GetLength(0) - 1 || next.y > junctionPredictor.GetLength(1) - 1)
+                    if (failed)
                     {
-                        continue;
+                        break;
                     }
-                    if (junctionPredictor[next.x, next.y] == 0)
+                    for (int dy = -10; dy <= 10; dy++)
                     {
-                        continue;
+                        int nx = x + dx;
+                        int ny = y + dy;
+                        if (_occupiedMap.IsOccupied(new(nx, ny)))
+                        {
+                            failed = true;
+                            break;
+                        }
+                        occupiedPositions.Add(new(nx, ny));
                     }
-                    toScan.Enqueue(next);
                 }
+                if (failed)
+                {
+                    continue;
+                }
+                Junction jn = new(occupiedPositions.ToArray());
+                if (!occupiedMap.CanPlace(jn))
+                {
+                    continue;
+                }
+
+                occupiedMap.Add(jn);
+                trackNodes[nodeIndex] = new(x, y);
+                return;
             }
 
-            foreach (Vector2Int pos in seen)
-            {
-                junctionPredictor[pos.x, pos.y] = 0;
-            }
-            if (finalPosition != Vector2.zero)
-            {
-                junctionPredictor[finalPosition.x, finalPosition.y] = 2;
-            }
+            trackNodes.RemoveAt(nodeIndex);
         }
 
         public void Initialize(IServiceRegistry serviceRegistry)

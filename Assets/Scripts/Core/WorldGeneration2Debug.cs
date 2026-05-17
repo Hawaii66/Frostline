@@ -16,7 +16,7 @@ namespace Frostline.Test
         [Button("Generate")]
         private void Generate()
         {
-            _result = _worldGen.Generate(new Vector2Int(100, 100));
+            _result = _worldGen.Generate(new Vector2Int(500, 500));
         }
 
         private void OnDrawGizmos()
@@ -72,7 +72,7 @@ namespace Frostline.Test
             {
                 for (int y = 0; y < sizeY; y++)
                 {
-                    if (_result.JunctionPredictor[x, y] > 1)
+                    if (_result.JunctionPredictor[x, y] > 1 && _result.TrackNodes.Contains(new(x, y)))
                     {
                         Vector3 pos = new(x, 0, y);
                         Handles.Label(pos, $"Junction: ${_result.JunctionPredictor[x, y]}");
@@ -81,6 +81,18 @@ namespace Frostline.Test
                     {
                         Vector3 pos = new(x, 0, y);
                         Gizmos.DrawWireSphere(pos, 0.3f);
+                    }
+                }
+            }
+
+            Gizmos.color = Color.darkKhaki;
+            for (int x = 0; x < sizeX; x++)
+            {
+                for (int y = 0; y < sizeY; y++)
+                {
+                    if (_result.OccupiedMap.IsOccupied(new(x, y)))
+                    {
+                        Gizmos.DrawWireSphere(new(x, 0, y), 0.1f);
                     }
                 }
             }

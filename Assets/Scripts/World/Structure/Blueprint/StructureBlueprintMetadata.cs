@@ -10,8 +10,8 @@ namespace Frostline.World.Structures
     {
         [SerializeField] private Vector2Int[] _occupiedPositions;
         [SerializeField] private Vector2Int _lowerLeftCorner;
-        [SerializeField] private Vector2Int _boundLowerLeft;
-        [SerializeField] private Vector2Int _boundUpperRight;
+        [SerializeField] private Vector2Int _boundCenterOffset;
+        [SerializeField] private Vector2Int _boundSize;
         public string Name;
 
         [Button("Generate Blueprint")]
@@ -27,11 +27,11 @@ namespace Frostline.World.Structures
         public Vector2Int[] GetBounds()
         {
             List<Vector2Int> bounds = new();
-            for (int x = _boundLowerLeft.x; x < _boundUpperRight.x; x++)
+            for (int x = -_boundSize.x; x < _boundSize.x + 1; x++)
             {
-                for (int y = _boundLowerLeft.y; y < _boundUpperRight.y; y++)
+                for (int y = -_boundSize.y; y < _boundSize.y + 1; y++)
                 {
-                    bounds.Add(new(x, y));
+                    bounds.Add(new(x + _boundCenterOffset.x, y + _boundCenterOffset.y));
                 }
             }
             return bounds.ToArray();
@@ -56,9 +56,9 @@ namespace Frostline.World.Structures
             Gizmos.DrawWireSphere(ToWorldCoordinate(new Vector3(_lowerLeftCorner.x, 0, _lowerLeftCorner.y)), 0.1f);
 
             Gizmos.color = Color.coral;
-            Vector3 boundCenter = new((_boundLowerLeft.x + _boundUpperRight.x) / 2, 0, (_boundLowerLeft.y + _boundUpperRight.y) / 2);
-            Vector3 boundSize = new(_boundUpperRight.x - _boundLowerLeft.x, 0.2f, _boundUpperRight.y - _boundLowerLeft.y);
-            Gizmos.DrawWireCube(ToWorldCoordinate(boundCenter), boundSize);
+            Vector3 boundCenterOffset = new(_boundCenterOffset.x, 0, _boundCenterOffset.y);
+            Vector3 boundSize = new(_boundSize.x * 2, 0.1f, _boundSize.y * 2);
+            Gizmos.DrawWireCube(ToWorldCoordinate(boundCenterOffset), boundSize);
         }
 
         [Button("Fix Alignment")]

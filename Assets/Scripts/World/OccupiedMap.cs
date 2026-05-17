@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Frostline.Core
 {
-    class OccupiedMap<T> where T : IPlaceable
+    public class OccupiedMap<T> where T : IPlaceable
     {
         private readonly Dictionary<Vector2Int, T> _cells;
 
