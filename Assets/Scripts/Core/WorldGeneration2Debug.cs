@@ -81,7 +81,7 @@ namespace Frostline.Test
                 {
                     if (_result.JunctionPredictor[x, y] > 1 && _result.TrackNodes.Contains(new(x, y)))
                     {
-                        Vector3 pos = new(x, 0, y);
+                        Vector3 pos = new(x, 1, y);
                         Handles.Label(pos, $"Junction: ${_result.JunctionPredictor[x, y]}");
                     }
                     if (_result.JunctionPredictor[x, y] != 0)

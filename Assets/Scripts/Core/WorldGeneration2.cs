@@ -152,21 +152,205 @@ namespace Frostline.Test
             }
             fillers.Clear();
 
+            Dictionary<Vector2Int, Structure> nodeToJunction = new();
             for (int x = 0; x < junctionPredictor.GetLength(0); x++)
             {
                 for (int y = 0; y < junctionPredictor.GetLength(1); y++)
                 {
                     if (junctionPredictor[x, y] == 2)
                     {
-                        Rotation rot = JunctionRotation(new(x, y), junctionPredictor);
-                        Vector2Int movedPosition = MoveJunction(new(x, y), rot, tJunctionBlueprint, _occupiedMap, size);
-                        AddJunctionAndEdges(new(x, y), movedPosition, size, tJunctionBlueprint, junctionT, structures, _occupiedMap, debugTexts, junctionPredictor, trackNodes, trackEdges, trackPointsList);
+                        Vector2Int node = new(x, y);
+                        Rotation rot = JunctionRotation(node, junctionPredictor);
+                        Vector2Int movedPosition = MoveJunction(node, rot, tJunctionBlueprint, _occupiedMap, size);
+                        Structure str = AddJunctionAndEdges(node, movedPosition, size, tJunctionBlueprint, junctionT, structures, _occupiedMap, debugTexts, junctionPredictor, trackNodes, trackEdges, trackPointsList);
+                        if (str != null)
+                        {
+                            nodeToJunction.Add(node, str);
+                        }
+                    }
+                }
+            }
+
+            HashSet<Vector2Int> visited = new();
+            for (int x = 0; x < junctionPredictor.GetLength(0); x++)
+            {
+                for (int y = 0; y < junctionPredictor.GetLength(1); y++)
+                {
+                    if (junctionPredictor[x, y] == 0)
+                    {
+                        continue;
+                    }
+                    if (junctionPredictor[x, y] == 2)
+                    {
+                        continue;
+                    }
+                    Vector2Int pos = new(x, y);
+                    if (visited.Contains(pos))
+                    {
+                        continue;
+                    }
+                    int count = JunctionPredictorAroundCount(pos, size, junctionPredictor);
+                    if (count == 2)
+                    {
+                        HandleTrackEdge(pos, size, junctionPredictor, trackNodes, trackEdges, visited);
+                    }
+                }
+            }
+
+            for (int x = 0; x < junctionPredictor.GetLength(0); x++)
+            {
+                for (int y = 0; y < junctionPredictor.GetLength(1); y++)
+                {
+                    if (junctionPredictor[x, y] == 2)
+                    {
+                        if (nodeToJunction.TryGetValue(new(x, y), out Structure str))
+                        {
+                            ResolveJunctionEdges(new(x, y), junctionPredictor, str, junctionT, trackNodes, trackEdges);
+                        }
                     }
                 }
             }
 
             return new WorldGenerationResult { DebugTexts = debugTexts, OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
         }
+
+        private void ResolveJunctionEdges(Vector2Int node, int[,] junctionPredictor, Structure junction, StructureBlueprintTrack sbt, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges)
+        {
+            List<(Vector2Int, Vector2Int)> edges = new();
+            List<(Vector2Int, Vector2Int)> toRemove = new();
+            for (int i = trackEdges.Count - 1; i >= 0; i--)
+            {
+                (Vector2Int, Vector2Int) edge = trackEdges[i];
+                Vector2Int a = edge.Item1;
+                Vector2Int b = edge.Item2;
+
+                if (a == node)
+                {
+                    edges.Add((a, b));
+                    trackEdges.RemoveAt(i);
+                }
+                if (b == node)
+                {
+                    edges.Add((b, a));
+                    trackEdges.RemoveAt(i);
+                }
+            }
+
+            trackNodes.Remove(node);
+
+            Rotation rot = JunctionRotation(node, junctionPredictor);
+            for (int i = 0; i < edges.Count; i++)
+            {
+                (Vector2Int, Vector2Int) edge = edges[i];
+                Vector2Int junctionNode = edge.Item1;
+                Vector2Int otherNode = edge.Item2;
+
+                float closestDist = float.MaxValue;
+                Vector2Int closestCanditate = Vector2Int.zero;
+                TrackPath[] trackPaths = sbt.TrackPaths;
+                for (int j = 0; j < trackPaths.Length; j++)
+                {
+                    Vector2Int[] path = trackPaths[j].Path;
+                    for (int k = 0; k < path.Length; k++)
+                    {
+                        Vector2Int pos = RotationManager.Rotate(path[k] + trackPaths[j].CenterOffset, rot) + junction.WorldPosition;
+
+                        float dist = DistanceSqrd(otherNode, pos);
+                        if (dist < closestDist)
+                        {
+                            closestDist = dist;
+                            closestCanditate = pos;
+                        }
+                    }
+                }
+
+                trackEdges.Add((otherNode, closestCanditate));
+            }
+        }
+
+        private float DistanceSqrd(Vector2Int a, Vector2Int b)
+        {
+            int dx = a.x - b.x;
+            int dy = a.y - b.y;
+            return dx * dx + dy * dy;
+        }
+
+        private void HandleTrackEdge(Vector2Int start, Vector2Int size, int[,] junctionPredictor, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges, HashSet<Vector2Int> visited)
+        {
+            Queue<Vector2Int> queue = new();
+            queue.Enqueue(start);
+
+            List<Vector2Int> nodes = new();
+            while (queue.Count > 0 && nodes.Count < 2)
+            {
+                Vector2Int node = queue.Dequeue();
+                if (visited.Contains(node))
+                {
+                    continue;
+                }
+
+                if (junctionPredictor[node.x, node.y] == 2)
+                {
+                    nodes.Add(node);
+                    continue;
+                }
+                visited.Add(node);
+
+                int count = JunctionPredictorAroundCount(node, size, junctionPredictor);
+                if (count == 1)
+                {
+                    nodes.Add(node);
+                    continue;
+                }
+
+                for (int i = 0; i < Util.CardinalOffsets.Length; i++)
+                {
+                    Vector2Int pos = Util.CardinalOffsets[i] + node;
+                    if (pos.x < 0 || pos.y < 0 || pos.x > size.x - 1 || pos.y > size.y - 1)
+                    {
+                        continue;
+                    }
+                    if (junctionPredictor[pos.x, pos.y] == 0)
+                    {
+                        continue;
+                    }
+                    queue.Enqueue(pos);
+                }
+            }
+
+            if (nodes.Count == 0)
+            {
+                return;
+            }
+            if (nodes.Count == 1)
+            {
+                Debug.Log($"{start} {nodes[0]}");
+                return;
+            }
+
+            trackNodes.Add(nodes[0]);
+            trackNodes.Add(nodes[1]);
+            trackEdges.Add((nodes[0], nodes[1]));
+        }
+        private int JunctionPredictorAroundCount(Vector2Int pos, Vector2Int size, int[,] junctionPredictor)
+        {
+            int count = 0;
+            for (int i = 0; i < Util.CardinalOffsets.Length; ++i)
+            {
+                Vector2Int node = pos + Util.CardinalOffsets[i];
+                if (node.x < 0 || node.y < 0 || node.x > size.x - 1 || node.y > size.y - 1)
+                {
+                    continue;
+                }
+
+                if (junctionPredictor[node.x, node.y] != 0)
+                {
+                    count += 1;
+                }
+            }
+            return count;
+        }
+
         private Rotation JunctionRotation(Vector2Int node, int[,] junctionPredictor)
         {
             for (int i = 0; i < Util.CardinalOffsets.Length; i++)
@@ -183,7 +367,7 @@ namespace Frostline.Test
             return Rotation.Up;
         }
 
-        private void AddJunctionAndEdges(Vector2Int originalPosition, Vector2Int junctionPos, Vector2Int size, StructureBlueprint tJB, StructureBlueprintTrack junctionT, List<Structure> structures, OccupiedMap<IPlaceable> occupiedMap, List<DebugText> debugTexts, int[,] junctionPredictor, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges, List<Vector2Int[]> trackPointsList)
+        private Structure AddJunctionAndEdges(Vector2Int originalPosition, Vector2Int junctionPos, Vector2Int size, StructureBlueprint tJB, StructureBlueprintTrack junctionT, List<Structure> structures, OccupiedMap<IPlaceable> occupiedMap, List<DebugText> debugTexts, int[,] junctionPredictor, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges, List<Vector2Int[]> trackPointsList)
         {
             Rotation rot = JunctionRotation(originalPosition, junctionPredictor);
 
@@ -199,6 +383,7 @@ namespace Frostline.Test
                 occupiedMap.Add(tJS);
                 structures.Add(tJS);
                 ExpandTrackPath(junctionPos, junctionT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
+                return tJS;
                 /*
                 for (int j = 0; j < junctionT.TrackPaths.Length; j++)
                 {
@@ -235,6 +420,7 @@ namespace Frostline.Test
                 }
                 */
             }
+            return null;
         }
         struct JunctionInfo
         {
