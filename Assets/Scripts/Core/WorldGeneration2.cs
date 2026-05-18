@@ -153,6 +153,7 @@ namespace Frostline.Test
             fillers.Clear();
 
             GenerateExtraJunctions(junctionPredictor, size, _occupiedMap, debugTexts);
+            return new WorldGenerationResult { DebugTexts = debugTexts, OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
 
             Dictionary<Vector2Int, Structure> nodeToJunction = new();
             for (int x = 0; x < junctionPredictor.GetLength(0); x++)
@@ -225,11 +226,6 @@ namespace Frostline.Test
             while (distanceInfo.Count > 0)
             {
                 DistanceInfo info = distanceInfo[0];
-                debugTexts.Add(new DebugText()
-                {
-                    Position = info.Position,
-                    Text = $"{info.Distance}"
-                });
                 distanceInfo.RemoveAt(0);
                 if (info.Distance < 20) //Minimum distance between junctions
                 {
@@ -240,6 +236,11 @@ namespace Frostline.Test
                     continue;
                 }
 
+                debugTexts.Add(new DebugText()
+                {
+                    Position = info.Position,
+                    Text = $"{info.Distance}"
+                });
                 Queue<Vector2Int> queue = new();
                 HashSet<Vector2Int> onEdge = new();
                 queue.Enqueue(info.Position);
@@ -291,6 +292,7 @@ namespace Frostline.Test
                 Vector2Int next = pos;
 
                 bool hasSeenEmpty = false;
+                int fullCount = 0;
                 while (true)
                 {
                     if (successAdding)
@@ -319,11 +321,17 @@ namespace Frostline.Test
                             junctionPredictor[pos.x, pos.y] += 1;
                             junctionPredictor[next.x, next.y] += 1;
 
+                            Vector2Int goal = next;
                             while (true)
                             {
                                 next -= offset;
                                 if (next == pos)
                                 {
+                                    debugTexts.Add(new DebugText()
+                                    {
+                                        Position = goal,
+                                        Text = $"Meet: {pos} {goal}"
+                                    });
                                     break;
                                 }
 
@@ -331,6 +339,14 @@ namespace Frostline.Test
                             }
                         }
 
+                    }
+                    else
+                    {
+                        if (fullCount > 0)
+                        {
+                            break;
+                        }
+                        fullCount += 1;
                     }
                     if (junctionPredictor[next.x, next.y] == 0)
                     {
