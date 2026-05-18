@@ -16,21 +16,21 @@ MonoBehaviour:
   TrackPaths:
   - Path:
     - {x: 0, y: 0}
-    - {x: 0, y: -13}
+    - {x: 0, y: -1}
     CenterOffset: {x: 3, y: 0}
   - Path:
     - {x: 0, y: 0}
-    - {x: 0, y: 13}
+    - {x: 0, y: 1}
     CenterOffset: {x: 3, y: 6}
   - Path:
     - {x: 0, y: 0}
-    - {x: -13, y: 0}
+    - {x: -1, y: 0}
     CenterOffset: {x: 0, y: 0}
   - Path:
     - {x: 0, y: 0}
-    - {x: -13, y: 0}
+    - {x: -1, y: 0}
     CenterOffset: {x: 0, y: 6}
   - Path:
     - {x: 0, y: 0}
-    - {x: 13, y: 0}
+    - {x: 1, y: 0}
     CenterOffset: {x: 6, y: 4}

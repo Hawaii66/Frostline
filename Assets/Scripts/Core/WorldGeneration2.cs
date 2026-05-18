@@ -152,6 +152,8 @@ namespace Frostline.Test
             }
             fillers.Clear();
 
+            GenerateExtraJunctions(junctionPredictor, size, _occupiedMap, debugTexts);
+
             Dictionary<Vector2Int, Structure> nodeToJunction = new();
             for (int x = 0; x < junctionPredictor.GetLength(0); x++)
             {
@@ -212,6 +214,218 @@ namespace Frostline.Test
             }
 
             return new WorldGenerationResult { DebugTexts = debugTexts, OccupiedMap = _occupiedMap, JunctionPredictor = junctionPredictor, Structures = structures, Tiles = tiles, TrackPaths = null, TrackEdges = trackEdges, TrackNodes = trackNodes };
+        }
+
+        private void GenerateExtraJunctions(int[,] junctionPredictor, Vector2Int size, OccupiedMap<IPlaceable> occupiedMap, List<DebugText> debugTexts)
+        {
+            int[,] distanceField = ComputeJunctionDistanceField(junctionPredictor, size);
+            List<DistanceInfo> distanceInfo = GetDistanceInfo(distanceField);
+
+            HashSet<Vector2Int> visited = new();
+            while (distanceInfo.Count > 0)
+            {
+                DistanceInfo info = distanceInfo[0];
+                debugTexts.Add(new DebugText()
+                {
+                    Position = info.Position,
+                    Text = $"{info.Distance}"
+                });
+                distanceInfo.RemoveAt(0);
+                if (info.Distance < 20) //Minimum distance between junctions
+                {
+                    continue;
+                }
+                if (visited.Contains(info.Position))
+                {
+                    continue;
+                }
+
+                Queue<Vector2Int> queue = new();
+                HashSet<Vector2Int> onEdge = new();
+                queue.Enqueue(info.Position);
+
+                while (queue.Count > 0)
+                {
+                    Vector2Int pos = queue.Dequeue();
+                    if (onEdge.Contains(pos))
+                    {
+                        continue;
+                    }
+                    onEdge.Add(pos);
+
+                    for (int i = 0; i < Util.CardinalOffsets.Length; i++)
+                    {
+                        Vector2Int next = Util.CardinalOffsets[i] + pos;
+                        if (next.x < 0 || next.y < 0 || next.x > size.x - 1 || next.y > size.y - 1)
+                        {
+                            continue;
+                        }
+                        if (junctionPredictor[next.x, next.y] != 1)
+                        {
+                            continue;
+                        }
+                        queue.Enqueue(next);
+                    }
+                }
+
+                foreach (Vector2Int pos in onEdge)
+                {
+                    visited.Add(pos);
+                }
+
+                Vector2Int startPosition = info.Position;
+                TryAddJunction(startPosition, size, junctionPredictor, distanceField, occupiedMap, debugTexts);
+            }
+        }
+
+        private void TryAddJunction(Vector2Int pos, Vector2Int size, int[,] junctionPredictor, int[,] distanceField, OccupiedMap<IPlaceable> occupiedMap, List<DebugText> debugTexts)
+        {
+            bool successAdding = false;
+            for (int i = 0; i < Util.CardinalOffsets.Length; i++)
+            {
+                if (successAdding)
+                {
+                    break;
+                }
+                Vector2Int offset = Util.CardinalOffsets[i];
+                Vector2Int next = pos;
+
+                bool hasSeenEmpty = false;
+                while (true)
+                {
+                    if (successAdding)
+                    {
+                        break;
+                    }
+                    next += offset;
+                    if (next.x < 0 || next.y < 0 || next.x > size.x - 1 || next.y > size.y - 1)
+                    {
+                        break;
+                    }
+                    if (occupiedMap.IsOccupied(next))
+                    {
+                        break;
+                    }
+
+                    if (hasSeenEmpty)
+                    {
+                        if (junctionPredictor[next.x, next.y] == 1)
+                        {
+                            if (distanceField[next.x, next.y] < 20)//Minimum distance
+                            {
+                                break;
+                            }
+                            successAdding = true;
+                            junctionPredictor[pos.x, pos.y] += 1;
+                            junctionPredictor[next.x, next.y] += 1;
+
+                            while (true)
+                            {
+                                next -= offset;
+                                if (next == pos)
+                                {
+                                    break;
+                                }
+
+                                junctionPredictor[next.x, next.y] += 1;
+                            }
+                        }
+
+                    }
+                    if (junctionPredictor[next.x, next.y] == 0)
+                    {
+                        hasSeenEmpty = true;
+                    }
+                }
+            }
+        }
+
+        struct DistanceInfo
+        {
+            public Vector2Int Position;
+            public int Distance;
+        }
+        private List<DistanceInfo> GetDistanceInfo(int[,] distanceField)
+        {
+            List<DistanceInfo> distanceInfo = new();
+            for (int x = 0; x < distanceField.GetLength(0); x++)
+            {
+                for (int y = 0; y < distanceField.GetLength(1); y++)
+                {
+                    if (distanceField[x, y] != 0)
+                    {
+                        distanceInfo.Add(new DistanceInfo()
+                        {
+                            Distance = distanceField[x, y],
+                            Position = new(x, y)
+                        });
+                    }
+                }
+            }
+
+            distanceInfo.Sort((a, b) => b.Distance.CompareTo(a.Distance));
+            return distanceInfo;
+        }
+
+        private int[,] ComputeJunctionDistanceField(int[,] junctionPredictor, Vector2Int size)
+        {
+            int[,] distanceField = new int[size.x, size.y];
+            Queue<Vector2Int> queue = new();
+
+            for (int x = 0; x < size.x; x++)
+            {
+                for (int y = 0; y < size.y; y++)
+                {
+                    int count = JunctionPredictorAroundCount(new(x, y), size, junctionPredictor);
+                    if (count == 1 && (junctionPredictor[x, y] == 1 || junctionPredictor[x, y] == -1))
+                    {
+                        queue.Enqueue(new(x, y));
+                        distanceField[x, y] = 1;
+                    }
+                    if (junctionPredictor[x, y] == 2)
+                    {
+                        queue.Enqueue(new(x, y));
+                        distanceField[x, y] = 1;
+                    }
+                    if (x == 0 || y == 0 || x == size.x - 1 || y == size.y - 1)
+                    {
+                        if (junctionPredictor[x, y] != 0)
+                        {
+                            queue.Enqueue(new(x, y));
+                            distanceField[x, y] = 1;
+                        }
+                    }
+                }
+            }
+
+            HashSet<Vector2Int> visited = new();
+            while (queue.Count > 0)
+            {
+                Vector2Int pos = queue.Dequeue();
+                if (visited.Contains(pos))
+                {
+                    continue;
+                }
+                visited.Add(pos);
+
+                int nextDistance = distanceField[pos.x, pos.y] + 1;
+                for (int i = 0; i < Util.CardinalOffsets.Length; i++)
+                {
+                    Vector2Int offset = Util.CardinalOffsets[i];
+                    Vector2Int next = pos + offset;
+                    if (next.x < 0 || next.y < 0 || next.x > size.x - 1 || next.y > size.y - 1)
+                    {
+                        continue;
+                    }
+                    if (junctionPredictor[next.x, next.y] != 0 && distanceField[next.x, next.y] == 0)
+                    {
+                        distanceField[next.x, next.y] = nextDistance;
+                        queue.Enqueue(next);
+                    }
+                }
+            }
+
+            return distanceField;
         }
 
         private void ResolveJunctionEdges(Vector2Int node, int[,] junctionPredictor, Structure junction, StructureBlueprintTrack sbt, List<Vector2Int> trackNodes, List<(Vector2Int, Vector2Int)> trackEdges)
