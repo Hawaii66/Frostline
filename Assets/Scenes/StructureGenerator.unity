@@ -40239,8 +40239,8 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: 1, y: 3}
   - {x: 2, y: 3}
-  _boundCenterOffset: {x: 0, y: 1}
-  _boundSize: {x: 4, y: 3}
+  _boundCenterOffset: {x: 0, y: 2}
+  _boundSize: {x: 8, y: 6}
   Name: TJunction
   _moveOccupiedPositons: {x: 0, y: 0}
 --- !u!114 &1182747906

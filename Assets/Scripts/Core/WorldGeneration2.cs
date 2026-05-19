@@ -608,9 +608,9 @@ namespace Frostline.Test
             });
 
             Structure tJS = new(tJB, junctionPos, rot);
-            if (occupiedMap.CanPlace(tJS))
+            if (occupiedMap.CanPlace(tJS.GetBounds()))
             {
-                occupiedMap.Add(tJS);
+                occupiedMap.Add(tJS, tJS.GetBounds());
                 structures.Add(tJS);
                 ExpandTrackPath(junctionPos, junctionT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
                 return tJS;
