@@ -76,6 +76,17 @@ namespace Frostline.Core.World
                 Gizmos.DrawLine(s, e);
             }
 
+
+            Gizmos.color = Color.orangeRed;
+            for (int i = 0; i < _context.ExtraJunctions.Count; i++)
+            {
+                Vector2Int start = _context.ExtraJunctions[i].A;
+                Vector2Int end = _context.ExtraJunctions[i].B;
+                Vector3 s = new(start.x, 0, start.y);
+                Vector3 e = new(end.x, 0, end.y);
+                Gizmos.DrawLine(s, e);
+            }
+
             Gizmos.color = Color.blueViolet;
             for (int x = 0; x < sizeX; x++)
             {

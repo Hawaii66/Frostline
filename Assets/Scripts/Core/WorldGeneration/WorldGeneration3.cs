@@ -102,6 +102,8 @@ namespace Frostline.Core.World
     {
         public void Execute(WorldGenerationContext context)
         {
+            context.ExtraJunctions = new();
+
             HashSet<Vector2Int> visitedJunctionCells = new();
             while (context.DistanceFieldCells.Count > 0)
             {
@@ -165,6 +167,8 @@ namespace Frostline.Core.World
                         {
                             context.JunctionCells[onEdgePosition.x, onEdgePosition.y].Make(JunctionCell.JunctionCellType.Track);
                         }
+                        context.JunctionCells[start.x, start.y].Make(JunctionCell.JunctionCellType.Junction);
+                        context.ExtraJunctions.Add(new Edge(start, position));
                         return true;
                     }
                 }
@@ -330,6 +334,7 @@ namespace Frostline.Core.World
         public JunctionCell[,] JunctionCells;
         public int[,] DistanceField;
         public List<DistanceFieldCell> DistanceFieldCells;
+        public List<Edge> ExtraJunctions;
 
         public WorldGenerationContext(TrackSegmentManager tsm, StructureBlueprintManager sbm, WorldSettings ws)
         {
