@@ -1,4 +1,5 @@
-﻿using Frostline.Renderer;
+﻿using Frostline.Core.World;
+using Frostline.Renderer;
 using Frostline.Test;
 using Frostline.World;
 using Frostline.World.Structures;
@@ -33,7 +34,7 @@ namespace Frostline.Core
         private void RegisterAll()
         {
             RegisterService(_worldSettings);
-            RegisterServiceDependency(new WorldGeneration2());
+            RegisterServiceDependency(new WorldGeneration3());
             RegisterServiceDependency(new StructureBlueprintManager());
             RegisterServiceDependency(new TrackSegmentManager());
             RegisterServiceDependency(new StructureManager());

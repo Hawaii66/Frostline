@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Frostline.World.WorldSettings
   Seed: 0
   ViewRadius: 30
+  Size: {x: 500, y: 500}
+  StructureCount: 20
+  StructureBorderBufferRadius: 30
+  MinimumDistanceBetweenJunctions: 20
+  ExtraJunctionSurvivalRate: 0.5
   GraphSettings: {fileID: 11400000, guid: e08d4640efd5c3148870ef864d9b58f6, type: 2}
   TileSettings: {fileID: 11400000, guid: d274900f8de210b409a3d32612572432, type: 2}

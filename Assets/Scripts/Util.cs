@@ -34,5 +34,17 @@ namespace Frostline.Core
             float t = Mathf.Max(0, Mathf.Min(1, (x - e0) / (e1 - e0)));
             return t * t * (3 - 2 * t);
         }
+        public static int Sign(int x)
+        {
+            if (x < 0)
+            {
+                return -1;
+            }
+            if (x > 0)
+            {
+                return 1;
+            }
+            return 0;
+        }
     }
 }

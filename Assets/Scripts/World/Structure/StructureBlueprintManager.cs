@@ -25,7 +25,7 @@ namespace Frostline.World.Structures
 
             for (int i = 0; i < filtered.Length; i++)
             {
-                structureBlueprints.Add(filtered[i].name, filtered[i]);
+                structureBlueprints.Add(filtered[i].Name, filtered[i]);
             }
         }
 

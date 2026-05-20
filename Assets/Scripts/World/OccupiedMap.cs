@@ -59,5 +59,17 @@ namespace Frostline.Core
 
             return false;
         }
+        public T[] AsArray()
+        {
+            T[] values = new T[_cells.Count];
+
+            int i = 0;
+            foreach (T t in _cells.Values)
+            {
+                values[i] = t;
+                i++;
+            }
+            return values;
+        }
     }
 }

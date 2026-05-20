@@ -10,6 +10,11 @@ namespace Frostline.World
         [Header("World Settings")]
         public int Seed;
         public int ViewRadius;
+        public Vector2Int Size;
+        public int StructureCount;
+        public int StructureBorderBufferRadius;
+        public int MinimumDistanceBetweenJunctions;
+        public float ExtraJunctionSurvivalRate;
 
         [Header("Special Settings")]
         public GraphSettings GraphSettings;

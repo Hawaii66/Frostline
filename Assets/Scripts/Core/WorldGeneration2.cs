@@ -62,14 +62,14 @@ namespace Frostline.Test
 
             Vector2Int center = size / 2;
             Structure centerStructure = new(centerBlueprint, center);
-            if (!_occupiedMap.CanPlace(centerStructure.GetBounds()))
+            if (!_occupiedMap.CanPlace(centerStructure.Bounds()))
             {
                 Debug.LogError($"Failed to place center structures");
                 return null;
             }
-            _occupiedMap.Add(centerStructure, centerStructure.GetBounds());
+            _occupiedMap.Add(centerStructure, centerStructure.Bounds());
             structures.Add(centerStructure);
-            ExpandStructureBounds(centerStructure.GetBounds(), size, _occupiedMap, fillers);
+            ExpandStructureBounds(centerStructure.Bounds(), size, _occupiedMap, fillers);
             ExpandTrackPath(center, centerT.TrackPaths, Rotation.Up, trackPointsList, trackNodes, trackEdges);
 
             int[,] junctionPredictor = new int[size.x, size.y];
@@ -114,11 +114,11 @@ namespace Frostline.Test
 
                     Vector2Int gridPos = new(randX, randY);
                     Structure cubeStructure = new(cubeBlueprint, gridPos, rot);
-                    if (_occupiedMap.CanPlace(cubeStructure.GetBounds()))
+                    if (_occupiedMap.CanPlace(cubeStructure.Bounds()))
                     {
-                        _occupiedMap.Add(cubeStructure, cubeStructure.GetBounds());
+                        _occupiedMap.Add(cubeStructure, cubeStructure.Bounds());
                         structures.Add(cubeStructure);
-                        ExpandStructureBounds(cubeStructure.GetBounds(), size, _occupiedMap, fillers);
+                        ExpandStructureBounds(cubeStructure.Bounds(), size, _occupiedMap, fillers);
 
                         ExpandTrackPath(gridPos, trackT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
                         break;
@@ -608,9 +608,9 @@ namespace Frostline.Test
             });
 
             Structure tJS = new(tJB, junctionPos, rot);
-            if (occupiedMap.CanPlace(tJS.GetBounds()))
+            if (occupiedMap.CanPlace(tJS.Bounds()))
             {
-                occupiedMap.Add(tJS, tJS.GetBounds());
+                occupiedMap.Add(tJS, tJS.Bounds());
                 structures.Add(tJS);
                 ExpandTrackPath(junctionPos, junctionT.TrackPaths, rot, trackPointsList, trackNodes, trackEdges);
                 return tJS;
